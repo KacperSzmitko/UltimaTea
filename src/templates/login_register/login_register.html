@@ -1,0 +1,84 @@
+<!doctype html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <!-- Register errors -->
+    {% if register_form.errors and not is_login %}
+        {% for field in register_form %}
+            {% for error in field.errors %}
+            <div class="error register">
+                <strong>{{ error|escape }}</strong>
+            </div>
+            {% endfor %}
+        {% endfor %}
+
+            {% for error in register_form.non_field_errors %}
+            <div class="error register">
+                <strong>{{ error|escape }}</strong>
+            </div>
+            {% endfor %}
+    {% endif %}
+
+    <!-- Register form PL -->
+    <form method="POST"> {% csrf_token %}
+            <div class="register_form">
+            Nazwa użytkownika {{ register_form.username}} <br>
+            E-mail {{register_form.email}} <br>
+            Hasło  {{register_form.password}} <br>
+            Powtórz hasło {{register_form.re_password}} <br>
+            </div>
+    <input type="submit" name='register' value="Utwórz konto">
+    </form>
+
+    <br>
+    <br>
+    <br>
+
+    <!-- Login errors -->
+    {% if login_form.errors and is_login %}
+        {% for field in login_form %}
+            {% for error in field.errors %}
+                <div class="error login">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+         {% endfor %}
+    
+    {% for error in login_form.non_field_errors %}
+        <div class="error login">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+    {% endif %}
+
+    <!-- Login form PL -->
+    <form method="POST"> {% csrf_token %}
+        <div class="row">
+            <div class="col-6">
+                Nazwa użytkownika lub adres E-mail {{ login_form.email_or_username}} <br>
+            </div>
+            <div class="col-6">
+            Hasło {{login_form.password}} <br>
+            </div>
+            <div class="col-6">
+                Zapamiętaj mnie {{login_form.remember_me}} <br>
+            </div>
+        </div>
+        <button class="btn btn-success" name='login' type="submit"> Zaloguj się </button>
+    </form>
+
+
+    {% endblock %}
+</body>
+
+</html>
