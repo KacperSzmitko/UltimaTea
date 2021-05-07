@@ -18,9 +18,11 @@ from django.urls import path
 from django.urls.conf import include
 from login_register.views import home_view
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/',include('login_register.urls')),
     path('',home_view,name='login_register'),
     path('',include('django.contrib.auth.urls')),
 ]
+

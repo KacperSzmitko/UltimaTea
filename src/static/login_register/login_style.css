@@ -1,0 +1,74 @@
+
+h3 {
+  font-family: 'Roboto';
+  font-weight:400;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+h4 {
+  font-family: 'Roboto';
+  margin-bottom: 8px;
+  font-size: medium;
+  font-weight: 300;
+  margin-left: 20px;
+}
+
+html{
+  height: 100%;
+}
+
+body
+{
+  height: 100%;
+}
+
+.login{
+  background-image:url("/static/login_register/media/Rectangle_left_half.png");
+  background-size: 100% 100%;
+  position: relative;
+}
+
+.register{
+  background-image:url("/static/login_register/media/Rectangle_right_half.png");
+  background-size: 100% 100%;
+
+}
+
+.main{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+@media (max-width: 576px) {
+
+  [class*="login"] {
+      margin-bottom: 80px;
+  }
+
+}
+
+
+.line{
+  max-width: 100%;
+  max-height: 90%;
+  position: absolute;
+  left: 95%;
+  bottom: 14px;
+}
+
+.main-window{
+  background-image:url("/static/login_register/media/Background.jpg");
+  background-size: 100% 100%;
+}
+
+#id_remember_me{
+  vertical-align:middle;
+}
+
+.log-c{
+  margin-left: 40px;
+}

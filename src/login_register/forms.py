@@ -73,7 +73,7 @@ class LoginForm(forms.ModelForm):
         required=True,
         widget=TextInput())
 
-    remember_me = forms.BooleanField()
+    remember_me = forms.BooleanField(required=False)
 
     class Meta:
         model = User
