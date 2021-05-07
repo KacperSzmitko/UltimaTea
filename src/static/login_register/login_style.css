@@ -14,14 +14,7 @@ h4 {
   margin-left: 20px;
 }
 
-html{
-  height: 100%;
-}
 
-body
-{
-  height: 100%;
-}
 
 .login{
   background-image:url("/static/login_register/media/Rectangle_left_half.png");

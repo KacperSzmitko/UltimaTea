@@ -22,7 +22,7 @@ from login_register.views import home_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/',include('login_register.urls')),
-    path('',home_view,name='login_register'),
-    path('',include('django.contrib.auth.urls')),
+    #path('',home_view,name='login_register'),
+    path('', include('main_app.urls')),
 ]
 
