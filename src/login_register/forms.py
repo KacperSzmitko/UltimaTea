@@ -18,7 +18,7 @@ class RegisterForm(forms.ModelForm):
                     max_length=255,
                     min_length=8,
                     required=True,
-                    widget=PasswordInput(attrs={'class':'log-in register-re-password form-control'})
+                    widget=PasswordInput(attrs={'class':'log-in register-re-password'})
                     )
 
     class Meta:
@@ -35,15 +35,10 @@ class RegisterForm(forms.ModelForm):
         'password': PasswordInput(attrs={'class':'log-in register-password'}),
         }
 
-    def clean_re_password(self):
-        if self.data.get("password") != self.cleaned_data.get("re_password"):
-            raise ValidationError(self.message[Error.PASSWORDS_NOT_MATCH],code=Error.PASSWORDS_NOT_MATCH)       
+    def clean_re_password(self):     
         return self.cleaned_data.get("re_password")
 
     def clean_password(self,*args, **kwargs):
-        password = self.cleaned_data.get("password")
-        if not pattern.search(password):
-            raise ValidationError(self.message[Error.WEAK_PASSWORD],code=Error.WEAK_PASSWORD)
         return make_password(self.cleaned_data.get("password"))
 
 
@@ -51,9 +46,6 @@ class RegisterForm(forms.ModelForm):
         username = self.cleaned_data.get("username")
         if User.objects.filter(username=username).exists():
             raise ValidationError(self.message[Error.USER_EXISTS],code=Error.USER_EXISTS)
-
-        if len(username) < 3:
-            raise ValidationError(self.message[Error.SHORT_USERNAME],code=Error.SHORT_USERNAME)
         return username
 
 
