@@ -1,7 +1,8 @@
 from django import forms
 from django.forms import fields
+from django.forms import widgets
 from django.forms.forms import Form
-from django.forms.widgets import PasswordInput, RadioSelect, TextInput
+from django.forms.widgets import EmailInput, PasswordInput, RadioSelect, TextInput
 from .models import User
 from django.contrib.auth.hashers import make_password,check_password
 import re
@@ -12,13 +13,12 @@ pattern = re.compile(r"(?=.*[?!.!\"#%&'()*+,\-\./:<>=?@\[\]\^_{}|~$])(?=.*[A-Z])
 
 class RegisterForm(forms.ModelForm):
     message = {}
-    password = forms.CharField(widget=PasswordInput())
 
     re_password = forms.CharField(  
                     max_length=255,
                     min_length=8,
                     required=True,
-                    widget=PasswordInput()
+                    widget=PasswordInput(attrs={'class':'log-in register-re-password form-control'})
                     )
 
     class Meta:
@@ -29,6 +29,11 @@ class RegisterForm(forms.ModelForm):
             're_password',
             'password',
         ]
+        widgets = {
+        'username': TextInput(attrs={'class':'log-in form-control'}),
+        'email': EmailInput(attrs={'class':'log-in form-control'}),
+        'password': PasswordInput(attrs={'class':'log-in register-password'}),
+        }
 
     def clean_re_password(self):
         if self.data.get("password") != self.cleaned_data.get("re_password"):
@@ -65,13 +70,12 @@ class RegisterForm(forms.ModelForm):
 
 class LoginForm(forms.ModelForm):
     message = {}
-    password = forms.CharField(widget=PasswordInput())
 
     email_or_username = forms.CharField(
         max_length=255,
         min_length=3,
         required=True,
-        widget=TextInput())
+        widget= TextInput(attrs={'class':'log-in form-control'}))
 
     remember_me = forms.BooleanField(required=False)
 
@@ -82,6 +86,9 @@ class LoginForm(forms.ModelForm):
             'password',
             'remember_me',
         ]
+        widgets = {
+        'password': PasswordInput(attrs={'class':'log-in form-control'}),
+        }
 
     def clean_email_or_username(self):
         email_or_username = self.cleaned_data.get("email_or_username")

@@ -1,6 +1,7 @@
 <!doctype html>
 
 <html>
+
 <head>
     {% extends 'base.html' %}
     {% block head %}
@@ -10,23 +11,26 @@
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'login_register/login_style.css' %}">
-    <title>Elo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
     {% endblock %}
 </head>
 
 <body>
 
-
     {% block content %}
     <div class="container-fluid h-100 main-window">
-        <div class="row  no-gutters w-100 main">
 
+        <div class="row  no-gutters w-100 ">
+            <div class="col-12"><h1>UltimeTea</h1> </div>
+        </div>
+
+        <div class="row  no-gutters w-100 main">         
             <div class="col-2 col-sm-1 col-md-2 col-lg-3"></div>
 
-            <div class="col-8 col-sm-5 col-md-4 col-lg-3 login ">
+            <div class="col-8 col-sm-5 col-md-4 col-lg-3 login text-center">
                 <div class="log-c">
                     <h3 class="text-center mb-3">Logowanie</h3>
-
+                    
                     <!-- Login errors -->
                     {% if login_form.errors and is_login %}
                     {% for field in login_form %}
@@ -36,26 +40,24 @@
                     </div>
                     {% endfor %}
                     {% endfor %}
-                
+
                     {% for error in login_form.non_field_errors %}
                     <div class="error login">
                         <strong>{{ error|escape }}</strong>
                     </div>
                     {% endfor %}
                     {% endif %}
-                
+
                     <!-- Login form PL -->
                     <form method="POST"> {% csrf_token %}
                         <div class="log-c__name-pass">
                             <h4>Login lub Email</h4> {{ login_form.email_or_username}}
-                            <h4> Hasło </h4> {{login_form.password}} 
-                        </div>
-                        <div class="log-c__pass-for">Nie pamiętasz hasła?</div>
-                        <div class="log-c__rem">{{login_form.remember_me}} Zapamiętaj mnie</div> 
-                        
-
-                        <button type="submit" name='login' class="btn btn-primary btn-lg"> Zaloguj się </button>
-                    </form>    
+                            <h4> Hasło </h4> {{login_form.password}}
+                            <div class="log-c__rem">{{login_form.remember_me}} Zapamiętaj mnie</div>
+                            <button type="submit" name='login' class="btn btn-primary btn-lg log-in"> Zaloguj się </button>
+                            <a href="{% url 'remind' %}"class="log-c__pass-for">Nie pamiętasz hasła?</a>
+                        </div>                                                                 
+                    </form>
 
                 </div>
                 <img src="{% static 'login_register/media/Line.png' %}" class="line d-none d-sm-inline-block">
@@ -65,42 +67,91 @@
 
             <div class="col-2 d-sm-none"></div>
 
-            <div class="col-8 col-sm-5 col-md-4 col-lg-3 register">
+            <div class="col-8 col-sm-5 col-md-4 col-lg-3 register text-center">
                 <h3 class="text-center mb-3">Rejestracja</h3>
                 <!-- Register errors -->
                 {% if register_form.errors and not is_login %}
-                    {% for field in register_form %}
-                        {% for error in field.errors %}
-                        <div class="error register">
-                            <strong>{{ error|escape }}</strong>
-                        </div>
-                        {% endfor %}
-                    {% endfor %}
+                {% for field in register_form %}
+                {% for error in field.errors %}
+                <div class="error register">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endfor %}
 
-                        {% for error in register_form.non_field_errors %}
-                        <div class="error register">
-                            <strong>{{ error|escape }}</strong>
-                        </div>
-                        {% endfor %}
+                {% for error in register_form.non_field_errors %}
+                <div class="error register">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
                 {% endif %}
 
                 <!-- Register form PL -->
                 <form method="POST"> {% csrf_token %}
-                        <div class="register_form">
-                        Nazwa użytkownika <br>{{ register_form.username}} <br>
-                        E-mail <br>{{register_form.email}} <br>
-                        Hasło <br>{{register_form.password}} <br>
-                        Powtórz hasło <br>{{register_form.re_password}} <br>
-                        </div>
-                <button type="submit" name='register' class="btn btn-primary btn-lg">Zarejestruj się</button>
+                    <div class="register_form">
+                        <h4>Nazwa użytkownika</h4> {{ register_form.username}} 
+                        <h4>E-mail</h4> {{register_form.email}} 
+                        <h4>Hasło</h4> {{register_form.password}} <div id="e_pass" class="e_text"></div>
+                        <h4>Powtórz hasło</h4> {{register_form.re_password}} <div id="e_repass" class="e_text"></div>
+                    </div>
+                    <button type="submit" name='register' class="btn btn-primary btn-lg log-in" style="margin-top: 8px;">Zarejestruj się</button>
                 </form>
             </div>
 
             <div class="col-2 col-sm-1 col-md-2 col-lg-3 "></div>
         </div>
     </div>
+    </div>
 
-    
+    <script>
+        var password_input = document.getElementsByClassName("register-password").item(0);
+        var password_error = document.getElementById("e_pass")
+
+        var re_password_input = document.getElementById("id_re_password");
+        var re_password_error = document.getElementById("e_repass")
+
+        re_password_input.oninput = check_re_passwd;
+        password_input.oninput = check_passwd;
+
+        function check_passwd() {
+            if (password_input.value.length!= 0 && password_input.value.match("(?=.*[?!.!\"#%&'()*+,\-\./:<>=?@\\[\\]\^_{}|~$])(?=.*[A-Z]).{8,255}") == null)
+            {
+                if (password_input.classList.contains("valid")) password_input.classList.replace("valid", "invalid")
+                else password_input.classList.replace("log-in","invalid");
+                password_error.innerHTML = "Hasło powinno składać się z min. 8 znaków,1 znaku specjalnego,1 liczby oraz 1 wielkiej lietry";
+            }
+            else if(password_input.value.length == 0)
+            {
+                if (password_input.classList.contains("invalid"))
+                    password_input.classList.replace("invalid","log-in");
+                password_error.innerHTML = "";
+            }
+            else
+            {
+                password_input.classList.replace("invalid","valid")
+                password_error.innerHTML = "";
+            }
+            
+        }
+
+        function check_re_passwd(){
+            if (re_password_input.value.length != 0 && re_password_input.value != password_input.value) {
+                if (re_password_input.classList.contains("valid")) re_password_input.classList.replace("valid", "invalid")
+                else re_password_input.classList.replace("log-in", "invalid");
+            re_password_error.innerHTML = "Hasła nie są takie same";
+            }
+            else if (re_password_input.value.length == 0) {
+                if (re_password_input.classList.contains("invalid"))
+                    re_password_input.classList.replace("invalid", "log-in");
+                re_password_error.innerHTML = "";
+            }
+            else {
+                re_password_input.classList.replace("invalid", "valid")
+                re_password_error.innerHTML = "";
+            }
+
+        }
+    </script>
     {% endblock %}
 </body>
 

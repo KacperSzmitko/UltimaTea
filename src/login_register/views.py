@@ -40,3 +40,6 @@ def home_view(request,*args, **kwargs):
         'is_login':is_login,
     }
     return render(request,"login_register/login_register.html",context)
+
+def remind_view(request,*args, **kwargs):
+    return HttpResponse("<h1> Przypominanie hasła </h1>")
