@@ -32,7 +32,7 @@ class RegisterForm(forms.ModelForm):
         widgets = {
         'username': TextInput(attrs={'class':'log-in form-control'}),
         'email': EmailInput(attrs={'class':'log-in form-control'}),
-        'password': PasswordInput(attrs={'class':'log-in register-password'}),
+        'password': PasswordInput(attrs={'class':'log-in register-password','id':'reg_id_password'}),
         }
 
     def clean_re_password(self):     
@@ -79,7 +79,7 @@ class LoginForm(forms.ModelForm):
             'remember_me',
         ]
         widgets = {
-        'password': PasswordInput(attrs={'class':'log-in form-control'}),
+        'password': PasswordInput(attrs={'class':'log-in form-control','id':'log_id_password'}),
         }
 
     def clean_email_or_username(self):

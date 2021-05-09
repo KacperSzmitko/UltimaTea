@@ -85,10 +85,6 @@ function check_passwd() {
     }
     else
     {
-        big_letter.classList.replace("valid-text","invalid-text");
-        digit.classList.replace("valid-text","invalid-text");
-        len.classList.replace("valid-text","invalid-text");
-        special.classList.replace("valid-text","invalid-text");
         if (password_input.classList.contains("invalid"))
             password_input.classList.replace("invalid","log-in");
         return;

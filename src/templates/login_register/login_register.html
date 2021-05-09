@@ -91,10 +91,22 @@
                     <div class="register_form">
                         <h4>Nazwa użytkownika</h4> {{ register_form.username}} 
                         <h4>E-mail</h4> {{register_form.email}} 
-                        <h4>Hasło</h4> {{register_form.password}} <div id="e_pass" class="e_text"></div>
-                        <h4>Powtórz hasło</h4> {{register_form.re_password}} <div id="e_repass" class="e_text"></div>
+                        <h4>Hasło</h4> <div style="display: flex;" >{{register_form.password}} <img src="{% static 'login_register/media/Eye.png' %}" id="eye" class="eye" onclick="show_password()"> </div>
+                            <div id="e_pass" class="e_text">
+                                <ul class="e_text">
+                                <li id="len" class="invalid-text">Miniumum 8 znaków</li>
+                                <li id="special-char" class="invalid-text"> Przynajmniej 1 znak specjalny</li>
+                                <li id="big-letter" class="invalid-text">Przynajmniej 1 wielka litera</li>
+                                <li id="digit" class="invalid-text">Conajmniej jedna liczba</li>
+                                </ul>
+                            </div>
+                        <h4>Powtórz hasło</h4> {{register_form.re_password}} <div id="e_repass" class="e_text">Hasła nie są takie same</div>
+
+                        <button type="submit" name='register' class="btn btn-primary btn-lg log-in" style="margin-top: 8px;">Zarejestruj
+                            się</button>
                     </div>
-                    <button type="submit" name='register' class="btn btn-primary btn-lg log-in" style="margin-top: 8px;">Zarejestruj się</button>
+                    
+                   
                 </form>
             </div>
 
@@ -105,6 +117,7 @@
 
     <script src="{% static 'login_register/scripts/password_check.js' %}"> </script>
     <script src="{% static 'login_register/scripts/buttons_availability.js' %}"> </script>
+    <script src="{% static 'login_register/scripts/password_preview.js' %}"> </script>
     {% endblock %}
 </body>
 

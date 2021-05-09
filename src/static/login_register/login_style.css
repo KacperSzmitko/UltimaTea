@@ -10,6 +10,7 @@ h3 {
   font-weight:400;
   margin-top: 20px;
   margin-bottom: 20px;
+  color:darkolivegreen;
 }
 
 h4 {
@@ -46,11 +47,13 @@ body
   background-image:url("/static/login_register/media/Rectangle_left_half.png");
   background-size: 100% 100%;
   position: relative;
+  min-width: 250px;
 }
 
 .register{
   background-image:url("/static/login_register/media/Rectangle_right_half.png");
   background-size: 100% 100%;
+  min-width: 280px;
 
 }
 
@@ -87,7 +90,6 @@ body
 }
 
 
-
 .line{
   max-width: 100%;
   max-height: 90%;
@@ -122,7 +124,7 @@ body
   border-radius: 3px;
   border: none;
   margin-bottom: 8px;
-  display: inline-block;
+  display: flex;
 }
 
 .log-in:focus{
@@ -151,6 +153,8 @@ body
 
 .btn{
   padding: 0px;
+  text-align: center;
+  display: block;
 }
 
 .invalid{
@@ -161,6 +165,7 @@ body
   border-color: red;
   display:inline-block;
   border-style: solid;
+  padding: .375rem .75rem;
 }
 
 .invalid:focus{
@@ -176,6 +181,7 @@ body
   border-color: rgb(23, 170, 23) !important;
   display:inline-block;
   border-style: solid;
+  padding: .375rem .75rem;
 }
 
 .valid:focus{
@@ -189,6 +195,9 @@ body
   text-align: left;
   overflow: hidden;
   max-width: 250px;
+  list-style-position: inside;
+  padding-left: 0;
+  color: red;
 }
 
 .btn{
@@ -197,4 +206,34 @@ body
 
 .btn:focus{
   color: white;
+}
+
+.invalid-text{
+  color: red;
+  font-size: 13px;
+}
+
+.valid-text{
+  color: green;
+}
+
+#e_pass{
+  display: none;
+}
+
+#e_repass{
+  display: none;
+}
+
+.eye{
+  width: 20px;
+  height: 20px;
+  display: flex;
+  position: relative;
+  right: -2px;
+  top: 6px;
+}
+
+.register-re-password{
+  display: block;
 }
