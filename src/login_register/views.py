@@ -18,12 +18,12 @@ from django.contrib.auth import update_session_auth_hash
 # Create your views here.
 
 def login_view(request:HttpRequest,*args, **kwargs):
-    print(request.user)
+
     request.session['lang'] = 'pl'
     register_form = RegisterForm(request.session['lang'],request.POST or None)
     login_form = LoginForm(request.session['lang'],request.POST or None)
 
-
+    register_form.error_messages
     if register_form.is_valid():
         register_form.save()
         response = redirect(reverse('auth:login_register'))
@@ -32,7 +32,9 @@ def login_view(request:HttpRequest,*args, **kwargs):
     if login_form.is_valid():
         remember_me = login_form.cleaned_data['remember_me']
         username = request.POST.get('username')
-        
+
+        if User.objects.get(email=username) != None :
+            username = User.objects.get(email=username).username
         user = authenticate(request,username=username,password=request.POST.get('password'))
         if user is not None:
             login(request,user)

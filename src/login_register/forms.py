@@ -31,8 +31,25 @@ class RegisterForm(UserCreationForm):
         'password2': PasswordInput(attrs={'class':'log-in', 'id':'id_re_password','name':'re_password'}),
         }
 
-    def clean_password2(self) -> str:
-        return super().clean_password2()
+    def clean_password2(self):     
+        return self.cleaned_data.get("password2")
+
+    def clean_password1(self,*args, **kwargs):
+        return self.cleaned_data.get("password1")
+
+
+    def clean_username(self):
+        username = self.cleaned_data.get("username")
+        if User.objects.filter(username=username).exists():
+            raise ValidationError(self.message[Error.USER_EXISTS],code=Error.USER_EXISTS)
+        return username
+
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        if User.objects.filter(email=email).exists():
+            raise ValidationError(self.message[Error.EMAIL_EXISTS],code=Error.EMAIL_EXISTS)
+        return email
 
     def __init__(self,lang,*args, **kwargs):
         super(RegisterForm, self).__init__(*args, **kwargs)

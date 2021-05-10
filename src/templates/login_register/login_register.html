@@ -95,33 +95,6 @@
     </div>
 
 
-
-
-
-
-    {% if register_form.errors and not is_login %}
-        {% if register_form.errors.username %}
-        <script>
-            document.onload = server_error("{{register_form.errors.username.0}}", "id_username");
-        </script>
-        {% elif register_form.errors.email %}
-        <script>
-            document.onload = server_error("{{register_form.errors.email.0}}", "id_email");
-        </script>
-        {% endif %}
-                            
-    {% elif login_form.errors and is_login %}
-        {% if login_form.errors.email_or_username %}
-        <script>
-            document.onload = server_error("{{login_form.errors.email_or_username.0}}", "id_email_or_username");
-        </script>
-        {% elif login_form.errors.password %}
-        <script>
-            document.onload = server_error("{{login_form.errors.password.0}}", "log_id_password");
-        </script>
-        {% endif %}
-    
-    {% endif %}
     <script>
         var x = document.getElementById("id_password1");
         x.classList.add("log-in", "register-password");
@@ -134,6 +107,30 @@
     <script src="{% static 'login_register/scripts/password_preview.js' %}"> </script>
     <script src="{% static 'login_register/scripts/server_side_errors.js' %}"> </script>
     <script src="{% static 'login_register/scripts/password_check.js' %}"> </script>
+
+    {% if register_form.errors and not is_login %}
+    {% if register_form.errors.username %}
+    <script>
+        document.onload = server_error("{{register_form.errors.username.0}}", "id_username");
+    </script>
+    {% elif register_form.errors.email %}
+    <script>
+        document.onload = server_error("{{register_form.errors.email.0}}", "id_email");
+    </script>
+    {% endif %}
+    
+    {% elif login_form.errors and is_login %}
+    {% if login_form.errors.email_or_username %}
+    <script>
+        document.onload = server_error("{{login_form.errors.email_or_username.0}}", "id_email_or_username");
+    </script>
+    {% elif login_form.errors.password %}
+    <script>
+        document.onload = server_error("{{login_form.errors.password.0}}", "log_id_password");
+    </script>
+    {% endif %}
+    
+    {% endif %}
     {% endblock %}
 </body>
 
