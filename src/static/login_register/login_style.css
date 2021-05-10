@@ -30,12 +30,34 @@ h4 {
   }
 }
 
+@keyframes fadein {
+    0% { opacity:0; }
+    20% { opacity:0; }
+    100% { opacity:1; }
+}
+@-moz-keyframes fadein { /* Firefox */
+    0% { opacity:0; }
+    20% { opacity:0; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    0% { opacity:0; }
+    20% { opacity:0; }
+    100% { opacity:1; }
+}
+@-o-keyframes fadein { /* Opera */
+    0% { opacity:0; }
+    20% { opacity:0; }
+    100% { opacity:1; }
+}
+
 html{
   height: 100%;
 }
 
 body
 {
+  font-family: 'Roboto';
   height:100%;
 }
 
@@ -43,11 +65,14 @@ body
    padding: 0;
 }
 
+
+
 .login{
   background-image:url("/static/login_register/media/Rectangle_left_half.png");
   background-size: 100% 100%;
   position: relative;
   min-width: 250px;
+
 }
 
 .register{
@@ -64,6 +89,14 @@ body
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   min-height: 400px;
+
+}
+
+.to-fade{
+  animation: fadein 3s;
+  -moz-animation: fadein 3s; /* Firefox */
+  -webkit-animation: fadein 3s; /* Safari and Chrome */
+  -o-animation: fadein 3s; /* Opera */
 }
 
 @media (max-width: 576px) {
@@ -125,6 +158,7 @@ body
   border: none;
   margin-bottom: 8px;
   display: flex;
+  padding: .08rem .75rem;
 }
 
 .log-in:focus{
@@ -163,15 +197,12 @@ body
   border-radius: 3px;
   margin-bottom: 8px;
   border-color: red;
-  display:inline-block;
+  display:flex;
   border-style: solid;
   padding: .375rem .75rem;
+  outline: none;
 }
 
-.invalid:focus{
-  outline: 0;
-  border-style: solid;
-}
 
 .valid{
   width: 250px;
@@ -181,7 +212,7 @@ body
   border-color: rgb(23, 170, 23) !important;
   display:inline-block;
   border-style: solid;
-  padding: .375rem .75rem;
+  padding: .15rem .75rem;
 }
 
 .valid:focus{
@@ -230,10 +261,22 @@ body
   height: 20px;
   display: flex;
   position: relative;
-  right: -2px;
+  right: 30px;
   top: 6px;
+  cursor: pointer;
 }
 
 .register-re-password{
   display: block;
 }
+
+.register-password{
+  padding-right: 35px;
+}
+
+.invalid:focus{
+  border-color: red;
+}
+
+
+

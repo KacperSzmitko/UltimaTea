@@ -16,7 +16,6 @@ class RegisterForm(forms.ModelForm):
 
     re_password = forms.CharField(  
                     max_length=255,
-                    min_length=8,
                     required=True,
                     widget=PasswordInput(attrs={'class':'log-in register-re-password'})
                     )
@@ -30,8 +29,8 @@ class RegisterForm(forms.ModelForm):
             'password',
         ]
         widgets = {
-        'username': TextInput(attrs={'class':'log-in form-control'}),
-        'email': EmailInput(attrs={'class':'log-in form-control'}),
+        'username': TextInput(attrs={'class':'log-in '}),
+        'email': EmailInput(attrs={'class':'log-in '}),
         'password': PasswordInput(attrs={'class':'log-in register-password','id':'reg_id_password'}),
         }
 
@@ -67,7 +66,7 @@ class LoginForm(forms.ModelForm):
         max_length=255,
         min_length=3,
         required=True,
-        widget= TextInput(attrs={'class':'log-in form-control'}))
+        widget= TextInput(attrs={'class':'log-in '}))
 
     remember_me = forms.BooleanField(required=False)
 
@@ -79,14 +78,14 @@ class LoginForm(forms.ModelForm):
             'remember_me',
         ]
         widgets = {
-        'password': PasswordInput(attrs={'class':'log-in form-control','id':'log_id_password'}),
+        'password': PasswordInput(attrs={'class':'log-in ','id':'log_id_password'}),
         }
 
     def clean_email_or_username(self):
         email_or_username = self.cleaned_data.get("email_or_username")
         if not User.objects.filter(username=email_or_username).exists():
             if not User.objects.filter(email=email_or_username).exists():
-                raise ValidationError(self.message[Error.WRONG_LOGIN_OR_PASSWORD],code=Error.WRONG_LOGIN_OR_PASSWORD)
+                raise ValidationError(self.message[Error.WRONG_LOGIN],code=Error.WRONG_LOGIN)
             self.is_mail = True
             return email_or_username
         self.is_mail = False
@@ -98,16 +97,50 @@ class LoginForm(forms.ModelForm):
         email_or_username = self.cleaned_data.get("email_or_username")
         hashed_password = ""
         if email_or_username is None:
-            raise ValidationError(self.message[Error.WRONG_LOGIN_OR_PASSWORD],code=Error.WRONG_LOGIN_OR_PASSWORD)
+            raise ValidationError(self.message[Error.WRONG_PASSWORD],code=Error.WRONG_PASSWORD)
         if not User.objects.filter(username=email_or_username).exists():
             hashed_password = User.objects.get(email=email_or_username)
         else:
             hashed_password = User.objects.get(username=email_or_username).password
         if check_password(password,hashed_password):
             return password
-        raise ValidationError(self.message[Error.WRONG_LOGIN_OR_PASSWORD],code=Error.WRONG_LOGIN_OR_PASSWORD)
+        raise ValidationError(self.message[Error.WRONG_PASSWORD],code=Error.WRONG_PASSWORD)
 
     def __init__(self,lang,*args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
         self.message = ErrorMessages.languages[lang]
             
+
+class ResetPasswordForm(forms.Form):
+    message = {}
+
+    email = forms.EmailField(
+        max_length=255,
+        required=True,
+        widget= TextInput(attrs={'class':'log-in '}))
+
+    def __init__(self,lang,*args, **kwargs):
+        super(ResetPasswordForm, self).__init__(*args, **kwargs)
+        self.message = ErrorMessages.languages[lang]
+
+
+class ChangePasswordForm(forms.ModelForm):
+
+    re_password = forms.CharField(  
+                    max_length=255,
+                    required=True,
+                    widget=PasswordInput(attrs={'class':'log-in register-re-password', 'id': 'change_re_password'})
+                    )
+
+    class Meta:
+        model = User
+        fields = [
+            'password',
+            're_password'
+        ]
+        widgets = {'password': PasswordInput(attrs={'class':'log-in', 'id' : "change_password"})}
+
+
+    def __init__(self,lang,*args, **kwargs):
+        super(ChangePasswordForm, self).__init__(*args, **kwargs)
+        self.message = ErrorMessages.languages[lang]

@@ -15,6 +15,7 @@ password_input.oninput = check_passwd;
 password_input.onfocus = display_passoword_requriments;
 password_input.onblur = hide_password_requriments;
 
+
 function display_passoword_requriments(){
     password_error.style.display = "block";
 }
