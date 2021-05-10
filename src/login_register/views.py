@@ -5,8 +5,8 @@ from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from .forms import *
 from django.shortcuts import redirect
-from django.contrib.auth import login,logout
-from .models import User
+from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth.models import User
 from django.urls import reverse
 from django.core.mail import send_mail
 from django.contrib.auth.tokens import default_token_generator 
@@ -30,23 +30,21 @@ def login_view(request:HttpRequest,*args, **kwargs):
         return response
 
     if login_form.is_valid():
-        login_form.save(commit=False)
         remember_me = login_form.cleaned_data['remember_me']
-        email_or_login = login_form.cleaned_data['email_or_username']
+        username = request.POST.get('username')
         
-        if login_form.is_mail:
-            user = User.objects.get(username=email_or_login)
-            login(request,user)
-        else:
-            user = User.objects.get(username=email_or_login)
+        user = authenticate(request,username=username,password=request.POST.get('password'))
+        if user is not None:
             login(request,user)
         if not remember_me:
-                    request.session.set_expiry(0)
+            request.session.set_expiry(0)
         return  redirect(reverse('app:home'))
 
     is_login = False
     if 'login' in request.POST:
         is_login = True
+
+
 
     context = {
         'register_form':register_form,

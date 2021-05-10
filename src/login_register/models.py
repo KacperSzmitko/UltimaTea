@@ -1,8 +1,6 @@
-from django.db import models
-from django.urls import reverse
-from django.contrib.auth.models import AbstractBaseUser
-from django.contrib.auth.models import User
 # Create your models here.
+
+'''
 class User(AbstractBaseUser):
     username    = models.CharField(max_length=255,unique=True)
     password    = models.CharField(max_length=255)
@@ -17,4 +15,4 @@ class User(AbstractBaseUser):
 
     def get_absolute_url(self):
         return reverse("login_register:login_register")
-    
+'''

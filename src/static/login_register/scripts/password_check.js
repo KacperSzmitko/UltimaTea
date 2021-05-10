@@ -9,9 +9,12 @@ var len = document.getElementById("len");
 var big_letter = document.getElementById("big-letter");
 var digit = document.getElementById("digit");
 
+
+
 var contrants_num = 4;
-re_password_input.oninput = check_re_passwd;
 password_input.oninput = check_passwd;
+re_password_input.oninput = check_re_passwd;
+
 password_input.onfocus = display_passoword_requriments;
 password_input.onblur = hide_password_requriments;
 
