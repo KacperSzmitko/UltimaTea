@@ -3,24 +3,12 @@
 <html>
 
 <head>
-    {% block head %}
+    {% extends 'base.html' %}
     {% load static %}
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% if user.is_authenticated %}
-    <meta http-equiv="refresh" content="0; url={% url 'main_app:home' %} " />
-    {% endif %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=fallback"
-        rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{% static 'login_register/login_style.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=fallback" rel="stylesheet">
-    {% endblock %}
 
+    {% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'login_register/login_style.css' %}">
+    {% endblock %}
 </head>
 
 <body>
@@ -43,7 +31,7 @@
                     <!-- Login form PL -->
                     <form method="POST" id="login_form"> {% csrf_token %}
                         <div class="log-c__name-pass">
-                            <h4>Login lub Email</h4> {{ login_form.username}}
+                            <h4>Login lub Email</h4> {{ login_form.login_username}}
                             <h4> Hasło </h4> {{login_form.password}}
                             <div class="log-c__rem">{{login_form.remember_me}} Zapamiętaj mnie</div>
                             <button type="submit" name='login' class="btn btn-primary btn-lg log-in"> Zaloguj się </button>
@@ -120,9 +108,9 @@
     {% endif %}
     
     {% elif login_form.errors and is_login %}
-    {% if login_form.errors.email_or_username %}
+    {% if login_form.errors.login_username %}
     <script>
-        document.onload = server_error("{{login_form.errors.email_or_username.0}}", "id_email_or_username");
+        document.onload = server_error("{{login_form.errors.login_username.0}}", "id_email_or_username");
     </script>
     {% elif login_form.errors.password %}
     <script>

@@ -60,9 +60,34 @@ class LoginForm(forms.Form):
     message = {}
 
     remember_me = forms.BooleanField(required=False)
-    username = forms.CharField(widget=TextInput(attrs={'class':'log-in ', 'id' : 'id_email_or_username','name':'email_or_username'}),required=True)
+    login_username = forms.CharField(widget=TextInput(attrs={'class':'log-in ', 'id' : 'id_email_or_username','name':'email_or_username'}),required=True)
     password = forms.CharField(widget=PasswordInput(attrs={'class':'log-in ','id':'log_id_password'}),required=True)
 
+
+    def clean_login_username(self):
+        email_or_username = self.cleaned_data.get("login_username")
+        if not User.objects.filter(username=email_or_username).exists():
+            if not User.objects.filter(email=email_or_username).exists():
+                raise ValidationError(self.message[Error.WRONG_LOGIN],code=Error.WRONG_LOGIN)
+            self.is_mail = True
+            return email_or_username
+        self.is_mail = False
+        return email_or_username
+
+
+    def clean_password(self):
+        password = self.cleaned_data.get("password")
+        email_or_username = self.cleaned_data.get("login_username")
+        hashed_password = ""
+        if email_or_username is None:
+            raise ValidationError(self.message[Error.WRONG_PASSWORD],code=Error.WRONG_PASSWORD)
+        if not User.objects.filter(username=email_or_username).exists():
+            hashed_password = User.objects.get(email=email_or_username).password
+        else:
+            hashed_password = User.objects.get(username=email_or_username).password
+        if check_password(password,hashed_password):
+            return password
+        raise ValidationError(self.message[Error.WRONG_PASSWORD],code=Error.WRONG_PASSWORD)
     def __init__(self,lang,*args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
         self.message = ErrorMessages.languages[lang]

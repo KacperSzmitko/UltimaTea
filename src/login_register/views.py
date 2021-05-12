@@ -17,24 +17,30 @@ from django.urls import reverse_lazy
 from django.contrib.auth import update_session_auth_hash
 # Create your views here.
 
+# Rejestracja powtórzenie hasła nie działa
 def login_view(request:HttpRequest,*args, **kwargs):
 
     request.session['lang'] = 'pl'
     register_form = RegisterForm(request.session['lang'],request.POST or None)
     login_form = LoginForm(request.session['lang'],request.POST or None)
+    is_login = False
+    if 'login' in request.POST:
+        is_login = True
 
-    register_form.error_messages
-    if register_form.is_valid():
+
+    if not is_login and register_form.is_valid():
         register_form.save()
+        register_form = RegisterForm(request.session['lang'])
         response = redirect(reverse('auth:login_register'))
         return response
 
-    if login_form.is_valid():
+    if is_login and login_form.is_valid():
         remember_me = login_form.cleaned_data['remember_me']
-        username = request.POST.get('username')
-
-        if User.objects.get(email=username) != None :
+        username = request.POST.get('login_username')
+        try:
             username = User.objects.get(email=username).username
+        except:
+            username = User.objects.get(username=username).username
         user = authenticate(request,username=username,password=request.POST.get('password'))
         if user is not None:
             login(request,user)
@@ -42,17 +48,13 @@ def login_view(request:HttpRequest,*args, **kwargs):
             request.session.set_expiry(0)
         return  redirect(reverse('app:home'))
 
-    is_login = False
-    if 'login' in request.POST:
-        is_login = True
-
-
 
     context = {
         'register_form':register_form,
         'login_form':login_form,
         'is_login':is_login,
     }
+
     #send_mail("Test","Wiadomość",'UltimaTeaService@gmail.com',["kacperszmitk@wp.pl"])
     return render(request,"login_register/login_register.html",context)
 
