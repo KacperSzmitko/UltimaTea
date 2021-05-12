@@ -25,7 +25,7 @@ class RegisterForm(UserCreationForm):
             'password2',
         ]
         widgets = {
-        'username': TextInput(attrs={'class':'log-in '}),
+        'username': TextInput(attrs={'class':'log-in ', 'minlength':'3'}),
         'email': EmailInput(attrs={'class':'log-in '}),
         'password1': TextInput(attrs={'class':'log-in','id':'reg_id_password','name':'password'}),
         'password2': PasswordInput(attrs={'class':'log-in', 'id':'id_re_password','name':'re_password'}),

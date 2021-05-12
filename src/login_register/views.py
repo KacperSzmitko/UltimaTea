@@ -23,16 +23,19 @@ def login_view(request:HttpRequest,*args, **kwargs):
     request.session['lang'] = 'pl'
     register_form = RegisterForm(request.session['lang'],request.POST or None)
     login_form = LoginForm(request.session['lang'],request.POST or None)
+    # Tells which form was submited. Empty string on get
     is_login = False
+    is_register = False
+
     if 'login' in request.POST:
         is_login = True
+    elif 'register' in request.POST:
+        is_register = True
 
 
-    if not is_login and register_form.is_valid():
+    if not is_register and register_form.is_valid():
         register_form.save()
         register_form = RegisterForm(request.session['lang'])
-        response = redirect(reverse('auth:login_register'))
-        return response
 
     if is_login and login_form.is_valid():
         remember_me = login_form.cleaned_data['remember_me']
@@ -53,6 +56,7 @@ def login_view(request:HttpRequest,*args, **kwargs):
         'register_form':register_form,
         'login_form':login_form,
         'is_login':is_login,
+        'is_register':is_register,
     }
 
     #send_mail("Test","Wiadomość",'UltimaTeaService@gmail.com',["kacperszmitk@wp.pl"])

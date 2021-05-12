@@ -18,9 +18,14 @@
         {% if not register_form.errors and not login_form.errors %}
         <div class="to-fade">
         {% endif %}
+        
+        
         <div class="row  no-gutters w-100 ">
-            <div class="col-12"><h1>UltimeTea</h1> </div>
+            {% if not register_form.errors and is_register%}
+            {% endif %}
+            <div class="col-12 header"><h1>UltimeTea</h1> </div>
         </div>
+        
 
         <div class="row  no-gutters w-100 main">         
             <div class="col-2 col-sm-1 col-md-2 col-lg-3"></div>
@@ -95,8 +100,9 @@
     <script src="{% static 'login_register/scripts/password_preview.js' %}"> </script>
     <script src="{% static 'login_register/scripts/server_side_errors.js' %}"> </script>
     <script src="{% static 'login_register/scripts/password_check.js' %}"> </script>
+    <script src="{% static 'login_register/scripts/username_check.js' %}"> </script>
 
-    {% if register_form.errors and not is_login %}
+    {% if register_form.errors and is_register %}
     {% if register_form.errors.username %}
     <script>
         document.onload = server_error("{{register_form.errors.username.0}}", "id_username");
