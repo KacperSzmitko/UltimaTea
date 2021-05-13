@@ -5,5 +5,7 @@ from django.shortcuts import render
 
 
 def home_view(request, *args, **kwargs):
-
-    return HttpResponse("<h1>Zalogowany</h1>")
+    context = {
+        'title':'Home'
+    }
+    return render(request,"main/home.html", context)
