@@ -9,6 +9,9 @@ pylint = "*"
 [packages]
 django = "*"
 mysqlclient = "*"
+redis = "*"
+celery = "*"
+gevent = "*"
 
 [requires]
 python_version = "3.9"
