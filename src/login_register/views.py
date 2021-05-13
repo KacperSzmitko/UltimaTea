@@ -66,6 +66,7 @@ def reset_password_view(request:HttpRequest):
             context = {
                 'id': user.id,
                 'token':token,
+                'adr':request.META.get("HTTP_HOST")
             }
             send_mails.delay(context,user.email)
 
