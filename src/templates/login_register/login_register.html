@@ -4,14 +4,10 @@
 
 <head>
     {% extends 'base.html' %}
-    {% block head %}
     {% load static %}
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
+
+    {% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static 'login_register/login_style.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
     {% endblock %}
 </head>
 
@@ -19,7 +15,9 @@
 
     {% block content %}
     <div class="container-fluid h-100 main-window">
-
+        {% if not register_form.errors and not login_form.errors %}
+        <div class="to-fade">
+        {% endif %}
         <div class="row  no-gutters w-100 ">
             <div class="col-12"><h1>UltimeTea</h1> </div>
         </div>
@@ -29,33 +27,15 @@
 
             <div class="col-8 col-sm-5 col-md-4 col-lg-3 login text-center">
                 <div class="log-c">
-                    <h3 class="text-center mb-3">Logowanie</h3>
-                    
-                    <!-- Login errors -->
-                    {% if login_form.errors and is_login %}
-                    {% for field in login_form %}
-                    {% for error in field.errors %}
-                    <div class="error login">
-                        <strong>{{ error|escape }}</strong>
-                    </div>
-                    {% endfor %}
-                    {% endfor %}
-
-                    {% for error in login_form.non_field_errors %}
-                    <div class="error login">
-                        <strong>{{ error|escape }}</strong>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
+                    <h3 class="text-center mb-3">Logowanie</h3>                   
                     <!-- Login form PL -->
-                    <form method="POST"> {% csrf_token %}
+                    <form method="POST" id="login_form"> {% csrf_token %}
                         <div class="log-c__name-pass">
-                            <h4>Login lub Email</h4> {{ login_form.email_or_username}}
+                            <h4>Login lub Email</h4> {{ login_form.login_username}}
                             <h4> Hasło </h4> {{login_form.password}}
                             <div class="log-c__rem">{{login_form.remember_me}} Zapamiętaj mnie</div>
                             <button type="submit" name='login' class="btn btn-primary btn-lg log-in"> Zaloguj się </button>
-                            <a href="{% url 'remind' %}"class="log-c__pass-for">Nie pamiętasz hasła?</a>
+                            <a href="{% url 'auth:password_reset' %}"class="log-c__pass-for">Nie pamiętasz hasła?</a>
                         </div>                                                                 
                     </form>
 
@@ -69,89 +49,76 @@
 
             <div class="col-8 col-sm-5 col-md-4 col-lg-3 register text-center">
                 <h3 class="text-center mb-3">Rejestracja</h3>
-                <!-- Register errors -->
-                {% if register_form.errors and not is_login %}
-                {% for field in register_form %}
-                {% for error in field.errors %}
-                <div class="error register">
-                    <strong>{{ error|escape }}</strong>
-                </div>
-                {% endfor %}
-                {% endfor %}
 
-                {% for error in register_form.non_field_errors %}
-                <div class="error register">
-                    <strong>{{ error|escape }}</strong>
-                </div>
-                {% endfor %}
-                {% endif %}
-
-                <!-- Register form PL -->
-                <form method="POST"> {% csrf_token %}
+                <form method="POST" id="register_form"> {% csrf_token %}
                     <div class="register_form">
                         <h4>Nazwa użytkownika</h4> {{ register_form.username}} 
                         <h4>E-mail</h4> {{register_form.email}} 
-                        <h4>Hasło</h4> {{register_form.password}} <div id="e_pass" class="e_text"></div>
-                        <h4>Powtórz hasło</h4> {{register_form.re_password}} <div id="e_repass" class="e_text"></div>
+                        <h4>Hasło</h4> <div style="display: flex;" >{{register_form.password1}} <img src="{% static 'login_register/media/Eye.png' %}" id="eye" class="eye" onclick="show_password()"> </div>
+                            <div id="e_pass" class="e_text drop-menu">
+                                <ul class="e_text">
+                                <li id="len" class="invalid-text">Miniumum 8 znaków</li>
+                                <li id="special-char" class="invalid-text"> Przynajmniej 1 znak specjalny</li>
+                                <li id="big-letter" class="invalid-text">Przynajmniej 1 wielka litera</li>
+                                <li id="digit" class="invalid-text">Conajmniej jedna liczba</li>
+                                </ul>
+                            </div>
+                        <h4>Powtórz hasło</h4> {{register_form.password2}} <div id="e_repass" class="e_text">Hasła nie są takie same</div>
+
+                        <button type="submit" name='register' class="btn btn-primary btn-lg log-in" style="margin-top: 8px;">Zarejestruj
+                            się</button>
                     </div>
-                    <button type="submit" name='register' class="btn btn-primary btn-lg log-in" style="margin-top: 8px;">Zarejestruj się</button>
+                    
+                   
                 </form>
             </div>
+            
 
             <div class="col-2 col-sm-1 col-md-2 col-lg-3 "></div>
         </div>
+        {% if not register_form.errors and not login_form.errors %}
+        </div>
+        {% endif %}
     </div>
     </div>
+
 
     <script>
-        var password_input = document.getElementsByClassName("register-password").item(0);
-        var password_error = document.getElementById("e_pass")
-
-        var re_password_input = document.getElementById("id_re_password");
-        var re_password_error = document.getElementById("e_repass")
-
-        re_password_input.oninput = check_re_passwd;
-        password_input.oninput = check_passwd;
-
-        function check_passwd() {
-            if (password_input.value.length!= 0 && password_input.value.match("(?=.*[?!.!\"#%&'()*+,\-\./:<>=?@\\[\\]\^_{}|~$])(?=.*[A-Z]).{8,255}") == null)
-            {
-                if (password_input.classList.contains("valid")) password_input.classList.replace("valid", "invalid")
-                else password_input.classList.replace("log-in","invalid");
-                password_error.innerHTML = "Hasło powinno składać się z min. 8 znaków,1 znaku specjalnego,1 liczby oraz 1 wielkiej lietry";
-            }
-            else if(password_input.value.length == 0)
-            {
-                if (password_input.classList.contains("invalid"))
-                    password_input.classList.replace("invalid","log-in");
-                password_error.innerHTML = "";
-            }
-            else
-            {
-                password_input.classList.replace("invalid","valid")
-                password_error.innerHTML = "";
-            }
-            
-        }
-
-        function check_re_passwd(){
-            if (re_password_input.value.length != 0 && re_password_input.value != password_input.value) {
-                if (re_password_input.classList.contains("valid")) re_password_input.classList.replace("valid", "invalid")
-                else re_password_input.classList.replace("log-in", "invalid");
-            re_password_error.innerHTML = "Hasła nie są takie same";
-            }
-            else if (re_password_input.value.length == 0) {
-                if (re_password_input.classList.contains("invalid"))
-                    re_password_input.classList.replace("invalid", "log-in");
-                re_password_error.innerHTML = "";
-            }
-            else {
-                re_password_input.classList.replace("invalid", "valid")
-                re_password_error.innerHTML = "";
-            }
-
-        }
+        var x = document.getElementById("id_password1");
+        x.classList.add("log-in", "register-password");
+        x.id = "reg_id_password";
+        x = document.getElementById("id_password2");
+        x.classList.add("log-in", "register-re-password");
+        x.id = "id_re_password";
     </script>
+    <script src="{% static 'login_register/scripts/buttons_availability.js' %}"> </script>
+    <script src="{% static 'login_register/scripts/password_preview.js' %}"> </script>
+    <script src="{% static 'login_register/scripts/server_side_errors.js' %}"> </script>
+    <script src="{% static 'login_register/scripts/password_check.js' %}"> </script>
+
+    {% if register_form.errors and not is_login %}
+    {% if register_form.errors.username %}
+    <script>
+        document.onload = server_error("{{register_form.errors.username.0}}", "id_username");
+    </script>
+    {% elif register_form.errors.email %}
+    <script>
+        document.onload = server_error("{{register_form.errors.email.0}}", "id_email");
+    </script>
+    {% endif %}
+    
+    {% elif login_form.errors and is_login %}
+    {% if login_form.errors.login_username %}
+    <script>
+        document.onload = server_error("{{login_form.errors.login_username.0}}", "id_email_or_username");
+    </script>
+    {% elif login_form.errors.password %}
+    <script>
+        document.onload = server_error("{{login_form.errors.password.0}}", "log_id_password");
+    </script>
+    {% endif %}
+    
+    {% endif %}
     {% endblock %}
 </body>
 

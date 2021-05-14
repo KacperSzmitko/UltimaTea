@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
 ROOT_URLCONF = 'UltimaTea.urls'
 
 TEMPLATES = [
@@ -82,7 +83,7 @@ DATABASES = {
         'NAME': 'projekt_pz',
         'USER': 'kacper',
         'PASSWORD': '5fUwXohpL6rh5xvK',
-        'HOST': '10.8.0.1',
+        'HOST': '192.168.1.250',
         'PORT': '3306',
     },
 }
@@ -92,9 +93,6 @@ DATABASES = {
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
@@ -140,4 +138,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'login_register.User'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'UltimaTeaService@gmail.com'
+EMAIL_HOST_PASSWORD = 'v!TvEC2kg=P8mw+^rd%DH@_#'
+DEFAULT_FROM_EMAIL = 'UltimaTeaService@gmail.com'

@@ -6,7 +6,8 @@ class Error(Enum):
     USER_EXISTS = "1002",
     SHORT_USERNAME = "1003",
     EMAIL_EXISTS = "1004",
-    WRONG_LOGIN_OR_PASSWORD = "1005",
+    WRONG_LOGIN = "1005",
+    WRONG_PASSWORD = "1006",
 
 
 class ErrorMessages():
@@ -18,7 +19,8 @@ class ErrorMessages():
         Error.USER_EXISTS: "Istnieje już użytkownik o takiej nazwie",
         Error.SHORT_USERNAME: "Nazwa użytkownika powinna mieć długość conajmniej 3 znaków",
         Error.EMAIL_EXISTS: "Podany adres Email jest już przypisany do istniejącego konta",
-        Error.WRONG_LOGIN_OR_PASSWORD: "Nieprawidłowa nazwa użytkownika/Email lub hasło",
+        Error.WRONG_LOGIN: "Nieprawidłowa nazwa użytkownika/adres Email",
+        Error.WRONG_PASSWORD: "Hasło nieprawidłowe",
     },
     'en':{},
     }
