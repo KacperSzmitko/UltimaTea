@@ -103,6 +103,7 @@ body
   -o-animation: fadein 2.2s; /* Opera */
 }
 
+
 @media (max-width: 576px) {
 
   [class*="login"] {
@@ -115,6 +116,7 @@ body
 
   [class*="main"] {
       position: relative;
+      transform:none;
   }
 
 }

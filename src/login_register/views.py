@@ -10,7 +10,7 @@ from django.urls import reverse
 from django.contrib.auth.tokens import default_token_generator 
 from django.conf import settings
 from .tasks import send_mails
-
+import time
 
 def login_view(request:HttpRequest,*args, **kwargs):
     request.session['lang'] = 'pl'
@@ -26,7 +26,7 @@ def login_view(request:HttpRequest,*args, **kwargs):
         is_register = True
 
 
-    if not is_register and register_form.is_valid():
+    if is_register and register_form.is_valid():
         register_form.save()
         register_form = RegisterForm(request.session['lang'])
 

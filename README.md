@@ -10,4 +10,5 @@ SETUP
 
 
 CELERY
-celery -A src/UltimaTea worker -l info -P gevent
+cd src
+celery -A UltimaTea worker -l info -P gevent
