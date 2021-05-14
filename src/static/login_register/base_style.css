@@ -1,15 +1,10 @@
-html{
+html {
   height: 100%;
 }
 
-body
-{
+body {
   font-family: 'Roboto';
   height:100%;
-}
-
-.container-fluid{
-   padding: 0;
 }
 
 h1 {
@@ -18,13 +13,14 @@ h1 {
   text-align: center;
   font-weight: 800;
   padding-top: 20px;
+  
 }
+
 h3 {
   font-family: 'Roboto';
   font-weight:400;
   margin-top: 20px;
   margin-bottom: 20px;
-  color:darkolivegreen;
 }
 
 h4 {
@@ -35,13 +31,16 @@ h4 {
   text-align: left;
 }
 
+.container-fluid {
+  padding: 0;
+}
 
-.main-window{
+.main-window {
   background-image:url("/static/login_register/media/Background.jpg");
   background-size: 100% 100%;
 }
 
-.log-in{
+.log-in {
   width: 250px;
   height: 33px;
   border-radius: 3px;
@@ -51,12 +50,11 @@ h4 {
   padding: .08rem .75rem;
 }
 
-.main{
+.main {
   margin: 0;
   position: absolute;
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   min-height: 400px;
-
 }
