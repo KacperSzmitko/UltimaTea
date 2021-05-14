@@ -6,3 +6,9 @@ SETUP
 5. Run server: python manage.py runserver
 
 # UltimaTea
+
+
+
+CELERY
+cd src
+celery -A UltimaTea worker -l info -P gevent

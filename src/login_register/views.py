@@ -1,4 +1,3 @@
-from django.contrib.auth.views import PasswordChangeView
 from django.http.request import HttpRequest
 from django.http.response import Http404, HttpResponse
 from django.shortcuts import render
@@ -8,31 +7,28 @@ from django.shortcuts import redirect
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.models import User
 from django.urls import reverse
-from django.core.mail import send_mail
 from django.contrib.auth.tokens import default_token_generator 
 from django.conf import settings
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
-from django.urls import reverse_lazy
-from django.contrib.auth import update_session_auth_hash
-# Create your views here.
+from .tasks import send_mails
+import time
 
-# Rejestracja powtórzenie hasła nie działa
 def login_view(request:HttpRequest,*args, **kwargs):
-
     request.session['lang'] = 'pl'
     register_form = RegisterForm(request.session['lang'],request.POST or None)
     login_form = LoginForm(request.session['lang'],request.POST or None)
+    # Tells which form was submited. Empty string on get
     is_login = False
+    is_register = False
+
     if 'login' in request.POST:
         is_login = True
+    elif 'register' in request.POST:
+        is_register = True
 
 
-    if not is_login and register_form.is_valid():
+    if is_register and register_form.is_valid():
         register_form.save()
         register_form = RegisterForm(request.session['lang'])
-        response = redirect(reverse('auth:login_register'))
-        return response
 
     if is_login and login_form.is_valid():
         remember_me = login_form.cleaned_data['remember_me']
@@ -53,6 +49,7 @@ def login_view(request:HttpRequest,*args, **kwargs):
         'register_form':register_form,
         'login_form':login_form,
         'is_login':is_login,
+        'is_register':is_register,
     }
 
     #send_mail("Test","Wiadomość",'UltimaTeaService@gmail.com',["kacperszmitk@wp.pl"])
@@ -69,15 +66,10 @@ def reset_password_view(request:HttpRequest):
             context = {
                 'id': user.id,
                 'token':token,
+                'adr':request.META.get("HTTP_HOST")
             }
-            html_message=render_to_string("login_register/mail.html",context,request=request)
-            plain_message = strip_tags(html_message)
-            send_mail(
-                "Zmiana hasła",
-                plain_message,
-                settings.EMAIL_HOST_USER,
-                [user.email],False,
-                html_message=html_message)
+            send_mails.delay(context,user.email)
+
             return redirect(reverse("auth:password_reset_done"))
     
     context = {

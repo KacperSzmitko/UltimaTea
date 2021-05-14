@@ -14,20 +14,38 @@
 <body>
 
     {% block content %}
+
+
     <div class="container-fluid h-100 main-window">
+        
+        {% block alerts %}
+        {% if not register_form.errors and is_register %}
+        <div id="succesful_send_alert" class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Pomyślnie utworzono konto</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endif %}
+
+        {% endblock %}
         {% if not register_form.errors and not login_form.errors %}
         <div class="to-fade">
         {% endif %}
+              
         <div class="row  no-gutters w-100 ">
-            <div class="col-12"><h1>UltimeTea</h1> </div>
+            {% if not register_form.errors and is_register%}
+            {% endif %}
+            <div class="col-12 header"><h1>UltimeTea</h1> </div>
         </div>
+        
 
         <div class="row  no-gutters w-100 main">         
             <div class="col-2 col-sm-1 col-md-2 col-lg-3"></div>
 
             <div class="col-8 col-sm-5 col-md-4 col-lg-3 login text-center">
                 <div class="log-c">
-                    <h3 class="text-center mb-3">Logowanie</h3>                   
+                    <h3 class="text-center mb-3">Zaloguj się</h3>                   
                     <!-- Login form PL -->
                     <form method="POST" id="login_form"> {% csrf_token %}
                         <div class="log-c__name-pass">
@@ -48,7 +66,7 @@
             <div class="col-2 d-sm-none"></div>
 
             <div class="col-8 col-sm-5 col-md-4 col-lg-3 register text-center">
-                <h3 class="text-center mb-3">Rejestracja</h3>
+                <h3 class="text-center mb-3">Utwórz konto</h3>
 
                 <form method="POST" id="register_form"> {% csrf_token %}
                     <div class="register_form">
@@ -95,8 +113,9 @@
     <script src="{% static 'login_register/scripts/password_preview.js' %}"> </script>
     <script src="{% static 'login_register/scripts/server_side_errors.js' %}"> </script>
     <script src="{% static 'login_register/scripts/password_check.js' %}"> </script>
+    <script src="{% static 'login_register/scripts/username_check.js' %}"> </script>
 
-    {% if register_form.errors and not is_login %}
+    {% if register_form.errors and is_register %}
     {% if register_form.errors.username %}
     <script>
         document.onload = server_error("{{register_form.errors.username.0}}", "id_username");

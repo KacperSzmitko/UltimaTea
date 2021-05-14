@@ -10,13 +10,14 @@ h3 {
   font-family: 'Roboto';
   font-weight:400;
   margin-top: 20px;
-  margin-bottom: 20px;
+/*   margin-bottom: 20px; */
+  color:darkolivegreen;
 }
 
 h4 {
   font-family: 'Roboto';
   margin-bottom: 3px;
-  font-size:small;
+  font-size:small !important;
   font-weight: 500;
   text-align: left;
 }
@@ -32,22 +33,22 @@ h4 {
 
 @keyframes fadein {
     0% { opacity:0; }
-    20% { opacity:0; }
+    25% { opacity:0; }
     100% { opacity:1; }
 }
 @-moz-keyframes fadein { /* Firefox */
     0% { opacity:0; }
-    20% { opacity:0; }
+    25% { opacity:0; }
     100% { opacity:1; }
 }
 @-webkit-keyframes fadein { /* Safari and Chrome */
     0% { opacity:0; }
-    20% { opacity:0; }
+    25% { opacity:0; }
     100% { opacity:1; }
 }
 @-o-keyframes fadein { /* Opera */
     0% { opacity:0; }
-    20% { opacity:0; }
+    25% { opacity:0; }
     100% { opacity:1; }
 }
 
@@ -68,18 +69,22 @@ body
 
 
 .login{
-  background-image:url("/static/login_register/media/Rectangle_left_half.png");
-  background-size: 100% 100%;
+/*   background-image:url("/static/login_register/media/Rectangle_left_half.png"); */
+  background-color: #F5F5F5;
+  opacity: 0.9;
   position: relative;
   min-width: 250px;
-
+  border: 1.2px solid #707070;
+  border-right: none;
 }
 
 .register{
-  background-image:url("/static/login_register/media/Rectangle_right_half.png");
-  background-size: 100% 100%;
+  /* background-image:url("/static/login_register/media/Rectangle_right_half.png"); */
+  background-color: #F5F5F5;
+  opacity: 0.9;
   min-width: 280px;
-
+  border: 1.2px solid #707070;
+  border-left: none;
 }
 
 .main{
@@ -93,11 +98,12 @@ body
 }
 
 .to-fade{
-  animation: fadein 3s;
-  -moz-animation: fadein 3s; /* Firefox */
-  -webkit-animation: fadein 3s; /* Safari and Chrome */
-  -o-animation: fadein 3s; /* Opera */
+  animation: fadein 2.2s;
+  -moz-animation: fadein 2.2s; /* Firefox */
+  -webkit-animation: fadein 2.2s; /* Safari and Chrome */
+  -o-animation: fadein 2.2s; /* Opera */
 }
+
 
 @media (max-width: 576px) {
 
@@ -111,6 +117,8 @@ body
 
   [class*="main"] {
       position: relative;
+      transform:none;
+      top:0%;
   }
 
 }
@@ -122,6 +130,12 @@ body
   }
 }
 
+@media (max-width: 576px) {
+
+  body {
+    height: auto;
+  }
+}
 
 .line{
   max-width: 100%;
@@ -278,5 +292,10 @@ body
   border-color: red;
 }
 
-
+.alert-success{
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  text-align: center;
+}
 
