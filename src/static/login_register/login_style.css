@@ -118,6 +118,7 @@ body
   [class*="main"] {
       position: relative;
       transform:none;
+      top:0%;
   }
 
 }
@@ -129,6 +130,12 @@ body
   }
 }
 
+@media (max-width: 576px) {
+
+  body {
+    height: auto;
+  }
+}
 
 .line{
   max-width: 100%;
@@ -285,5 +292,10 @@ body
   border-color: red;
 }
 
-
+.alert-success{
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  text-align: center;
+}
 

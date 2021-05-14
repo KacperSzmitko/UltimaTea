@@ -14,12 +14,25 @@
 <body>
 
     {% block content %}
+
+
     <div class="container-fluid h-100 main-window">
+        
+        {% block alerts %}
+        {% if not register_form.errors and is_register %}
+        <div id="succesful_send_alert" class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Pomyślnie utworzono konto</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endif %}
+
+        {% endblock %}
         {% if not register_form.errors and not login_form.errors %}
         <div class="to-fade">
         {% endif %}
-        
-        
+              
         <div class="row  no-gutters w-100 ">
             {% if not register_form.errors and is_register%}
             {% endif %}
