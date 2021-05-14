@@ -83,7 +83,7 @@ DATABASES = {
         'NAME': 'projekt_pz',
         'USER': 'kacper',
         'PASSWORD': '5fUwXohpL6rh5xvK',
-        'HOST': '10.8.0.1',
+        'HOST': '192.168.1.250',
         'PORT': '3306',
     },
 }
