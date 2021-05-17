@@ -1,3 +1,4 @@
+from re import template
 from django.http.request import HttpRequest
 from django.http.response import Http404, HttpResponse
 from django.shortcuts import render
@@ -13,7 +14,6 @@ from .tasks import send_mails
 import time
 
 def login_view(request:HttpRequest,*args, **kwargs):
-    request.session['lang'] = 'pl'
     register_form = RegisterForm(request.session['lang'],request.POST or None)
     login_form = LoginForm(request.session['lang'],request.POST or None)
     # Tells which form was submited. Empty string on get
@@ -70,7 +70,7 @@ def reset_password_view(request:HttpRequest):
             }
             send_mails.delay(context,user.email)
 
-            return redirect(reverse("auth:password_reset_done"))
+            return redirect(reverse("auth:password_reset_sent"))
     
     context = {
         'reset_password_form':reset_password_form
@@ -79,34 +79,32 @@ def reset_password_view(request:HttpRequest):
 
 
 class ResetPasswordSendView(TemplateView):
-    template_name = "login_register/password_reset_succes.html"
+    template_name = "login_register/password_reset_sent.html"
 
 class InvalidLinkView(TemplateView):
     template_name = "login_register/invalid_link.html"
 
 
-def ChangePasswordView(request:HttpRequest, *args, **kwargs):
+def change_password_view(request:HttpRequest, *args, **kwargs):
     change_password_form = ChangePasswordForm(request.session["lang"], request.POST or None)
 
-    if change_password_form.is_valid():
-        change_password_form.save(commit=False)
+    if  not default_token_generator.check_token(User.objects.get(id=kwargs.get("id")),kwargs.get("token")):
+        return redirect(reverse("auth:invalid_link"))
 
+    if change_password_form.is_valid():
         user = User.objects.get(id=kwargs.get("id"))
-        user.password  = change_password_form.cleaned_data.get("password")
+        user.set_password(change_password_form.cleaned_data.get("password"))
         user.save()
         # Powiadam że udało się zmienić hasło
-        return redirect(reverse("auth:login_register"))
+        return redirect(reverse("auth:password_change_complete"))
 
-    # Invalid link
-    if request.method == 'GET':       
-        if  not default_token_generator.check_token(User.objects.get(id=kwargs.get("id")),kwargs.get("token")):
-            return redirect(reverse("auth:invalid_link"))
-    
     context = {
         'change_password_form':change_password_form,
     }
-
     return render(request,"login_register/password_change.html",context)
+    
+class ResetPasswordCompleteView(TemplateView):
+    template_name = 'login_register/password_change_complete.html'
     
 
 

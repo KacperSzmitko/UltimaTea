@@ -106,22 +106,18 @@ class ResetPasswordForm(forms.Form):
         self.message = ErrorMessages.languages[lang]
 
 
-class ChangePasswordForm(forms.ModelForm):
+class ChangePasswordForm(forms.Form):
 
     re_password = forms.CharField(  
                     max_length=255,
                     required=True,
                     widget=PasswordInput(attrs={'class':'log-in register-re-password', 'id': 'change_re_password'})
                     )
-
-    class Meta:
-        model = User
-        fields = [
-            'password',
-            're_password'
-        ]
-        widgets = {'password': PasswordInput(attrs={'class':'log-in', 'id' : "change_password"})}
-
+    password = forms.CharField(
+                max_length=255,
+                required=True,
+                widget=PasswordInput(attrs={'class':'log-in register-re-password', 'id': 'change_password'})
+    )
 
     def __init__(self,lang,*args, **kwargs):
         super(ChangePasswordForm, self).__init__(*args, **kwargs)
