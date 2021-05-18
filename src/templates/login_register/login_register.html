@@ -73,8 +73,8 @@
                         <h4>Nazwa użytkownika</h4> {{ register_form.username}} 
                         <h4>E-mail</h4> {{register_form.email}} 
                         <h4>Hasło</h4> <div style="display: flex;" >{{register_form.password1}} <img src="{% static 'login_register/media/Eye.png' %}" id="eye" class="eye" onclick="show_password()"> </div>
-                            <div id="e_pass" class="e_text drop-menu">
-                                <ul class="e_text">
+                            <div>
+                                <ul id="e_pass" class="e_text">
                                 <li id="len" class="invalid-text">Miniumum 8 znaków</li>
                                 <li id="special-char" class="invalid-text"> Przynajmniej 1 znak specjalny</li>
                                 <li id="big-letter" class="invalid-text">Przynajmniej 1 wielka litera</li>
