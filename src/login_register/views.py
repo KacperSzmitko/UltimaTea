@@ -14,8 +14,8 @@ from .tasks import send_mails
 import time
 
 def login_view(request:HttpRequest,*args, **kwargs):
-    register_form = RegisterForm(request.session['lang'],request.POST or None)
-    login_form = LoginForm(request.session['lang'],request.POST or None)
+    register_form = RegisterForm('pl',request.POST or None)
+    login_form = LoginForm('pl',request.POST or None)
     # Tells which form was submited. Empty string on get
     is_login = False
     is_register = False
@@ -28,7 +28,7 @@ def login_view(request:HttpRequest,*args, **kwargs):
 
     if is_register and register_form.is_valid():
         register_form.save()
-        register_form = RegisterForm(request.session['lang'])
+        register_form = RegisterForm('pl')
 
     if is_login and login_form.is_valid():
         remember_me = login_form.cleaned_data['remember_me']
@@ -57,9 +57,9 @@ def login_view(request:HttpRequest,*args, **kwargs):
 
     
 def reset_password_view(request:HttpRequest):
-    reset_password_form = ResetPasswordForm(request.session['lang'])
+    reset_password_form = ResetPasswordForm('pl')
     if request.method == 'POST':
-        reset_password_form = ResetPasswordForm(request.session['lang'],request.POST)
+        reset_password_form = ResetPasswordForm('pl',request.POST)
         if reset_password_form.is_valid():
             user = User.objects.get(email=reset_password_form.cleaned_data['email'])
             token = default_token_generator.make_token(user)
