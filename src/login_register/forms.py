@@ -100,7 +100,7 @@ class ResetPasswordForm(forms.Form):
     email = forms.EmailField(
         max_length=255,
         required=True,
-        widget= TextInput(attrs={'class':'log-in '}))
+        widget= EmailInput(attrs={'class':'log-in '}))
 
     def clean_email(self):
         email = self.cleaned_data.get("email")
@@ -122,12 +122,14 @@ class ChangePasswordForm(forms.Form):
     re_password = forms.CharField(  
                     max_length=255,
                     required=True,
-                    widget=PasswordInput(attrs={'class':'log-in register-re-password', 'id': 'change_re_password'})
+        widget=PasswordInput(
+            attrs={'class': 'log-in register-re-password', 'id': 'id_re_password'})
                     )
     password = forms.CharField(
                 max_length=255,
                 required=True,
-                widget=PasswordInput(attrs={'class':'log-in register-re-password', 'id': 'change_password'})
+        widget=PasswordInput(
+            attrs={'class': 'log-in register-password', 'id': 'register-password'})
     )
 
 
