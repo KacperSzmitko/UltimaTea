@@ -25,7 +25,7 @@ function server_error(error,id)
     element.onclick = function() {element.classList.remove("invalid");};
     element.oninput = function() {element.classList.remove("invalid");};
   
-    setTimeout( function() {element.setCustomValidity("");},2000);
+    setTimeout( function() {element.setCustomValidity("");},3000);
 
 }
 

@@ -68,7 +68,8 @@ def reset_password_view(request:HttpRequest):
                 'token':token,
                 'adr':request.META.get("HTTP_HOST")
             }
-            send_mails.delay(context,user.email)
+            send_mails.delay(
+                context, reset_password_form.cleaned_data['email'])
 
             return redirect(reverse("auth:password_reset_sent"))
     
@@ -86,16 +87,14 @@ class InvalidLinkView(TemplateView):
 
 
 def change_password_view(request:HttpRequest, *args, **kwargs):
-    change_password_form = ChangePasswordForm(request.session["lang"], request.POST or None)
-
-    if  not default_token_generator.check_token(User.objects.get(id=kwargs.get("id")),kwargs.get("token")):
+    change_password_form = ChangePasswordForm('pl', request.POST or None)
+    if not User.objects.filter(id=kwargs.get("id")).exists() or not default_token_generator.check_token(User.objects.get(id=kwargs.get("id")), kwargs.get("token")):
         return redirect(reverse("auth:invalid_link"))
 
     if change_password_form.is_valid():
         user = User.objects.get(id=kwargs.get("id"))
         user.set_password(change_password_form.cleaned_data.get("password"))
         user.save()
-        # Powiadam że udało się zmienić hasło
         return redirect(reverse("auth:password_change_complete"))
 
     context = {

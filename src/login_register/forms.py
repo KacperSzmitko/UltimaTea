@@ -88,6 +88,7 @@ class LoginForm(forms.Form):
         if check_password(password,hashed_password):
             return password
         raise ValidationError(self.message[Error.WRONG_PASSWORD],code=Error.WRONG_PASSWORD)
+
     def __init__(self,lang,*args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
         self.message = ErrorMessages.languages[lang]
@@ -99,7 +100,17 @@ class ResetPasswordForm(forms.Form):
     email = forms.EmailField(
         max_length=255,
         required=True,
-        widget= TextInput(attrs={'class':'log-in '}))
+        widget= EmailInput(attrs={'class':'log-in '}))
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        try:
+            User.objects.get(
+                email=email)
+        except:
+            raise ValidationError(
+                self.message[Error.EMAIL_NOT_EXISTS], code=Error.EMAIL_NOT_EXISTS)
+        return email
 
     def __init__(self,lang,*args, **kwargs):
         super(ResetPasswordForm, self).__init__(*args, **kwargs)
@@ -111,13 +122,16 @@ class ChangePasswordForm(forms.Form):
     re_password = forms.CharField(  
                     max_length=255,
                     required=True,
-                    widget=PasswordInput(attrs={'class':'log-in register-re-password', 'id': 'change_re_password'})
+        widget=PasswordInput(
+            attrs={'class': 'log-in register-re-password', 'id': 'id_re_password'})
                     )
     password = forms.CharField(
                 max_length=255,
                 required=True,
-                widget=PasswordInput(attrs={'class':'log-in register-re-password', 'id': 'change_password'})
+        widget=PasswordInput(
+            attrs={'class': 'log-in register-password', 'id': 'register-password'})
     )
+
 
     def __init__(self,lang,*args, **kwargs):
         super(ChangePasswordForm, self).__init__(*args, **kwargs)

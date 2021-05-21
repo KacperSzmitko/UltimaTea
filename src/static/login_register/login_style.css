@@ -101,22 +101,7 @@
   text-align: left;
 }
 
-.log-in{
-  width: 250px;
-  height: 33px;
-  border-radius: 3px;
-  border: none;
-  margin-bottom: 8px;
-  display: flex;
-  padding: .08rem .75rem;
-}
 
-.log-in:focus{
-  color: #495057;
-  border-color: #80bdff;
-  box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
-  outline: 0;
-}
 
 .log-c__name-pass{
   display:inline-block;
@@ -135,11 +120,7 @@
   margin-top: 3px;
 }
 
-.btn{
-  padding: 0px;
-  text-align: center;
-  display: block;
-}
+
 
 .invalid{
   width: 250px;
@@ -170,24 +151,7 @@
   border-style: solid;
 }
 
-.e_text{
-  font-family: 'Roboto';
-  font-size: small;
-  text-align: left;
-  overflow: hidden;
-  max-width: 250px;
-  list-style-position: inside;
-  padding-left: 0;
-  color: red;
-}
 
-.btn{
-  font-family: 'Roboto';
-}
-
-.btn:focus{
-  color: white;
-}
 
 .invalid-text{
   color: red;

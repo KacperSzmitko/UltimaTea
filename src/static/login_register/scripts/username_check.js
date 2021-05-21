@@ -3,9 +3,10 @@ var username = document.getElementById("id_username")
 username.oninput = username_check;
 
 function username_check(){
+
     if (username.value.length > 0)
     {
-        if (!(/^[\x00-\x7F]*$/.test(username.value)))
+        if (!isASCII(username.value))
         {
             username.setCustomValidity("Nazwa użytkownika nie może zawierać niedozwolonych znaków");
             username.reportValidity();
@@ -22,5 +23,5 @@ function username_check(){
 }
 
 function isASCII(str) {
-    return /^[\x00-\x7F]*$/.test(str);
+    return /^[\x21-\x7D]*$/.test(str);
 }
