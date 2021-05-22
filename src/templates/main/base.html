@@ -9,20 +9,24 @@
 {%endblock head%}
 
 {%block content%}
-<div class="container-fluid h-100">
-    <div class="container row h-100">
-        <div class = "menu col-3">
+<div class="box container-fluid" style="background-color: seashell; height: 100%;">
+    <div class="infoBar row" style="background-color: beige; height: 17%; margin: 0;">
+        Informacyjny bar
+    </div>
+    <div class="containerRow" style="background-color: gold; height: 83%; width: 100%; display: flex;">
+        <div class="containerMenu" style="background-color: grey; width: 29%">
             {%include "main/menu.html"%}
         </div>
-        <div class="content col-9 container-fluid">
-            <div class="main_content row h-100">
-                <div class="content col-12">
-                    {% block main_content %}{% endblock main_content%}
-                </div>
-            </div>
+        <div class="containerSeparator" style="background-color: gainsboro; width: 1%">
+            
+        </div>
+        <div class="containerContent" style="background-color: blue; width: 77%">
+            {%block main_content%}
+            {%endblock main_content%}
         </div>
     </div>
+        
+        
 </div>
-
 {%endblock content%}
 
