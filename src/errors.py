@@ -8,6 +8,7 @@ class Error(Enum):
     EMAIL_EXISTS = "1004",
     WRONG_LOGIN = "1005",
     WRONG_PASSWORD = "1006",
+    EMAIL_NOT_EXISTS = "1007",
 
 
 class ErrorMessages():
@@ -21,6 +22,7 @@ class ErrorMessages():
         Error.EMAIL_EXISTS: "Podany adres Email jest już przypisany do istniejącego konta",
         Error.WRONG_LOGIN: "Nieprawidłowa nazwa użytkownika/adres Email",
         Error.WRONG_PASSWORD: "Hasło nieprawidłowe",
+        Error.EMAIL_NOT_EXISTS: "Podany adres email nie jest przypisany do żadnego użytkownika",
     },
     'en':{},
     }

@@ -1,6 +1,6 @@
 
-function show_password(){
-    var x = document.getElementById("reg_id_password");
+function show_password(id){
+    var x = document.getElementById(id);
     if (x.type === "password") {
     x.type = "text";
   } else {

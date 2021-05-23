@@ -40,14 +40,14 @@ h4 {
   background-size: 100% 100%;
 }
 
-.log-in {
-  width: 250px;
-  height: 33px;
-  border-radius: 3px;
-  border: none;
-  margin-bottom: 8px;
-  display: flex;
-  padding: .08rem .75rem;
+.login{
+/*   background-image:url("/static/login_register/media/Rectangle_left_half.png"); */
+  background-color: #F5F5F5;
+  opacity: 0.9;
+  position: relative;
+  min-width: 250px;
+  border: 1.2px solid #707070;
+  border-right: none;
 }
 
 .main {
@@ -58,3 +58,55 @@ h4 {
   transform: translateY(-50%);
   min-height: 400px;
 }
+
+
+.alert-success{
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  text-align: center;
+}
+
+.log-in{
+  width: 250px;
+  height: 33px;
+  border-radius: 3px;
+  border: none;
+  margin-bottom: 8px;
+  display: flex;
+  padding: .08rem .75rem;
+}
+
+.log-in:focus{
+  color: #495057;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
+  outline: 0;
+}
+
+.btn:focus{
+  color: white;
+}
+
+.btn{
+  font-family: 'Roboto';
+  padding: 0px;
+  text-align: center;
+  display: block;
+}
+
+.e_text{
+  font-family: 'Roboto';
+  font-size: small;
+  text-align: left;
+  max-width: 250px;
+  list-style-position: inside;
+  padding-left: 0;
+  color: red;
+}
+
+.invalid-text{
+  color: red;
+  font-size: 13px;
+}
+

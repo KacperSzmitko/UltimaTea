@@ -1,27 +1,3 @@
-h1 {
-  font-family: 'Yellowtail', cursive;
-  font-size:110px;
-  text-align: center;
-  font-weight: 800;
-  padding-top: 20px;
-}
-
-h3 {
-  font-family: 'Roboto';
-  font-weight:400;
-  margin-top: 20px;
-/*   margin-bottom: 20px; */
-  color:darkolivegreen;
-}
-
-h4 {
-  font-family: 'Roboto';
-  margin-bottom: 3px;
-  font-size:small !important;
-  font-weight: 500;
-  text-align: left;
-}
-
 @keyframes highlight {
   0% {
     border-color:white;
@@ -52,32 +28,6 @@ h4 {
     100% { opacity:1; }
 }
 
-html{
-  height: 100%;
-}
-
-body
-{
-  font-family: 'Roboto';
-  height:100%;
-}
-
-.container-fluid{
-   padding: 0;
-}
-
-
-
-.login{
-/*   background-image:url("/static/login_register/media/Rectangle_left_half.png"); */
-  background-color: #F5F5F5;
-  opacity: 0.9;
-  position: relative;
-  min-width: 250px;
-  border: 1.2px solid #707070;
-  border-right: none;
-}
-
 .register{
   /* background-image:url("/static/login_register/media/Rectangle_right_half.png"); */
   background-color: #F5F5F5;
@@ -87,15 +37,6 @@ body
   border-left: none;
 }
 
-.main{
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  min-height: 400px;
-
-}
 
 .to-fade{
   animation: fadein 2.2s;
@@ -145,11 +86,6 @@ body
   bottom: 14px;
 }
 
-.main-window{
-  background-image:url("/static/login_register/media/Background.jpg");
-  background-size: 100% 100%;
-}
-
 #id_remember_me{
   vertical-align:middle;
 }
@@ -165,22 +101,7 @@ body
   text-align: left;
 }
 
-.log-in{
-  width: 250px;
-  height: 33px;
-  border-radius: 3px;
-  border: none;
-  margin-bottom: 8px;
-  display: flex;
-  padding: .08rem .75rem;
-}
 
-.log-in:focus{
-  color: #495057;
-  border-color: #80bdff;
-  box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
-  outline: 0;
-}
 
 .log-c__name-pass{
   display:inline-block;
@@ -199,11 +120,7 @@ body
   margin-top: 3px;
 }
 
-.btn{
-  padding: 0px;
-  text-align: center;
-  display: block;
-}
+
 
 .invalid{
   width: 250px;
@@ -234,24 +151,7 @@ body
   border-style: solid;
 }
 
-.e_text{
-  font-family: 'Roboto';
-  font-size: small;
-  text-align: left;
-  overflow: hidden;
-  max-width: 250px;
-  list-style-position: inside;
-  padding-left: 0;
-  color: red;
-}
 
-.btn{
-  font-family: 'Roboto';
-}
-
-.btn:focus{
-  color: white;
-}
 
 .invalid-text{
   color: red;
@@ -292,10 +192,5 @@ body
   border-color: red;
 }
 
-.alert-success{
-  position: fixed;
-  z-index: 999;
-  width: 100%;
-  text-align: center;
-}
+
 

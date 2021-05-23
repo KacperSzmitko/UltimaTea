@@ -6,7 +6,7 @@
     {% extends 'base.html' %}
     {% load static %}
 
-    {% block styles %}
+    {% block additional_styles %}
     <link rel="stylesheet" type="text/css" href="{% static 'login_register/login_style.css' %}">
     {% endblock %}
 </head>
@@ -72,7 +72,7 @@
                     <div class="register_form">
                         <h4>Nazwa użytkownika</h4> {{ register_form.username}} 
                         <h4>E-mail</h4> {{register_form.email}} 
-                        <h4>Hasło</h4> <div style="display: flex;" >{{register_form.password1}} <img src="{% static 'login_register/media/Eye.png' %}" id="eye" class="eye" onclick="show_password()"> </div>
+                        <h4>Hasło</h4> <div style="display: flex;" >{{register_form.password1}} <img src="{% static 'login_register/media/Eye.png' %}" id="eye" class="eye" onclick="show_password('reg_id_password')"> </div>
                             <div id="e_pass" class="e_text drop-menu">
                                 <ul class="e_text">
                                 <li id="len" class="invalid-text">Miniumum 8 znaków</li>
@@ -100,7 +100,8 @@
     </div>
     </div>
 
-
+    {% endblock %}
+    {% block scripts %}
     <script>
         var x = document.getElementById("id_password1");
         x.classList.add("log-in", "register-password");
@@ -109,6 +110,7 @@
         x.classList.add("log-in", "register-re-password");
         x.id = "id_re_password";
     </script>
+
     <script src="{% static 'login_register/scripts/buttons_availability.js' %}"> </script>
     <script src="{% static 'login_register/scripts/password_preview.js' %}"> </script>
     <script src="{% static 'login_register/scripts/server_side_errors.js' %}"> </script>
@@ -139,6 +141,7 @@
     
     {% endif %}
     {% endblock %}
+
 </body>
 
 </html>
