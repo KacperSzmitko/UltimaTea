@@ -7,68 +7,13 @@
         </div>
 
     </div>
-    <div class="mainRecipes" style="width: 100%; height: 80%; display: flex; background-color: indigo;">
+    <div class="mainRecipes" style="width: 100%; height: 60%; display: flex; background-color: indigo;">
         <div class="leftScroll" style="width: 10%; height: 100%;background-color: maroon;">
             <<
         </div>
-        <div class="recipesDisplay" style="width: 80%; height: 100%; display: flex; background-color: violet;">
-            <div class="displayRecipe" style="width: 33.33%; height: 100%; background-color: chocolate;">
-                <div class="recipeTitle" style="width: 100%; height: 15%; background-color: indianred;">
-                    Nazwa herbaty
-                </div>
-                <div class="recipeBorder" style="width: 100%; height: 1%; background-color: rgb(53, 38, 10);">
-                    -
-                </div>
-                <div class="recipeContent" style="width: 100%; height: 84%; background-color: peru;">
-                    <div class="recipeIngredients" style="width: 100%; height: 33.4%; background-color: navy;">
-                        Składniki
-                    </div>
-                    <div class="recipeTemperatures" style="width: 100%; height: 33.4%; background-color: red;">
-                        Temepratury
-                    </div>
-                    <div class="recipeTimes" style="width: 100%; height: 33.4%; background-color: olive;">
-                        Czasy
-                    </div>
-                </div>
-            </div>
-            <div class="displayRecipe" style="width: 33.33%; height: 100%; background-color: chocolate;">
-                <div class="recipeTitle" style="width: 100%; height: 15%; background-color: indianred;">
-                    Nazwa herbaty
-                </div>
-                <div class="recipeBorder" style="width: 100%; height: 1%; background-color: rgb(53, 38, 10);">
-                    -
-                </div>
-                <div class="recipeContent" style="width: 100%; height: 84%; background-color: peru;">
-                    <div class="recipeIngredients" style="width: 100%; height: 33.4%; background-color: navy;">
-                        Składniki
-                    </div>
-                    <div class="recipeTemperatures" style="width: 100%; height: 33.4%; background-color: red;">
-                        Temepratury
-                    </div>
-                    <div class="recipeTimes" style="width: 100%; height: 33.4%; background-color: olive;">
-                        Czasy
-                    </div>
-                </div>
-            </div>
-            <div class="displayRecipe" style="width: 33.33%; height: 100%; background-color: chocolate;">
-                <div class="recipeTitle" style="width: 100%; height: 15%; background-color: indianred;">
-                    Nazwa herbaty
-                </div>
-                <div class="recipeBorder" style="width: 100%; height: 1%; background-color: rgb(53, 38, 10);">
-                    -
-                </div>
-                <div class="recipeContent" style="width: 100%; height: 84%; background-color: peru;">
-                    <div class="recipeIngredients" style="width: 100%; height: 33.4%; background-color: navy;">
-                        Składniki
-                    </div>
-                    <div class="recipeTemperatures" style="width: 100%; height: 33.4%; background-color: red;">
-                        Temepratury
-                    </div>
-                    <div class="recipeTimes" style="width: 100%; height: 33.4%; background-color: olive;">
-                        Czasy
-                    </div>
-                </div>
-            </div>
+        <div id="recipesDisplay" class="recipesDisplay" style="width: 80%; height: 100%; display: flex; background-color: violet;">
+            
+            
         </div>
 
         <div class="rightScroll" style="width: 10%; height: 100%; background-color: black;">
@@ -76,7 +21,7 @@
         </div>
 
     </div>
-    <div class="mainBottom" style="width: 100%; height: 10%; background-color: aliceblue;">
+    <div class="mainBottom" style="width: 100%; height: 30%; background-color: aliceblue;">
         <div class="bottomButton" style="width: 100%; height: 50%; background-color: cadetblue;">
             Przycisk robienia
         </div>
@@ -86,3 +31,10 @@
     </div>
 </div>
 {%endblock main_content%}
+
+{%block scripts%}
+<script src="static/main/scripts/home_scripts.js"> </script>
+<script>
+    loadRecipes('right')
+</script>
+{%endblock scripts%}

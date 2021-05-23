@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home_view
+from .views import home_view, recipes_view
 
 app_name = 'main_app'
 urlpatterns = [
@@ -10,4 +10,6 @@ urlpatterns = [
     path('configureIngredients', home_view, name='main_configure_ingredients'),
     path('status', home_view, name='main_status'),
     path('editProfile', home_view, name='main_edit_profile'),
+
+    path('recipesList', recipes_view, name='main_get_recipes')
 ]

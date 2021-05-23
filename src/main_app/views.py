@@ -11,3 +11,37 @@ def home_view(request, *args, **kwargs):
         'title':'Home'
     }
     return render(request,"main/home.html", context)
+
+def recipes_view(request, *args, **kwargs):
+    context = {
+        'recipes':[
+            {
+                'title':'title_val',
+                'ing_names':['Sól', 'Sól', 'Sól'],
+                'ing_qua':[{'value': 20, 'unit': 'g'},{'value': 20, 'unit': 'g'},{'value': 20, 'unit': 'g'}],
+                'tem_name':['Parzenie', 'Grzanie'],
+                'tem_val':['95', '2137'],
+                'tim_nam':['Parzenie', 'Chłodzenie'],
+                'tim_val':[21, 98]
+            },
+            {
+                'title':'title_val',
+                'ing_names':['Sól', 'Sól', 'Sól'],
+                'ing_qua':[{'value': 20, 'unit': 'g'},{'value': 20, 'unit': 'g'},{'value': 20, 'unit': 'g'}],
+                'tem_name':['Parzenie', 'Grzanie'],
+                'tem_val':['95', '2137'],
+                'tim_nam':['Parzenie', 'Chłodzenie'],
+                'tim_val':[21, 98]
+            },
+            {
+                'title':'title_val',
+                'ing_names':['Sól', 'Sól', 'Sól'],
+                'ing_qua':[{'value': 20, 'unit': 'g'},{'value': 20, 'unit': 'g'},{'value': 20, 'unit': 'g'}],
+                'tem_name':['Parzenie', 'Grzanie'],
+                'tem_val':['95', '2137'],
+                'tim_nam':['Parzenie', 'Chłodzenie'],
+                'tim_val':[21, 98]
+            },
+        ]
+    }
+    return render(request,"main/recipesList.html", context)

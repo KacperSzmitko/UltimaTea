@@ -1,0 +1,86 @@
+{% for recipe in recipes %}
+<div id="recipesDisplayed" class="displayRecipe" style="width: 33.33%; height: 100%; background-color: chocolate;">
+    <div class="recipeTitle centerIn" style="width: 100%; height: 10%; background-color: indianred;">
+        <div class="teaName in"> 
+            {{recipe.title}}
+        </div>
+    </div>
+    <div class="recipeBorder centerIn" style="width: 100%; height: 1%; background-color: rgb(53, 38, 10);">
+        <div class="in borderSec"></div>
+    </div>
+    <div class="recipeContent" style="width: 100%; height: 84%; background-color: peru;">
+        <div class="recipeIngredients centerIn" style="width: 100%; height: 33.4%; background-color: wheat;">
+            <div class="in" style="width: 100%; height: 100%">
+                <div class="dataTitle dataPos" style="width: 100%; height: 20%">Skłdaniki</div>
+                <div class="data" style="width: 100%; height: 80%; display: flex;">
+                    <div class="names" style="width: 69%; height: 100%;">
+                        {%for ingreditntName in recipe.ing_names%}
+                        <div class="dataPos">{{ingreditntName}}</div>
+                        {%endfor%}
+                        <!-- <div class="dataPos">Sól</div>
+                        <div class="dataPos">Sól</div>
+                        <div class="dataPos">Sól</div> -->
+                    </div>
+                    <div class="borderSec-ver"></div>
+                    <div class="quantity" style="width: 30%; height: 100%;">
+                        {%for ingreditntQuantity in recipe.ing_qua%}
+                        <div class="dataPos">{{ingreditntQuantity.value}} {{ingreditntQuantity.unit}}</div>
+                        {%endfor%}
+                        <!-- <div class="dataPos">20 g</div>
+                        <div class="dataPos">20 g</div>
+                        <div class="dataPos">20 g</div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="recipeIngredients centerIn" style="width: 100%; height: 33.4%; background-color: darkcyan;">
+            <div class="in" style="width: 100%; height: 100%">
+                <div class="dataTitle dataPos" style="width: 100%; height: 20%">Temperatury</div>
+                <div class="data" style="width: 100%; height: 80%; display: flex;">
+                    <div class="names" style="width: 69%; height: 100%;">
+                        {%for tempName in recipe.tem_name%}
+                        <div class="dataPos">{{tempName}}</div>
+                        {%endfor%}
+                        <!-- <div class="dataPos">Sól</div>
+                        <div class="dataPos">Sól</div>
+                        <div class="dataPos">Sól</div> -->
+                    </div>
+                    <div class="borderSec-ver"></div>
+                    <div class="quantity" style="width: 30%; height: 100%;">
+                        {%for temVal in recipe.tem_val%}
+                        <div class="dataPos">{{temVal}} *C</div>
+                        {%endfor%}
+                        <!-- <div class="dataPos">20 g</div>
+                        <div class="dataPos">20 g</div>
+                        <div class="dataPos">20 g</div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="recipeIngredients centerIn" style="width: 100%; height: 33.4%; background-color: sienna;">
+            <div class="in" style="width: 100%; height: 100%">
+                <div class="dataTitle dataPos" style="width: 100%; height: 20%">Czasy</div>
+                <div class="data" style="width: 100%; height: 80%; display: flex;">
+                    <div class="names" style="width: 69%; height: 100%;">
+                        {%for timNam in recipe.tim_nam%}
+                        <div class="dataPos">{{timNam}}</div>
+                        {%endfor%}
+                        <!-- <div class="dataPos">Sól</div>
+                        <div class="dataPos">Sól</div>
+                        <div class="dataPos">Sól</div> -->
+                    </div>
+                    <div class="borderSec-ver"></div>
+                    <div class="quantity" style="width: 30%; height: 100%;">
+                        {%for timVal in recipe.tim_val%}
+                        <div class="dataPos">{{timVal}} s</div>
+                        {%endfor%}
+                        <!-- <div class="dataPos">20 g</div>
+                        <div class="dataPos">20 g</div>
+                        <div class="dataPos">20 g</div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endfor%}  
