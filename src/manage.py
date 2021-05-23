@@ -2,6 +2,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+import logging
 
 
 def main():
@@ -19,4 +20,13 @@ def main():
 
 
 if __name__ == '__main__':
+
+    logger = logging.getLogger('main_logger')
+    logger.setLevel(logging.DEBUG)
+    fh = logging.FileHandler('main_logger.log')
+    fh.setLevel(logging.DEBUG)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    fh.setFormatter(formatter)
+    logger.addHandler(fh)
+
     main()
