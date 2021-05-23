@@ -33,8 +33,12 @@
 {%endblock main_content%}
 
 {%block scripts%}
+{% csrf_token %}
+<script>
+const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+</script>
 <script src="static/main/scripts/home_scripts.js"> </script>
 <script>
-    loadRecipes('right')
+    loadRecipes('right', 'asdasd', '{% csrf_token %}')
 </script>
 {%endblock scripts%}

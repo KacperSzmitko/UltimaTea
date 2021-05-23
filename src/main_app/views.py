@@ -14,6 +14,7 @@ def home_view(request, *args, **kwargs):
     }
     return render(request,"main/home.html", context)
 
+
 def recipes_view(request:HttpRequest, *args, **kwargs):
     context = {
         'recipes':[

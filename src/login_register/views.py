@@ -12,6 +12,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.conf import settings
 from .tasks import send_mails
 import time
+import logging
 
 def login_view(request:HttpRequest,*args, **kwargs):
     register_form = RegisterForm('pl',request.POST or None)
@@ -57,6 +58,12 @@ def login_view(request:HttpRequest,*args, **kwargs):
 
     
 def reset_password_view(request:HttpRequest):
+
+    logger = logging.getLogger('main_logger')
+    
+    logger.info(request.META)
+    logger.info(request.body)
+
     reset_password_form = ResetPasswordForm('pl')
     if request.method == 'POST':
         reset_password_form = ResetPasswordForm('pl',request.POST)
@@ -87,6 +94,8 @@ class InvalidLinkView(TemplateView):
 
 
 def change_password_view(request:HttpRequest, *args, **kwargs):
+
+
     change_password_form = ChangePasswordForm('pl', request.POST or None)
     if not User.objects.filter(id=kwargs.get("id")).exists() or not default_token_generator.check_token(User.objects.get(id=kwargs.get("id")), kwargs.get("token")):
         return redirect(reverse("auth:invalid_link"))
