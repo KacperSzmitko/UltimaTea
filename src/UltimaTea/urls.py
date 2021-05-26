@@ -21,8 +21,8 @@ from django.urls.conf import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/',include('login_register.urls')),
+    path('login/', include('login_register.urls', namespace='auth')),
     #path('',home_view,name='login_register'),
-    path('', include('main_app.urls')),
+    path('', include('main_app.urls', namespace='app')),
 ]
 
