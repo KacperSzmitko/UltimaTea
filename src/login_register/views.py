@@ -59,11 +59,6 @@ def login_view(request:HttpRequest,*args, **kwargs):
     
 def reset_password_view(request:HttpRequest):
 
-    logger = logging.getLogger('main_logger')
-    
-    logger.info(request.META)
-    logger.info(request.body)
-
     reset_password_form = ResetPasswordForm('pl')
     if request.method == 'POST':
         reset_password_form = ResetPasswordForm('pl',request.POST)

@@ -29,9 +29,13 @@ class Recipes(models.Model):
     class Meta:
         db_table = 'recipes'
 
+    def __str__(self):
+        return self.recipe_name+': '+self.descripction
+
 # In db all ammounts will be stored in one type of unit, and will be converted on demand
 class IngredientsRecipes(models.Model):
     recipe = models.ForeignKey(Recipes,on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingerdients,on_delete=models.CASCADE)
     # Unit in which recipe was created
     ammount = models.FloatField()
     class Meta:
