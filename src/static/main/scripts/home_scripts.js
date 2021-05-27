@@ -3,8 +3,6 @@ var machinInfoContainer = document.getElementById("infoBar");
 
 
 function loadRecipes(request_id, fetch_nexts, csrf_token) {
-    // console.log(request_id)
-    // console.log(fetch_nexts)
     var requestData = new XMLHttpRequest();
     requestData.responseType = "text";
     requestData.addEventListener("load", function () {
@@ -38,4 +36,31 @@ function loadMachineInfo(csrf_token) {
     requestData.setRequestHeader("X-CSRFToken", csrf_token);
     requestData.send();
 
+}
+
+
+
+
+var toggled = undefined
+
+function displayTotalTime(){
+
+}
+
+
+function toggle_select(name) {
+    var envRow = document.getElementById(name);
+    
+    if(envRow.classList.contains("selected")) {
+        envRow.classList.remove("selected");
+        toggled = undefined
+    }
+    else{
+        envRow.classList.add("selected");
+        if(toggled != undefined){
+            toggle_select(toggled)
+        }
+        toggled = name
+
+    }
 }

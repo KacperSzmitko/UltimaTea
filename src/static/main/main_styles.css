@@ -46,3 +46,9 @@
     padding-left: 10%;
 }
 
+
+.selected {
+    border-style: solid;
+    border-color: blueviolet;
+    border-radius: 5px;
+}
