@@ -30,7 +30,9 @@ def recipes_view(request:HttpRequest, *args, **kwargs):
 
     
     if request_d['range'] < 0:
-        fetched = request.user.recipes_set.filter(id__lt = 3).order_by('-id')[:abs(request_d['range']):-1]
+        fetched = request.user.recipes_set.filter(id__lt = request_d['from']).order_by('-id')[:abs(request_d['range']):-1]
+        # logger.info(request_d['range'])
+        # logger.info(fetched)
     else:
         fetched = request.user.recipes_set.filter(id__gt = request_d['from']).order_by('id')[:request_d['range']]
     
