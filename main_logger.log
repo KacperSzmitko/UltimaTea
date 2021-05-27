@@ -1,2 +1,17 @@
 
 2021-05-26 21:39:45,629 - main_logger - INFO - <QuerySet [<Recipes: Specjaï¿½ kafelkarza: Smaczna herbata z duï¿½ï¿½ iloï¿½ciï¿½ cukru by siï¿½ pobudziï¿½ rano.>]>
+2021-05-27 17:03:58,237 - main_logger - INFO - Syrop malinowy
+2021-05-27 17:03:58,286 - main_logger - INFO - Miód
+2021-05-27 17:03:58,335 - main_logger - INFO - Sok z cytryny
+2021-05-27 17:03:58,383 - main_logger - INFO - cukier
+2021-05-27 17:03:58,444 - main_logger - INFO - woda
+2021-05-27 17:05:39,115 - main_logger - INFO - Syrop malinowy
+2021-05-27 17:05:39,167 - main_logger - INFO - Miód
+2021-05-27 17:05:39,230 - main_logger - INFO - Sok z cytryny
+2021-05-27 17:05:39,543 - main_logger - INFO - cukier
+2021-05-27 17:05:39,629 - main_logger - INFO - woda
+2021-05-27 17:06:00,433 - main_logger - INFO - Syrop malinowy
+2021-05-27 17:06:00,493 - main_logger - INFO - Miód
+2021-05-27 17:06:00,547 - main_logger - INFO - Sok z cytryny
+2021-05-27 17:06:00,613 - main_logger - INFO - cukier
+2021-05-27 17:06:00,660 - main_logger - INFO - woda

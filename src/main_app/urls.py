@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home_view, recipes_view
+from .views import home_view, recipes_view, machine_info_view
 
 app_name = 'main_app'
 urlpatterns = [
@@ -11,5 +11,6 @@ urlpatterns = [
     path('status', home_view, name='main_status'),
     path('editProfile', home_view, name='main_edit_profile'),
 
-    path('recipesList', recipes_view, name='main_get_recipes')
+    path('recipesList', recipes_view, name='main_get_recipes'),
+    path('machineList', machine_info_view, name='main_get_machine_info')
 ]

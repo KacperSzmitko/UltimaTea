@@ -1,0 +1,33 @@
+<div class="infoBox" style="display: flex; width: 100%;">
+
+    <div class="statusInfo" style="height: 100%; width: 20%;">
+        <div class="centerIn">
+            <div class="in" style="height: 70%; width: 70%; background-color: white;">
+            </div>
+        </div>
+    </div>
+
+    <div class="statusesInfo" style="display: flex; height: 100%; justify-content: flex-end; width: 100%;">
+        {%for info in infos%}
+        <div class="infoStatus" style="height: 100%; width: 15%; display: block;">
+            <div class="filler" style="height: 20%;">
+                
+            </div>
+            <div class="name" style="height: 20%;">
+                {{info.name}}
+            </div>
+            <div class="centerIn" style="height: 30%;">
+                <div class="in" style="height: 80%; width: 90%; display: block; border-style: solid;">
+                    <div class="progressBar" style="height: 100%; width: {{info.value}}%; background-color: green;">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="filler" style="height: 30%;">
+                
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+
+</div>

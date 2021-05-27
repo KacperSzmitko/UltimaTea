@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE, SET_DEFAULT
 # Create your models here.
 
+
 class Ingerdients(models.Model):
     class Types(models.IntegerChoices):
         LIQUID = 1
@@ -32,6 +33,7 @@ class Recipes(models.Model):
     def __str__(self):
         return self.recipe_name+': '+self.descripction
 
+
 # In db all ammounts will be stored in one type of unit, and will be converted on demand
 class IngredientsRecipes(models.Model):
     recipe = models.ForeignKey(Recipes,on_delete=models.CASCADE)
@@ -41,11 +43,13 @@ class IngredientsRecipes(models.Model):
     class Meta:
         db_table = 'ingredients_recipes'
 
+
 class UserSettings(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     class Meta:
         db_table = 'user_settings'
-    
+
+
 class Machines(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,default=None)
     machine_password = models.CharField(max_length=255)
@@ -53,12 +57,23 @@ class Machines(models.Model):
     class Meta:
         db_table = 'machines'
 
+
+class MachineContainers(models.Model):
+    machine = models.ForeignKey(Machines, on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingerdients, on_delete=models.CASCADE)
+    ammount = models.FloatField()
+
+    class Meta:
+        db_table = 'machine_container'
+
+
 class FavoriteRecipes(models.Model):
     recipe = models.ForeignKey(Recipes,on_delete=CASCADE)
     user = models.ForeignKey(User,on_delete=CASCADE)
 
     class Meta:
         db_table = 'favorite_recipes'
+
 
 class History(models.Model):
     user = models.ForeignKey(User,on_delete=CASCADE)

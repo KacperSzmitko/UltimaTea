@@ -13,8 +13,10 @@ import json
 from .models import Recipes, Ingerdients, IngredientsRecipes
 
 
-#@login_required(login_url= '/login/')#dev
-def home_view(request, *args, **kwargs):
+#@login_required()
+def home_view(request:HttpRequest, *args, **kwargs):
+    if not request.user.is_authenticated:
+        return redirect('auth:login_register')
     logger = logging.getLogger('main_logger')
     # logger.info(request.user.recipes_set.all())
     context = {
@@ -25,8 +27,8 @@ def home_view(request, *args, **kwargs):
 
 def recipes_view(request:HttpRequest, *args, **kwargs):
     logger = logging.getLogger('main_logger')
+    
     recipes_list = []
-
     for recipe in request.user.recipes_set.all():
         ing_names = []
         ing_quantity = []
@@ -48,20 +50,47 @@ def recipes_view(request:HttpRequest, *args, **kwargs):
     
     context = {
         'recipes': recipes_list
-        # [
-        #     {
-        #         'id': 28,
-        #         'title':'title_val',
-        #         'ing_names':['Sól', 'Sól', 'Sól'],
-        #         'ing_qua':[{'value': 20, 'unit': 'g'},{'value': 20, 'unit': 'g'},{'value': 20, 'unit': 'g'}],
-        #         'tem_name':['Parzenie', 'Grzanie'],
-        #         'tem_val':['95', '2137'],
-        #         'tim_nam':['Parzenie', 'Chłodzenie'],
-        #         'tim_val':[21, 98]
-        #     }
-        # ]
     }
-    
-    
 
     return render(request,"main/recipesList.html", context)
+
+
+def machine_info_view(request:HttpRequest, *args, **kwargs):
+    logger = logging.getLogger('main_logger')
+
+    infos=[]
+
+    for container in request.user.machines_set.first().machinecontainers_set.all():
+        infos.append({
+            'name':container.ingredient.ingredient_name,
+            'value':container.ammount
+        })
+
+    context = {
+        'infos': infos
+        # [
+        #     {
+        #         'name':'sól',
+        #         'value':20
+        #     },
+        #     {
+        #         'name':'sól',
+        #         'value':95
+        #     },
+        #     {
+        #         'name':'sól',
+        #         'value':40
+        #     },
+        #     {
+        #         'name':'sól',
+        #         'value':11
+        #     },
+        #     {
+        #         'name':'sól',
+        #         'value':12
+        #     },
+        # ]
+    }
+
+    return render(request,"main/machineInfo.html", context)
+

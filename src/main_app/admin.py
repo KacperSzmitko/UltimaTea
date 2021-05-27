@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Recipes, FavoriteRecipes, IngredientsRecipes, Ingerdients, UserSettings, Machines, History
+from .models import Recipes, FavoriteRecipes, IngredientsRecipes, Ingerdients, UserSettings, Machines, History, MachineContainers
 
 # Register your models here.
 admin.site.register(Recipes)
@@ -10,3 +10,4 @@ admin.site.register(Ingerdients)
 admin.site.register(UserSettings)
 admin.site.register(Machines)
 admin.site.register(History)
+admin.site.register(MachineContainers)
