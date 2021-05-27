@@ -11,24 +11,25 @@
 
 
 {%block content%}
-<div class="box main_center" style="background-color: seashell; height: 87%; width: 82%; ">
-    <div id = "infoBar" class="infoBar row" style="background-color: beige; height: 15%; margin: 0;">
-        
-    </div>
-    <div class="containerRow" style="background-color: gold; height: 85%; width: 100%; display: flex;">
-        <div class="containerMenu" style="background-color: grey; width: 29%">
-            {%include "main/menu.html"%}
-        </div>
-        <div class="containerSeparator" style="background-color: gainsboro; width: 1%">
+<div class="container-fluid" style="height: 100%; width: 100%; background-image:url('/static/login_register/media/Background.jpg');background-size: 100% 100%;">
+    <div class="box main_center" style="height: 87%; width: 82%; background-color: RGB(242, 242, 242);">
+        <div id = "infoBar" class="infoBar row" style="height: 15%; margin: 0;">
             
         </div>
-        <div class="containerContent" style="background-color: blue; width: 77%">
-            {%block main_content%}
-            {%endblock main_content%}
+        <div class="containerRow" style="height: 85%; width: 100%; display: flex;">
+            <div class="containerMenu" style="width: 29%">
+                {%include "main/menu.html"%}
+            </div>
+            <div class="containerSeparator borderSec-ver" style="width: 1%">
+                
+            </div>
+            <div class="containerContent" style="width: 77%">
+                {%block main_content%}
+                {%endblock main_content%}
+            </div>
         </div>
     </div>
-        
-        
 </div>
+
 {%endblock content%}
 

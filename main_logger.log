@@ -15,3 +15,18 @@
 2021-05-27 17:06:00,547 - main_logger - INFO - Sok z cytryny
 2021-05-27 17:06:00,613 - main_logger - INFO - cukier
 2021-05-27 17:06:00,660 - main_logger - INFO - woda
+2021-05-27 19:09:45,778 - main_logger - INFO - <QuerySet [<Recipes: Test1: test description bro>, <Recipes: Specja³ kafelkarza: Smaczna herbata z du¿¹ iloœci¹ cukru by siê pobudziæ rano.>]>
+2021-05-27 19:10:34,089 - main_logger - INFO - 3
+2021-05-27 19:10:34,089 - main_logger - INFO - <QuerySet [<Recipes: Specja³ kafelkarza: Smaczna herbata z du¿¹ iloœci¹ cukru by siê pobudziæ rano.>, <Recipes: Test1: test description bro>]>
+2021-05-27 19:11:34,822 - main_logger - INFO - 3
+2021-05-27 19:11:34,823 - main_logger - INFO - <QuerySet []>
+2021-05-27 19:11:48,423 - main_logger - INFO - 3
+2021-05-27 19:11:48,423 - main_logger - INFO - <QuerySet [<Recipes: Specja³ kafelkarza: Smaczna herbata z du¿¹ iloœci¹ cukru by siê pobudziæ rano.>]>
+2021-05-27 19:11:57,439 - main_logger - INFO - 3
+2021-05-27 19:11:57,439 - main_logger - INFO - <QuerySet [<Recipes: Specja³ kafelkarza: Smaczna herbata z du¿¹ iloœci¹ cukru by siê pobudziæ rano.>]>
+2021-05-27 19:14:54,928 - main_logger - INFO - 3
+2021-05-27 19:14:54,929 - main_logger - INFO - <QuerySet [<Recipes: Test1: test description bro>, <Recipes: Specja³ kafelkarza: Smaczna herbata z du¿¹ iloœci¹ cukru by siê pobudziæ rano.>]>
+2021-05-27 19:17:40,077 - main_logger - INFO - 3
+2021-05-27 19:17:40,078 - main_logger - INFO - [<Recipes: Specja³ kafelkarza: Smaczna herbata z du¿¹ iloœci¹ cukru by siê pobudziæ rano.>, <Recipes: Test1: test description bro>]
+2021-05-27 19:17:48,759 - main_logger - INFO - 2
+2021-05-27 19:17:48,759 - main_logger - INFO - [<Recipes: Specja³ kafelkarza: Smaczna herbata z du¿¹ iloœci¹ cukru by siê pobudziæ rano.>, <Recipes: Test1: test description bro>]

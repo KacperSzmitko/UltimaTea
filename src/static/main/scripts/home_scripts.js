@@ -3,6 +3,11 @@ var machinInfoContainer = document.getElementById("infoBar");
 
 
 function loadRecipes(request_id, fetch_nexts, csrf_token) {
+    console.log(request_id)
+    console.log(fetch_nexts)
+    // if (document.getElementsByClassName('recipeDisplayed')[0] != undefined){
+    //     // console.log(document.getElementsByClassName('recipeDisplayed')[0].getAttribute('value'))
+    // }
     var requestData = new XMLHttpRequest();
     requestData.responseType = "text";
     requestData.addEventListener("load", function () {

@@ -18,7 +18,6 @@ def home_view(request:HttpRequest, *args, **kwargs):
     if not request.user.is_authenticated:
         return redirect('auth:login_register')
     logger = logging.getLogger('main_logger')
-    # logger.info(request.user.recipes_set.all())
     context = {
         'title':'Home'
     }
@@ -27,9 +26,16 @@ def home_view(request:HttpRequest, *args, **kwargs):
 
 def recipes_view(request:HttpRequest, *args, **kwargs):
     logger = logging.getLogger('main_logger')
+    request_d = json.loads(request.body)
+
+    
+    if request_d['range'] < 0:
+        fetched = request.user.recipes_set.filter(id__lt = 3).order_by('-id')[:abs(request_d['range']):-1]
+    else:
+        fetched = request.user.recipes_set.filter(id__gt = request_d['from']).order_by('id')[:request_d['range']]
     
     recipes_list = []
-    for recipe in request.user.recipes_set.all():
+    for recipe in fetched:
         ing_names = []
         ing_quantity = []
 
@@ -68,28 +74,6 @@ def machine_info_view(request:HttpRequest, *args, **kwargs):
 
     context = {
         'infos': infos
-        # [
-        #     {
-        #         'name':'sól',
-        #         'value':20
-        #     },
-        #     {
-        #         'name':'sól',
-        #         'value':95
-        #     },
-        #     {
-        #         'name':'sól',
-        #         'value':40
-        #     },
-        #     {
-        #         'name':'sól',
-        #         'value':11
-        #     },
-        #     {
-        #         'name':'sól',
-        #         'value':12
-        #     },
-        # ]
     }
 
     return render(request,"main/machineInfo.html", context)

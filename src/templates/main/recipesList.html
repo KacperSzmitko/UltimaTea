@@ -1,16 +1,16 @@
 {% for recipe in recipes %}
-<div id="recipesDisplayed" class="displayRecipe centerIn" style="width: 33.33%; height: 100%; background-color: chocolate;">
-    <div class="in" style="width: 95%; height: 97%;">
-        <div class="recipeTitle centerIn" style="width: 100%; height: 10%; background-color: indianred;">
+<div id="recipesDisplayed" value="{{recipe.id}}" class="recipeDisplayed displayRecipe centerIn" style="width: 33.33%; height: 100%;">
+    <div class="in" style="width: 95%; height: 97%; border-radius: 5px; background-color: rgb(255,255,255);">
+        <div class="recipeTitle centerIn" style="width: 100%; height: 10%;">
             <div class="teaName in"> 
                 {{recipe.title}}
             </div>
         </div>
-        <div class="recipeBorder centerIn" style="width: 100%; height: 1%; background-color: rgb(53, 38, 10);">
+        <div class="recipeBorder centerIn" style="width: 100%; height: 1%;">
             <div class="in borderSec"></div>
         </div>
-        <div class="recipeContent" style="width: 100%; height: 84%; background-color: peru;">
-            <div class="recipeIngredients centerIn" style="width: 100%; height: auto; background-color: wheat;">
+        <div class="recipeContent" style="width: 100%; height: 84%;">
+            <div class="recipeIngredients centerIn" style="width: 100%; height: auto;">
                 <div class="in" style="width: 100%; height: 100%">
                     <div class="dataTitle dataPos" style="width: 100%; height: 20%">Skłdaniki</div>
                     <div class="data" style="width: 100%; height: 80%; display: flex;">
@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </div>
-            <div class="recipeTemperatures centerIn" style="width: 100%; height: auto; background-color: darkcyan;">
+            <div class="recipeTemperatures centerIn" style="width: 100%; height: auto;">
                 <div class="in" style="width: 100%; height: 100%">
                     <div class="dataTitle dataPos" style="width: 100%; height: 20%">Temperatury</div>
                     <div class="data" style="width: 100%; height: 80%; display: flex;">
@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <div class="recipeTimes centerIn" style="width: 100%; height: auto; background-color: sienna;">
+            <div class="recipeTimes centerIn" style="width: 100%; height: auto;">
                 <div class="in" style="width: 100%; height: 100%">
                     <div class="dataTitle dataPos" style="width: 100%; height: 20%">Czasy</div>
                     <div class="data" style="width: 100%; height: 80%; display: flex;">

@@ -1,31 +1,35 @@
 {%extends "main/base.html"%}
 {%block main_content%}
-<div class="mainContent" style="width: 100%; height: 100%; background-color: aqua;">
-    <div class="mainTop" style="width: 100%; height: 10%; background-color: darkblue;">
-        <div class="topSearch" style="width: 30%; height: 100%; margin: auto; background-color: aliceblue;">
+<div class="mainContent" style="width: 100%; height: 100%;">
+    <div class="mainTop" style="width: 100%; height: 10%;">
+        <div class="topSearch" style="width: 30%; height: 100%; margin: auto;">
             Wyszukiwarka
         </div>
 
     </div>
-    <div class="mainRecipes" style="width: 100%; height: 60%; display: flex; background-color: indigo;">
-        <div class="leftScroll" style="width: 10%; height: 100%;background-color: maroon;">
-            <<
+    <div class="mainRecipes" style="width: 100%; height: 60%; display: flex;">
+        <div class="leftScroll centerIn" style="width: 10%; height: 100%;">
+            <div class="in" style="width: 70%; height: 70%; background-color: brown;" onclick = "loadRecipes(document.getElementsByClassName('recipeDisplayed')[0].getAttribute('value'), -3, csrftoken)">
+
+            </div>
         </div>
-        <div id="recipesDisplay" class="recipesDisplay" style="width: 80%; height: 100%; display: flex; background-color: violet;">
+        <div id="recipesDisplay" class="recipesDisplay" style="width: 80%; height: 100%; display: flex;">
             
             
         </div>
 
-        <div class="rightScroll" style="width: 10%; height: 100%; background-color: black;">
-            >>
+        <div class="rightScroll centerIn" style="width: 10%; height: 100%;">
+            <div class="in" style="width: 70%; height: 70%; background-color: brown;" onclick = "loadRecipes(document.getElementsByClassName('recipeDisplayed')[0].getAttribute('value'), 3, csrftoken)">
+
+            </div>
         </div>
 
     </div>
-    <div class="mainBottom" style="width: 100%; height: 30%; background-color: aliceblue;">
-        <div class="bottomButton" style="width: 100%; height: 50%; background-color: cadetblue;">
+    <div class="mainBottom" style="width: 100%; height: 30%;">
+        <div class="bottomButton" style="width: 100%; height: 50%;">
             Przycisk robienia
         </div>
-        <div class="bottomText" style="width: 100%; height: 50%; background-color: violet;">
+        <div class="bottomText" style="width: 100%; height: 50%;">
             Szacowany czas przygotowania
         </div>
     </div>
@@ -39,7 +43,7 @@ const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 </script>
 <script src="static/main/scripts/home_scripts.js"> </script>
 <script>
-    loadRecipes(1, 3, csrftoken)
+    loadRecipes(3, -3, csrftoken)
     loadMachineInfo(csrftoken)
 </script>
 {%endblock scripts%}
