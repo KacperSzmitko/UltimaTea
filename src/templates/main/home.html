@@ -1,4 +1,11 @@
 {%extends "main/base.html"%}
+
+{% load static %}
+
+{% block additional_styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/home_styles.css' %}">
+{% endblock additional_styles %}
+
 {%block main_content%}
 <div class="mainContent" style="width: 100%; height: 100%;">
     <div class="mainTop" style="width: 100%; height: 10%;">
