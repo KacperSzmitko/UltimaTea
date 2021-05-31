@@ -1,12 +1,15 @@
 
 {% extends 'base.html' %}
-{%block head%}
+{% load static %}
+{%block head%}  
     {%if title%}
         <title>UltimaTea-{{title}}</title>
     {%else%}
         <title>UltimaTea</title>
-    {%endif%}  
+    {%endif%} 
+    {% block styles %} 
     <link rel="stylesheet" type="text/css" href="/static/main/main_styles.css">
+    {% endblock %}
 {%endblock head%}
 
 
@@ -32,4 +35,12 @@
 </div>
 
 {%endblock content%}
+
+
+{% block scripts %}
+ <script src="{% static 'main/scripts/base_scripts.js' %}"> </script>
+    {% block additional_scripts %}
+
+    {% endblock additional_scripts %}
+{% endblock scripts %}
 

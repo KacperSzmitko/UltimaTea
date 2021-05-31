@@ -81,3 +81,7 @@ def machine_info_view(request:HttpRequest, *args, **kwargs):
 
     return render(request,"main/machineInfo.html", context)
 
+
+def edit_recipes_view(request: HttpRequest, *args, **kwargs):
+    context = {}
+    return render(request,"main/edit_recipes.html",context)
