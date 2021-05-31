@@ -2,7 +2,6 @@ from django.contrib import admin
 
 from .models import Recipes, FavoriteRecipes, IngredientsRecipes, Ingerdients, UserSettings, Machines, History, MachineContainers
 
-# Register your models here.
 admin.site.register(Recipes)
 admin.site.register(FavoriteRecipes)
 admin.site.register(IngredientsRecipes)
