@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from .forms import *
 from django.shortcuts import redirect
-from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.contrib.auth.tokens import default_token_generator 
@@ -43,7 +43,7 @@ def login_view(request:HttpRequest,*args, **kwargs):
             login(request,user)
         if not remember_me:
             request.session.set_expiry(0)
-        return  redirect(reverse('app:home'))
+        return  redirect(reverse('app:main_home'))
 
 
     context = {
@@ -110,5 +110,7 @@ class ResetPasswordCompleteView(TemplateView):
     template_name = 'login_register/password_change_complete.html'
     
 
-
+def logout_view(request:HttpRequest, *args, **kwargs):
+    logout(request)
+    return  redirect(reverse('auth:login_register'))
 
