@@ -1,0 +1,19 @@
+{%extends "main/base.html"%}
+
+{%block main_content%}
+        <div id="recipesDisplay" class="recipesDisplay" style="width: 80%; height: 100%; display: flex; justify-content: center;">
+        </div>
+{%endblock main_content%}
+
+
+{%block additional_scripts%}
+{% csrf_token %}
+    <script>
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    var last = 0
+    </script>
+    <script src="static/main/scripts/home_scripts.js"> </script>
+    <script>
+        loadMachineInfo(csrftoken)
+    </script>
+{%endblock additional_scripts%}
