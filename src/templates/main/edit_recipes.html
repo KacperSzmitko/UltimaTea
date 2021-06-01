@@ -8,14 +8,49 @@
 
 {%block main_content%}
     <div id="filters">
-    <form method="POST" id="filters_id" onsubmit="event.preventDefault();apply_filters();fetch_next()">  {% csrf_token %}
-    {{filters.as_p}}
-    <button type="submit"> Filtr </button>
-    </form>
+    <h3>Filtry</h3>
+    <form method="POST" id="filters_id" onsubmit="event.preventDefault();apply_filters();fetch_next(5)">  {% csrf_token %}
+    <h5>Nazwa herbaty</h5><div class="input_box"> {{filters.recipe_name_filter}} </div>
+    <h5>Dodatkowy składnik #1</h5><div class="input_box"> {{filters.ingredient1_filter}} </div>
+    <h5>Dodatkowy składnik #2</h5> 
+    <div class="input_box"> {{filters.ingredient2_filter}} </div>
+    <h5>Dodatkowy składnik #3</h5>
+    <div class="input_box"> {{filters.ingredient3_filter}} </div>
+    <h5>Temperatura parzenia</h5>
+    <div class="range_filter input_box">
+        <div class="range-input"> {{filters.brewing_temperatue_down_filter}}  <span class="unit unit_cel">&#8451</span> </div> 
+        <div class="separator">-</div>
+        <div class="range-input"> {{filters.brewing_temperatue_up_filter}}  <span class="unit unit_cel">&#8451</span> </div>
     </div>
-    <div id="recipesDisplay">
+    <h5>Czas parzenia</h5>
+    <div class="range_filter input_box">
+        <div class="range-input"> {{filters.brewing_time_down_filter}} <span class="unit">s</span> </div>
+        <div class="separator">-</div>
+        <div class="range-input"> {{filters.brewing_time_up_filter}} <span class="unit">s</span> </div>
+    </div>
+    <h5>Czas mieszania</h5>
+    <div class="range_filter input_box">
+        <div class="range-input"> {{filters.mixing_time_down_filter}} <span class="unit">s</span> </div>
+        <div class="separator">-</div>
+        <div class="range-input"> {{filters.mixing_time_up_filter}} <span class="unit">s</span> </div>
     </div>
     
+    <button type="submit" class="filter_btn"> Filtruj </button> <button type="reset" class="filter_btn"> Resetuj filtry</button>
+    </form>
+    </div>
+
+    <div class="arrow_box" id="left_arrow_box">
+        <img src='/static/main/media/left-arrow.png' id="left_arrow" class="arrow" alt="Left" onclick="fetch_next(-5)">
+    </div>
+
+
+    <div id="recipesDisplay">
+    </div>
+
+    <div class="arrow_box" id="right_arrow_box">
+        <img src='/static/main/media/right-arrow.png' id="right_arrow" class="arrow" alt="Right" onclick="fetch_next(5)">
+    </div>
+
 
 
 {%endblock main_content%}
@@ -33,6 +68,6 @@
 
     <script>
         loadMachineInfo(csrftoken);
-        fetch_next(csrftoken);
+        fetch_next(5);
     </script>
 {%endblock additional_scripts%}

@@ -53,7 +53,7 @@ def recipes_view(request:HttpRequest, *args, **kwargs):
             'ing_names':ing_names,
             'ing_qua':ing_quantity,
             'tem_name':['Parzenie'],
-            'tem_val':[recipe.brewing_temperatue],
+            'tem_val':[recipe.brewing_temperature],
             'tim_nam':['Mieszanie'],
             'tim_val':[recipe.mixing_time],
         })
@@ -85,9 +85,6 @@ def machine_info_view(request:HttpRequest, *args, **kwargs):
 
 
 def edit_recipes_view(request: HttpRequest, *args, **kwargs):
-
-
-
     if request.method == "POST":
         return True
 
@@ -100,11 +97,16 @@ def edit_recipes_view(request: HttpRequest, *args, **kwargs):
 # Get n objects and apply filters
 def fetch_edit_recipes(request: HttpRequest, *args, **kwargs):
 
+    recipes, fetched_count = get_recipes(request, True)
     context = {
-        'recipes': get_recipes(request,True),
+        'recipes': recipes,
         'blank': True,
     }
-    return render(request, "main/recipesList.html", context)
+    result = render(
+        request, "main/recipesList.html", context)
+    result['fetched'] = fetched_count
+    result['last_fetch'] = len(recipes)
+    return result
 
 
 def apply_filters(filters, recipes: QuerySet):
@@ -112,6 +114,7 @@ def apply_filters(filters, recipes: QuerySet):
     if filters['recipe_name_filter'] != "":
         recipes = recipes.filter(
             recipe_name__iregex=f".*(?={filters['recipe_name_filter']}).*")
+
     if filters['ingredient1_filter'] != "":
         recipes = recipes.filter(
             ingredientsrecipes__ingredient__ingredient_name=filters['ingredient1_filter'])
@@ -121,15 +124,43 @@ def apply_filters(filters, recipes: QuerySet):
     if filters['ingredient3_filter'] != "":
         recipes = recipes.filter(
             ingredientsrecipes__ingredient__ingredient_name=filters['ingredient3_filter'])
-    if filters['brewing_temperatue_filter'] != "":
+
+    if filters['brewing_temperatue_down_filter'] != "":
+        if filters['brewing_temperatue_up_filter'] != "":
+            recipes = recipes.filter(
+                brewing_temperature__gte=filters['brewing_temperatue_down_filter'],
+                brewing_temperatue__lte=filters['brewing_temperatue_up_filter'])
+        else:
+            recipes = recipes.filter(
+                brewing_temperature__gte=filters['brewing_temperatue_down_filter'])
+    elif filters['brewing_temperatue_up_filter'] != "":
         recipes = recipes.filter(
-            brewing_temperatue=filters['brewing_temperatue_filter'])
-    if filters['brewing_time_filter'] != "":
+            brewing_temperatue__lte=filters['brewing_temperatue_up_filter'])
+    
+    if filters['brewing_time_down_filter'] != "":
+        if filters['brewing_time_up_filter'] != "":
+            recipes = recipes.filter(
+                brewing_time__gte=filters['brewing_time_down_filter'],
+                brewing_time__lte=filters['brewing_time_up_filter'])
+        else:
+            recipes = recipes.filter(
+                brewing_time__gte=filters['brewing_time_down_filter'])
+    elif filters['brewing_time_up_filter'] != "":
         recipes = recipes.filter(
-            brewing_time=filters['brewing_time_filter'])
-    if filters['mixing_time_filter'] != "":
+            brewing_time__lte=filters['brewing_time_up_filter'])
+    
+    if filters['mixing_time_down_filter'] != "":
+        if filters['mixing_time_up_filter'] != "":
+            recipes = recipes.filter(
+                mixing_time__gte=filters['mixing_time_down_filter'],
+                mixing_time__lte=filters['mixing_time_up_filter'])
+        else:
+            recipes = recipes.filter(
+                mixing_time__gte=filters['mixing_time_down_filter'])
+    elif filters['mixing_time_up_filter'] != "":
         recipes = recipes.filter(
-            mixing_time=filters['mixing_time_filter'])
+            mixing_time__lte=filters['mixing_time_up_filter'])
+
     return recipes
 
 
@@ -138,6 +169,7 @@ def get_recipes(request: HttpRequest,filters=False):
     fetched_recipes = request_d["fetched_recipes"]
     recipes_to_fetch = request_d["num_of_recipes_to_fetch"]
     filters = request_d["filters"]
+    last_fetched = request_d["last_fetch"]
     recipes_list = []
 
     user_recipes = ""
@@ -147,16 +179,52 @@ def get_recipes(request: HttpRequest,filters=False):
     else:
         user_recipes = request.user.recipes_set.all()
 
-    # Cannot fetch given number of recipes
-    if fetched_recipes == 0:
-        # If there is less than we want to fetch, just fetch all
-        if len(user_recipes) <= recipes_to_fetch:
-            recipes_to_fetch = len(user_recipes)
-    elif ((len(user_recipes) // fetched_recipes) < 2):
-        recipes_to_fetch = len(user_recipes) % fetched_recipes
+    # If true returns 0 as fetched
+    end = False
+    # Fetched all
+    if len(user_recipes) == fetched_recipes:
+        if len(user_recipes) > 0:
+            # Last page, Fetched all,  go right
+            if recipes_to_fetch > 0:
+                start_index = fetched_recipes - last_fetched
+                end_index = fetched_recipes
+                end = True
+            else:
+                # First page,Fetched all, go left
+                if fetched_recipes <= abs(recipes_to_fetch):
+                    start_index = 0
+                    end_index = fetched_recipes
+                    end = True
+    # Not all fetched
+    else:
+        # First fetch
+        if fetched_recipes == 0:
+            # If there isnt recipes return 0
+            if recipes_to_fetch < 0:
+                recipes_to_fetch = 0
+            # If there is less than we want to fetch, just fetch all
+            elif len(user_recipes) <= recipes_to_fetch:
+                recipes_to_fetch = len(user_recipes)
+        # Fetch > 1 tell how many recipes left, go right
+        elif recipes_to_fetch > 0 and ((len(user_recipes) // fetched_recipes) < 2):
+            recipes_to_fetch = len(user_recipes) % fetched_recipes
+        # First page , not all fetched ,go left
+        elif fetched_recipes <= abs(recipes_to_fetch):
+            start_index = 0
+            end_index = start_index + abs(recipes_to_fetch)
+            end = True
 
-    for recipe in user_recipes[fetched_recipes:fetched_recipes+recipes_to_fetch]:
+    # Go right
+    if not end and recipes_to_fetch >= 0:
+        start_index = fetched_recipes
+        end_index = fetched_recipes+recipes_to_fetch
+    # Go left
+    elif not end:
+        start_index = fetched_recipes - last_fetched +recipes_to_fetch
+        end_index = start_index + abs(recipes_to_fetch)
 
+
+    for recipe in user_recipes[start_index:end_index]:
         ing_names = []
         ing_quantity = []
 
@@ -170,8 +238,10 @@ def get_recipes(request: HttpRequest,filters=False):
             'ing_names': ing_names,
             'ing_qua': ing_quantity,
             'tem_name': ['Parzenie'],
-            'tem_val': [recipe.brewing_temperatue],
+            'tem_val': [recipe.brewing_temperature],
             'tim_nam': ['Mieszanie'],
             'tim_val': [recipe.mixing_time],
         })
-    return recipes_list
+
+    return recipes_list,end_index
+

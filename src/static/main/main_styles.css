@@ -6,6 +6,9 @@
     transform: translate(-50%, -50%);
 }
 
+body {
+  font-family: 'Roboto';
+}
 
 .fill{
     width: 100%;

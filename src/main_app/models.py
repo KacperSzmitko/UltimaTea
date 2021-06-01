@@ -23,7 +23,7 @@ class Recipes(models.Model):
     overall_upvotes = models.IntegerField(default=0)
     last_month_upvotes = models.IntegerField(default=0)
     is_public = models.BooleanField(default=False)
-    brewing_temperatue = models.FloatField()
+    brewing_temperature = models.FloatField()
     brewing_time = models.FloatField()
     mixing_time = models.FloatField()
     tea_portion = models.FloatField()

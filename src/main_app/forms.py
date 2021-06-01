@@ -11,22 +11,29 @@ class IngerdientsModelChoiceField(forms.ModelChoiceField):
 
 class FiltersForm(forms.Form):
     recipe_name_filter = forms.CharField(max_length=255, required=False,
-                                         widget=TextInput(attrs={'class': 'recipe_name_filter filters', 'id': 'recipe_name_filter'}))
+        widget=TextInput(attrs={'class': 'recipe_name_filter filters choice', 'id': 'recipe_name_filter'}))
     ingredient1_filter = IngerdientsModelChoiceField(
         queryset=Ingerdients.objects.all(), empty_label="Nie wybrano", required=False, 
-        widget=forms.Select(attrs={'class': 'filters', 'id': 'id_ing_1'}))
+        widget=forms.Select(attrs={'class': 'filters choice', 'id': 'id_ing_1'}))
     ingredient2_filter = IngerdientsModelChoiceField(
         queryset=Ingerdients.objects.all(), empty_label="Nie wybrano", required=False,
-        widget=forms.Select(attrs={'class': 'filters', 'id': 'id_ing_2'}))
+        widget=forms.Select(attrs={'class': 'filters choice', 'id': 'id_ing_2'}))
     ingredient3_filter = IngerdientsModelChoiceField(
         queryset=Ingerdients.objects.all(), empty_label="Nie wybrano", required=False,
-        widget=forms.Select(attrs={'class': 'filters', 'id': 'id_ing_3'}))
-    brewing_temperatue_filter = forms.FloatField(required=False,
+        widget=forms.Select(attrs={'class': 'filters choice', 'id': 'id_ing_3'}))
+    brewing_temperatue_down_filter = forms.FloatField(required=False,
         widget=forms.NumberInput(attrs={'class': 'number_filter filters'}))
-    brewing_time_filter = forms.FloatField(required=False,
+    brewing_time_down_filter = forms.FloatField(required=False,
         widget=forms.NumberInput(attrs={'class': 'number_filter filters'}))
-    mixing_time_filter = forms.FloatField(required=False,
+    mixing_time_down_filter = forms.FloatField(required=False,
         widget=forms.NumberInput(attrs={'class': 'number_filter filters'}))
+    brewing_temperatue_up_filter = forms.FloatField(required=False,
+        widget=forms.NumberInput(attrs={'class': 'number_filter filters'}))
+    brewing_time_up_filter = forms.FloatField(required=False,
+        widget=forms.NumberInput(attrs={'class': 'number_filter filters'}))
+    mixing_time_up_filter = forms.FloatField(required=False,
+        widget=forms.NumberInput(attrs={'class': 'number_filter filters'}))
+    
 
     def __init__(self, lang, *args, **kwargs):
         super(FiltersForm, self).__init__(*args, **kwargs)
