@@ -1,5 +1,6 @@
 var machinInfoContainer = document.getElementById("infoBar");
 
+
 function loadMachineInfo(csrf_token) {
     var requestData = new XMLHttpRequest();
     requestData.responseType = "text";

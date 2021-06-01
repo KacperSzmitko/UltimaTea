@@ -24,6 +24,9 @@
 .in {
     margin: auto;
     display: block;
+    outline-style: auto;
+    outline: 3px;
+    outline-color: rgb(219, 218, 218);
 } 
 
 
@@ -51,4 +54,8 @@
     border-style: solid;
     border-color: blueviolet;
     border-radius: 5px;
+}
+
+.containerContent{
+    display: flex;
 }

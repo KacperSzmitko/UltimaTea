@@ -1,8 +1,23 @@
 {%extends "main/base.html"%}
 
+{% load static %}
+
+{% block additional_styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/edit_recipes_styles.css' %}">
+{% endblock additional_styles %}
+
 {%block main_content%}
-        <div id="recipesDisplay" class="recipesDisplay" style="width: 80%; height: 100%; display: flex; justify-content: center;">
-        </div>
+    <div id="filters">
+    <form method="POST" id="filters_id" onsubmit="event.preventDefault();apply_filters();fetch_next()">  {% csrf_token %}
+    {{filters.as_p}}
+    <button type="submit"> Filtr </button>
+    </form>
+    </div>
+    <div id="recipesDisplay">
+    </div>
+    
+
+
 {%endblock main_content%}
 
 
@@ -13,7 +28,11 @@
     var last = 0
     </script>
     <script src="static/main/scripts/home_scripts.js"> </script>
+    <script src="static/main/scripts/edit_recipes_scripts.js"> </script>
+    <script> fetched_recipes = {{ recipes_list|length  }} </script>
+
     <script>
-        loadMachineInfo(csrftoken)
+        loadMachineInfo(csrftoken);
+        fetch_next(csrftoken);
     </script>
 {%endblock additional_scripts%}

@@ -1,7 +1,6 @@
 from django import forms
 from django.forms import fields
 from django.forms import widgets
-from django.forms.forms import Form
 from django.forms.widgets import EmailInput, PasswordInput, RadioSelect, TextInput
 #from .models import User
 from django.contrib.auth.models import User

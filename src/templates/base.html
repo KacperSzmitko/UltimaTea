@@ -19,13 +19,12 @@
         rel="stylesheet"
     >
     <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=fallback" rel="stylesheet">
-
-    {% block styles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'login_register/base_style.css' %}">
-    {% block additional_styles %}
-    {% endblock %}
-    {% endblock %}
     {% block head %}
+        {% block styles %}
+            <link rel="stylesheet" type="text/css" href="{% static 'login_register/base_style.css' %}">
+            {% block additional_styles %}
+            {% endblock additional_styles %}
+        {% endblock styles%}
     {% endblock %}
 </head>
 

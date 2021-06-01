@@ -27,8 +27,10 @@ class Recipes(models.Model):
     brewing_time = models.FloatField()
     mixing_time = models.FloatField()
     tea_portion = models.FloatField()
+    is_favourite = models.BooleanField(default=False)
     class Meta:
         db_table = 'recipes'
+        ordering = ('is_favourite','recipe_name',)
 
     def __str__(self):
         return self.recipe_name+': '+self.descripction

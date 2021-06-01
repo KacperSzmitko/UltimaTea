@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home_view, recipes_view, machine_info_view, edit_recipes_view
+from .views import *
 
 app_name = 'main_app'
 urlpatterns = [
@@ -16,4 +16,5 @@ urlpatterns = [
 
     path('recipesList', recipes_view, name='main_get_recipes'),
     path('machineList', machine_info_view, name='main_get_machine_info'),
+    path('fetchRecipesWithFilters', fetch_edit_recipes, name='main_fetch_recipes_with_filters'),
 ]

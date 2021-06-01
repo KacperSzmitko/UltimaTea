@@ -1,3 +1,10 @@
+{% if blank %}
+    <div  value="0" class="recipeDisplayed recipe_0 centerIn">
+        <div id="createRecipe" class="in" style="width: 95%; height: 97%; border-radius: 5px; background-color: rgb(255,255,255); " onclick="toggle_select('recipesDisplayed{{recipe.id}}')">
+        </div>
+    </div>
+{% endif %}
+
 {% for recipe in recipes %}
 <div  value="{{recipe.id}}" class="recipeDisplayed recipe_{{recipe.id}} centerIn">
     <div id="recipesDisplayed{{recipe.id}}" class="in" style="width: 95%; height: 97%; border-radius: 5px; background-color: rgb(255,255,255); " onclick="toggle_select('recipesDisplayed{{recipe.id}}')">

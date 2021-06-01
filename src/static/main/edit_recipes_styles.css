@@ -1,0 +1,29 @@
+#recipesDisplay{
+    width: 81%;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 2.5%;
+}
+
+#filters{
+    width: 25%;
+    margin-right: 3%;
+    overflow: auto;
+}
+
+
+.recipeDisplayed {
+    width: 26%;
+    margin-left: 3%;
+    margin-right: 3%;
+    max-height: 50%;
+    overflow: initial;
+}
+
+.containerContent{
+    padding-bottom: 2.5%;
+}
+
+.in{
+    overflow: auto;
+}
