@@ -125,3 +125,15 @@ h5 {
 .filter_btn{
     margin-bottom: 6%;
 }
+
+#createRecipeImg{
+    width: 60%;
+    height: 50%;
+    cursor: pointer;
+}
+
+#createRecipe{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

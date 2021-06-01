@@ -1,6 +1,8 @@
 {% if blank %}
     <div  value="0" class="recipeDisplayed recipe_0 centerIn">
-        <div id="createRecipe" class="in" style="width: 95%; height: 97%; border-radius: 5px; background-color: rgb(255,255,255); " onclick="toggle_select('recipesDisplayed{{recipe.id}}')">
+        {% load static %}
+        <div id="createRecipe" class="in" style="width: 95%; height: 97%; border-radius: 5px; background-color: rgb(255,255,255); " onclick="create_recipe()">
+        <img src="{% static 'main/media/add_recipe.png' %}" id="createRecipeImg">
         </div>
     </div>
 {% endif %}

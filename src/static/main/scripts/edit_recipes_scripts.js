@@ -72,3 +72,6 @@ function apply_filters(){
     fetched_recipes = 0;
 }
 
+function create_recipe(){
+    
+}
