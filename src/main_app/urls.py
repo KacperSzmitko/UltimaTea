@@ -17,4 +17,6 @@ urlpatterns = [
     path('recipesList', recipes_view, name='main_get_recipes'),
     path('machineList', machine_info_view, name='main_get_machine_info'),
     path('fetchRecipesWithFilters', fetch_edit_recipes, name='main_fetch_recipes_with_filters'),
+    path('addToFavourites', add_to_favourites,name="main_add_recipe_to_favourites"),
+    path('deleteFromFavourites', delete_from_favourites,name="main_delete_recipe_from_favourites"),
 ]

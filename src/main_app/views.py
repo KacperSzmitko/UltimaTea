@@ -6,7 +6,6 @@ from django.http.request import HttpRequest
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
-from .models import Ingerdients
 from django.contrib.auth import logout
 from .forms import FiltersForm
 import logging
@@ -56,6 +55,7 @@ def recipes_view(request:HttpRequest, *args, **kwargs):
             'tem_val':[recipe.brewing_temperature],
             'tim_nam':['Mieszanie'],
             'tim_val':[recipe.mixing_time],
+            'favourite': recipe.is_favourite,
         })
     
     context = {
@@ -129,13 +129,13 @@ def apply_filters(filters, recipes: QuerySet):
         if filters['brewing_temperatue_up_filter'] != "":
             recipes = recipes.filter(
                 brewing_temperature__gte=filters['brewing_temperatue_down_filter'],
-                brewing_temperatue__lte=filters['brewing_temperatue_up_filter'])
+                brewing_temperature__lte=filters['brewing_temperatue_up_filter'])
         else:
             recipes = recipes.filter(
                 brewing_temperature__gte=filters['brewing_temperatue_down_filter'])
     elif filters['brewing_temperatue_up_filter'] != "":
         recipes = recipes.filter(
-            brewing_temperatue__lte=filters['brewing_temperatue_up_filter'])
+            brewing_temperature__lte=filters['brewing_temperatue_up_filter'])
     
     if filters['brewing_time_down_filter'] != "":
         if filters['brewing_time_up_filter'] != "":
@@ -170,6 +170,12 @@ def get_recipes(request: HttpRequest,filters=False):
     recipes_to_fetch = request_d["num_of_recipes_to_fetch"]
     filters = request_d["filters"]
     last_fetched = request_d["last_fetch"]
+    remove = request_d["remove"]
+    id_to_remove = request_d["id_to_remove"]
+
+    if remove:
+        Recipes.objects.get(pk=id_to_remove).delete()
+
     recipes_list = []
 
     user_recipes = ""
@@ -241,7 +247,25 @@ def get_recipes(request: HttpRequest,filters=False):
             'tem_val': [recipe.brewing_temperature],
             'tim_nam': ['Mieszanie'],
             'tim_val': [recipe.mixing_time],
+            'favourite': recipe.is_favourite,
         })
 
     return recipes_list,end_index
+
+
+def add_to_favourites(request: HttpRequest, *args, **kwargs):
+    recipe_id = json.loads(request.body)["recipe_id"]
+    recipe = Recipes.objects.get(pk=recipe_id)
+    recipe.is_favourite = True
+    recipe.save()
+    return HttpResponse(status=200)
+
+
+def delete_from_favourites(request: HttpRequest, *args, **kwargs):
+    recipe_id = json.loads(request.body)["recipe_id"]
+    recipe = Recipes.objects.get(pk=recipe_id)
+    recipe.is_favourite = False
+    recipe.save()
+    return HttpResponse(status=200)
+
 

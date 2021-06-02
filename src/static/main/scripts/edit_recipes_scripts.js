@@ -13,15 +13,20 @@ var filters = {
         "brewing_time_up_filter":"",
         "mixing_time_up_filter":"",
 }
+var csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
-
-function fetch_next(num_of_recipes_to_fetch){
-    csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value;
+function fetch_next(num_of_recipes_to_fetch,id_to_remove){
+    var remove = false;
+    if (id_to_remove > 0){
+        remove = true;
+    }
     var data = JSON.stringify({ 
         "fetched_recipes": fetched_recipes, 
         "num_of_recipes_to_fetch":num_of_recipes_to_fetch,
         "filters": filters,
         "last_fetch": last_fetch,
+        "remove":remove,
+        "id_to_remove":id_to_remove
     })
 
     var requestData = new XMLHttpRequest();
@@ -74,4 +79,46 @@ function apply_filters(){
 
 function create_recipe(){
     
+}
+
+async function icons_fetches(url,recipe_id){
+    return await fetch(url,{
+        method:"POST",
+        headers:{
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrf_token,
+        },
+        body:JSON.stringify({"recipe_id" : recipe_id}),
+    });
+}
+
+async function add_to_favourites(element){
+    let value = element.getAttribute('value');
+    document.getElementById("full_hearth_ico_" + value).style.zIndex = "1";
+    document.getElementById("empty_hearth_ico_" + value).style.zIndex = "0";
+    const response = await icons_fetches("addToFavourites",value);
+    if (!response.ok){
+        console.log("favourites add error");
+    }
+}
+
+async function delete_from_favourites(element){
+    let value = element.getAttribute('value');
+    document.getElementById("empty_hearth_ico_" + value).style.zIndex = "1";
+    document.getElementById("full_hearth_ico_" + value).style.zIndex = "0";
+    const response = await icons_fetches("deleteFromFavourites",value);
+    if (!response.ok){
+        console.log("favourites delete error");
+    }
+}
+
+
+async function delete_recipe(element){
+    let value = element.getAttribute('value');
+    fetched_recipes -= last_fetch
+    fetch_next(5,value);
+}
+
+function edit_recipe(element){
+
 }
