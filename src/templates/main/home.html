@@ -23,6 +23,7 @@
         </div>
 
         <div id="recipesDisplay" class="recipesDisplay" style="width: 80%; height: 100%; display: flex; justify-content: center;">
+        {% include "main/edit_recipe.html"%}
         </div>
         <!-- background-image:url('/static/main/media/right-arrow.png');  -->
         <div class="rightScroll centerIn" style="width: 10%; height: 100%;">
@@ -52,7 +53,7 @@ var last = 0
 </script>
 <script src="static/main/scripts/home_scripts.js"> </script>
 <script>
-    loadRecipes(1, 3, csrftoken)
+    {% comment %} loadRecipes(1, 3, csrftoken) {% endcomment %}
     loadMachineInfo(csrftoken,{{ adr }})
 </script>
 {%endblock additional_scripts%}
