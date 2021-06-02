@@ -7,6 +7,10 @@
 {% endblock additional_styles %}
 
 {%block main_content%}
+    <div id="addRecipePage">
+    <div id="test">
+    </div>
+    </div>
     <div id="filters">
     <h3>Filtry</h3>
     <form method="POST" id="filters_id" onsubmit="event.preventDefault();apply_filters();fetch_next(5,0)">  {% csrf_token %}

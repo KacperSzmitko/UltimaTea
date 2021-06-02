@@ -77,10 +77,6 @@ function apply_filters(){
     fetched_recipes = 0;
 }
 
-function create_recipe(){
-    
-}
-
 async function icons_fetches(url,recipe_id){
     return await fetch(url,{
         method:"POST",
@@ -121,4 +117,18 @@ async function delete_recipe(element){
 
 function edit_recipe(element){
 
+}
+
+function create_recipe(){
+    document.getElementById("containerContent").classList.add("to_blur");
+    document.getElementById("containerContent").style.zIndex = 0;
+    document.getElementById("addRecipePage").style.zIndex = 2;
+    document.getElementById("addRecipePage").style.display = "flex";
+}
+
+function close_create_recipe(){
+    document.getElementById("addRecipePage").zIndex = 0;
+    document.getElementById("addRecipePage").style.display = "none";
+    document.getElementById("containerContent").classList.remove("to_blur");
+    document.getElementById("containerContent").style.zIndex = 1;
 }

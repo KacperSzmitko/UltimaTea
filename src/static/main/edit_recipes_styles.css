@@ -22,6 +22,7 @@ h5 {
 
 .containerContent{
     position: relative;
+    z-index: 1;
 }
 
 #recipesDisplay{
@@ -190,5 +191,29 @@ h5 {
 
 .trash_ico{
     top:40%;
+}
+
+.to_blur{
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+
+#addRecipePage{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+#test{
+    width: 30%;
+    height: 30%;
+    background-color: red;
 }
 
