@@ -120,8 +120,8 @@ function edit_recipe(element){
 }
 
 function create_recipe(){
-    document.getElementById("containerContent").classList.add("to_blur");
-    document.getElementById("containerContent").style.zIndex = 0;
+    document.getElementById("content_to_blur").classList.add("to_blur");
+    document.getElementById("content_to_blur").style.zIndex = 0;
     document.getElementById("addRecipePage").style.zIndex = 2;
     document.getElementById("addRecipePage").style.display = "flex";
 }
@@ -129,6 +129,6 @@ function create_recipe(){
 function close_create_recipe(){
     document.getElementById("addRecipePage").zIndex = 0;
     document.getElementById("addRecipePage").style.display = "none";
-    document.getElementById("containerContent").classList.remove("to_blur");
-    document.getElementById("containerContent").style.zIndex = 1;
+    document.getElementById("content_to_blur").classList.remove("to_blur");
+    document.getElementById("content_to_blur").style.zIndex = 1;
 }
