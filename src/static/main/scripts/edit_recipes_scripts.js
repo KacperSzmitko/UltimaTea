@@ -12,6 +12,7 @@ var filters = {
         "brewing_temperatue_up_filter":"",
         "brewing_time_up_filter":"",
         "mixing_time_up_filter":"",
+        "tea_type_filter": "",
 }
 var csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
@@ -131,4 +132,31 @@ function close_create_recipe(){
     document.getElementById("addRecipePage").style.display = "none";
     document.getElementById("content_to_blur").classList.remove("to_blur");
     document.getElementById("content_to_blur").style.zIndex = 1;
+}
+
+function submit_recipe(){
+    var fields = {
+        "recipe_name" : "",
+        "water" : "",
+        "ingredient1" : "",
+        "ingredient2" : "",
+        "ingredient3" : "",
+        "brewing_temperatue" : "",
+        "brewing_time" :"",
+        "mixing_time" :"",
+        "tea_type": "",
+    }
+    if (document.getElementById("recipe_name_create").value != "")
+        fields["recipe_name"] =  document.getElementById("recipe_name_create").value
+    if (document.getElementById("id_water").value != "")
+        fields["water"] =  document.getElementById("id_water").value
+    if (document.getElementById("id_ing_1_create").value != "")
+        fields["ingredient1"] =  document.getElementById("id_ing_1_create").options[document.getElementById("id_ing_1_create").value].text;
+    if (document.getElementById("id_ing_2_create").value != "")
+        fields["ingredient2"] =  document.getElementById("id_ing_2_create").options[document.getElementById("id_ing_2_create").value].text;
+    if (document.getElementById("id_ing_3_create").value != "")
+        fields["ingredient3"] =  document.getElementById("id_ing_3_create").options[document.getElementById("id_ing_3_create").value].text;
+    if (document.getElementById("tea_name_create").value != "")
+        fields["tea_type"] =  document.getElementById("tea_name_create").options[document.getElementById("tea_name_create").value].text;
+
 }

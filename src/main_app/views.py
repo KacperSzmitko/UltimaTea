@@ -126,6 +126,9 @@ def apply_filters(filters, recipes: QuerySet):
     if filters['ingredient3_filter'] != "":
         recipes = recipes.filter(
             ingredientsrecipes__ingredient__ingredient_name=filters['ingredient3_filter'])
+    if filters['tea_type_filter'] != "":
+        recipes = recipes.filter(
+            teas__tea_name=filters['tea_type_filter'])
 
     if filters['brewing_temperatue_down_filter'] != "":
         if filters['brewing_temperatue_up_filter'] != "":
