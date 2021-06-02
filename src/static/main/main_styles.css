@@ -62,3 +62,17 @@ body {
 .containerContent{
     display: flex;
 }
+
+.number, .choice{
+    height: 20px;
+    width: 50px;
+}
+
+.choice {
+    width: 150px;
+}
+
+.text_input {
+    height: 24px;
+    width: 150px;
+}

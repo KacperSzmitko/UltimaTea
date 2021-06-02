@@ -1,0 +1,74 @@
+<div class="centerIn recipeDisplayed">
+    <div id="recipesDisplayed" class="in" style="width: 95%; height: 97%; border-radius: 5px; background-color: rgb(255,255,255); " onclick="toggle_select('recipesDisplayed{{recipe.id}}')">
+        <div class="recipeTitle centerIn" style="width: 100%; height: 19%;">
+            <div class="teaName in"> 
+                <div>Nazwa</div>
+                <div class="input_box"> {{create_filters.recipe_name}} </div>
+            </div>
+        </div>
+        <div class="recipeBorder centerIn" style="width: 100%; height: 1%;">
+            <div class="in borderSec"></div>
+        </div>
+        <div class="recipeContent" style="width: 100%; height: 80%;">
+            <div class="recipeIngredients centerIn" style="width: 100%; height: auto;">
+                <div class="in" style="width: 100%; height: 100%">
+                    <div class="dataTitle dataPos" style="width: 100%; height: 20%">Skłdaniki</div>
+                    <div class="data" style="width: 100%; height: 80%; display: flex;">
+                        <div class="names" style="display: flex; flex-wrap: wrap; width: 69%; height: 100%;">
+                            <div style="height: 20px;">Woda</div>
+                            <div class="input_box" style="height: 20px; width: 100%;"> {{create_filters.tea_name_filter}} </div>
+                            <div class="input_box" style="height: 20px; width: 100%;"> {{create_filters.ingredient1}} </div>
+                            <div class="input_box" style="height: 20px; width: 100%;"> {{create_filters.ingredient2}} </div>
+                            <div class="input_box" style="height: 20px; width: 100%;"> {{create_filters.ingredient3}} </div>
+    
+                        </div>
+                        <div style="height: auto; width: 1;"> <div style="height: 10%;"></div> <div class="borderSec-ver"></div></div>
+                        <div class="quantity" style="display: flex; flex-wrap: wrap; width: 30%; height: 100%;">
+                            <div class="input_box" style="height: 20px; width: 100%;"> {{create_filters.water}} </div>
+                            <div class="input_box" style="height: 20px; width: 100%;"> {{create_filters.tea_quan}} </div>
+                            <div class="input_box" style="height: 20px; width: 100%;"> {{create_filters.ing1}} </div>
+                            <div class="input_box" style="height: 20px; width: 100%;"> {{create_filters.ing2}} </div>
+                            <div class="input_box" style="height: 20px; width: 100%;"> {{create_filters.ing3}} </div>
+                            
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="recipeTemperatures centerIn" style="width: 100%; height: auto;">
+                <div class="in" style="width: 100%; height: 100%">
+                    <div class="dataTitle dataPos" style="width: 100%; height: 20%">Temperatury</div>
+                    <div class="data" style="width: 100%; height: 80%; display: flex;">
+                        <div class="names" style="width: 69%; height: 100%;">
+                            <div>Parzenie</div>
+    
+                        </div>
+                        <div style="height: auto; width: 1;"> <div style="height: 5%;"></div> <div class="borderSec-ver"></div></div>
+                        <div class="quantity" style="width: 30%; height: 100%;">
+                            <div class="input_box"> {{create_filters.brewing_temperatue}} </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="recipeTimes centerIn" style="width: 100%; height: auto;">
+                <div class="in" style="width: 100%; height: 100%">
+                    <div class="dataTitle dataPos" style="width: 100%; height: 20%">Czasy</div>
+                    <div class="data" style="width: 100%; height: 80%; display: flex;">
+                        <div class="names" style="width: 69%; height: 100%;">
+                            <div>Parzenie</div>
+                            <div>Mieszanie</div>
+    
+                        </div>
+                        <div style="height: auto; width: 1;"> <div style="height: 5%;"></div> <div class="borderSec-ver"></div></div>
+                        <div class="quantity" style="width: 30%; height: 100%;">
+                            <div class="input_box"> {{create_filters.brewing_time}} </div>
+                            <div class="input_box"> {{create_filters.mixing_time}} </div>
+      
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
