@@ -15,7 +15,7 @@
 {% endif %}
 
 {% for recipe in recipes %}
-<div  value="{{recipe.id}}" class="recipeDisplayed recipe_{{recipe.id}} centerIn">
+<div  value="{{recipe.id}}" class="recipe_{{recipe.id}} centerIn recipeDisplayed">
     <div id="recipesDisplayed{{recipe.id}}" class="in" style="width: 95%; height: 97%; border-radius: 5px; background-color: rgb(255,255,255); " onclick="toggle_select('recipesDisplayed{{recipe.id}}')">
         <div class="recipeTitle centerIn" style="width: 100%; height: 10%;">
             <div class="teaName in"> 
