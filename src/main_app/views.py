@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
-from .forms import FiltersForm
+from .forms import FiltersForm,CreateFiltersForm
 import logging
 import json
 import functools
@@ -89,8 +89,10 @@ def edit_recipes_view(request: HttpRequest, *args, **kwargs):
         return True
 
     filters = FiltersForm('pl')
+    create_filters = CreateFiltersForm('pl')
     context = {
         'filters': filters,
+        'create_filters': create_filters,
     }
     return render(request,"main/edit_recipes.html",context)
 

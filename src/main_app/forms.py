@@ -1,7 +1,7 @@
 from django.forms.forms import Form
 from django import forms
-from django.forms.widgets import TextInput
-from .models import Ingerdients
+from django.forms.widgets import Select, TextInput
+from .models import Ingerdients,Teas
 from errors import Error, ErrorMessages
 
 
@@ -9,9 +9,16 @@ class IngerdientsModelChoiceField(forms.ModelChoiceField):
     def label_from_instance(self, obj):
         return obj.ingredient_name
 
+
+class TeaNamesChoiceField(forms.ModelChoiceField):
+    def label_from_instance(self, obj):
+        return obj.tea_name
+
 class FiltersForm(forms.Form):
     recipe_name_filter = forms.CharField(max_length=255, required=False,
-        widget=TextInput(attrs={'class': 'recipe_name_filter filters choice', 'id': 'recipe_name_filter'}))
+        widget=TextInput(attrs={'class': 'recipe_name_filter filters', 'id': 'recipe_name_filter'}))
+    tea_name_filter = TeaNamesChoiceField(queryset=Teas.objects.all(), empty_label="Nie wybrano", required=False,
+        widget=forms.Select(attrs={'class': 'tea_name_filter filters choice', 'id': 'tea_name_filter'}))
     ingredient1_filter = IngerdientsModelChoiceField(
         queryset=Ingerdients.objects.all(), empty_label="Nie wybrano", required=False, 
         widget=forms.Select(attrs={'class': 'filters choice', 'id': 'id_ing_1'}))
@@ -37,4 +44,32 @@ class FiltersForm(forms.Form):
 
     def __init__(self, lang, *args, **kwargs):
         super(FiltersForm, self).__init__(*args, **kwargs)
+        self.message = ErrorMessages.languages[lang]
+
+
+class CreateFiltersForm(forms.Form):
+    recipe_name = forms.CharField(max_length=255, required=False,
+                                  widget=TextInput(attrs={'class': 'recipe_name create', 'id': 'recipe_name_create'}))
+    water = forms.FloatField(max_value=150,required=False)
+    tea_name_filter = TeaNamesChoiceField(queryset=Teas.objects.all(), empty_label="Nie wybrano", required=False,
+                                    widget=forms.Select(attrs={'class': 'tea_name choice', 'id': 'tea_name_create'}))
+    ingredient1 = IngerdientsModelChoiceField(
+        queryset=Ingerdients.objects.all(), empty_label="Nie wybrano", required=False, 
+        widget=forms.Select(attrs={'class': 'create choice', 'id': 'id_ing_1_create'}))
+    ingredient2 = IngerdientsModelChoiceField(
+        queryset=Ingerdients.objects.all(), empty_label="Nie wybrano", required=False,
+        widget=forms.Select(attrs={'class': 'create choice', 'id': 'id_ing_2_create'}))
+    ingredient3 = IngerdientsModelChoiceField(
+        queryset=Ingerdients.objects.all(), empty_label="Nie wybrano", required=False,
+        widget=forms.Select(attrs={'class': 'create choice', 'id': 'id_ing_3_create'}))
+    brewing_temperatue = forms.FloatField(required=False,max_value=150,
+                                               widget=forms.NumberInput(attrs={'class': 'number create'}))
+    brewing_time = forms.FloatField(required=False,
+                                         widget=forms.NumberInput(attrs={'class': 'number create'}))
+    mixing_time = forms.FloatField(required=False,
+                                        widget=forms.NumberInput(attrs={'class': 'number create'}))
+    
+
+    def __init__(self, lang, *args, **kwargs):
+        super(CreateFiltersForm, self).__init__(*args, **kwargs)
         self.message = ErrorMessages.languages[lang]
