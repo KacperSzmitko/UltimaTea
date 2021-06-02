@@ -19,7 +19,10 @@ def home_view(request:HttpRequest, *args, **kwargs):
     if not request.user.is_authenticated:
         return redirect('auth:login_register')
     logger = logging.getLogger('main_logger')
+    create_filters = CreateFiltersForm('pl')
+
     context = {
+        'create_filters': create_filters,
         'title':'Home'
     }
     return render(request,"main/home.html", context)

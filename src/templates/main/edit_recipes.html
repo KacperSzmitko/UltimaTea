@@ -16,7 +16,8 @@
     <form method="POST" id="filters_id" onsubmit="event.preventDefault();apply_filters();fetch_next(5,0)">  {% csrf_token %}
     <h5>Nazwa przepisu</h5><div class="input_box"> {{filters.recipe_name_filter}} </div>
     <h5>Typ herbaty</h5> <div class="input_box"> {{filters.tea_name_filter}} </div>
-    <h5>Dodatkowy składnik #1</h5><div class="input_box"> {{filters.ingredient1_filter}} </div>
+    <h5>Dodatkowy składnik #1</h5>
+    <div class="input_box"> {{filters.ingredient1_filter}} </div>
     <h5>Dodatkowy składnik #2</h5> 
     <div class="input_box"> {{filters.ingredient2_filter}} </div>
     <h5>Dodatkowy składnik #3</h5>

@@ -49,8 +49,9 @@ class FiltersForm(forms.Form):
 
 class CreateFiltersForm(forms.Form):
     recipe_name = forms.CharField(max_length=255, required=False,
-                                  widget=TextInput(attrs={'class': 'recipe_name create', 'id': 'recipe_name_create'}))
-    water = forms.FloatField(max_value=150,required=False)
+                                  widget=TextInput(attrs={'class': 'recipe_name create text_input', 'id': 'recipe_name_create'}))
+    water = forms.FloatField(max_value=150,required=False, 
+                                                widget=forms.NumberInput(attrs={'class': 'number create'}))
     tea_name_filter = TeaNamesChoiceField(queryset=Teas.objects.all(), empty_label="Nie wybrano", required=False,
                                     widget=forms.Select(attrs={'class': 'tea_name choice', 'id': 'tea_name_create'}))
     ingredient1 = IngerdientsModelChoiceField(
@@ -62,6 +63,15 @@ class CreateFiltersForm(forms.Form):
     ingredient3 = IngerdientsModelChoiceField(
         queryset=Ingerdients.objects.all(), empty_label="Nie wybrano", required=False,
         widget=forms.Select(attrs={'class': 'create choice', 'id': 'id_ing_3_create'}))
+    ing1 = forms.FloatField(required=False,max_value=150,
+                                               widget=forms.NumberInput(attrs={'class': 'number create'}))
+    ing2 = forms.FloatField(required=False,max_value=150,
+                                               widget=forms.NumberInput(attrs={'class': 'number create'}))
+    ing3 = forms.FloatField(required=False,max_value=150,
+                                               widget=forms.NumberInput(attrs={'class': 'number create'}))
+    tea_quan = forms.FloatField(required=False,max_value=150,
+                                               widget=forms.NumberInput(attrs={'class': 'number create'}))                                           
+    
     brewing_temperatue = forms.FloatField(required=False,max_value=150,
                                                widget=forms.NumberInput(attrs={'class': 'number create'}))
     brewing_time = forms.FloatField(required=False,
