@@ -1,5 +1,5 @@
 import re
-from django.http.response import HttpResponse
+from django.http.response import Http404, HttpResponse
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http.request import HttpRequest
@@ -11,7 +11,7 @@ from .forms import FiltersForm,CreateFiltersForm
 import logging
 import json
 import functools
-from .models import Recipes, Ingerdients, IngredientsRecipes
+from .models import Recipes, Ingerdients, IngredientsRecipes, Teas
 from django.db.models.query import QuerySet
 
 #@login_required()
@@ -274,3 +274,61 @@ def delete_from_favourites(request: HttpRequest, *args, **kwargs):
     return HttpResponse(status=200)
 
 
+def create_recipe(request: HttpRequest, *args, **kwargs):
+    request_d = json.loads(request.body)
+    if request_d['edit']:
+        recipe = Recipes.objects.get(pk=request_d['recipe_id'])
+        ings = IngredientsRecipes.objects.filter(recipe=recipe)
+        recipe.recipe_name = request_d['recipe_name']
+        recipe.brewing_temperature = request_d['brewing_temperature']
+        recipe.brewing_time = request_d['brewing_time']
+        recipe.mixing_time = request_d['mixing_time']
+        recipe.tea_portion = request_d['water']
+        recipe.tea_ammount = request_d['tea_quan']
+        recipe.tea_type = Teas.objects.get(
+            pk=request_d['tea_name'])
+        for i,ing in enumerate(ings):
+            if i<3 and request_d[f'ingredient{i+1}'] != '' and request_d[f'ing{i+1}_ammount'] != "":
+                ing.ingredient = Ingerdients.objects.get(
+                    pk=request_d[f'ingredient{i+1}'])
+                ing.ammount = request_d[f'ing{i+1}_ammount']
+                ing.save()
+        recipe.save()
+    else:
+        recipe = Recipes.objects.create(author=request.user,
+                                        recipe_name=request_d['recipe_name'], 
+                                        brewing_temperature=request_d['brewing_temperature'],
+                                        brewing_time=request_d['brewing_time'],
+                                        mixing_time=request_d['mixing_time'],
+                                        tea_portion=request_d['water'],
+                                        tea_type=Teas.objects.get(
+                                        pk=request_d['tea_name']),
+                                        tea_ammount=request_d['tea_quan'],
+                            )
+        try:
+            if request_d['ingredient1'] != '' and request_d['ing1_ammount'] != "":
+                IngredientsRecipes.objects.create(
+                    recipe=recipe, 
+                    ingredient=Ingerdients.objects.get(pk=request_d['ingredient1']),
+                    ammount=request_d['ing1_ammount'],
+                )
+            if request_d['ingredient2'] != '' and request_d['ing2_ammount'] != "":
+                IngredientsRecipes.objects.create(
+                    recipe=recipe, 
+                    ingredient=Ingerdients.objects.get(pk=request_d['ingredient2']),
+                    ammount=request_d['ing2_ammount'],
+                )
+            if request_d['ingredient3'] != '' and request_d['ing3_ammount'] != "":
+                IngredientsRecipes.objects.create(
+                    recipe=recipe, 
+                    ingredient=Ingerdients.objects.get(pk=request_d['ingredient3']),
+                    ammount=request_d['ing3_ammount'],
+                )
+        except Exception :
+            recipe.delete()
+            return Http404()
+    return HttpResponse(status=200)
+
+
+def browse_recipes_view(request: HttpRequest, *args, **kwargs):
+    return Http404()

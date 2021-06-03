@@ -210,6 +210,7 @@ h5 {
     align-items: center;
     justify-content: center;
     filter: none;
+    overflow: hidden;
 }
 
 
@@ -226,4 +227,24 @@ h5 {
 #recipeEdit{
     width: 100%;
     height: 100%;
+}
+
+#icons_edit{
+    position: absolute;
+    left: 110%;
+    height: 90%;
+    width: 10%;
+}
+
+#create_recipe_id{
+    position: relative;
+}
+
+#recipeEdit{
+    overflow: visible;
+}
+
+.ico_edit{
+    width: 60%;
+    height: 80%;
 }

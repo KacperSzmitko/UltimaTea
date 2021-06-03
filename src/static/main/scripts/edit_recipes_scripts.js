@@ -15,6 +15,9 @@ var filters = {
         "tea_type_filter": "",
 }
 var csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value;
+var options = {};
+var edit = false;
+var edit_recipe_id = 0;
 
 function fetch_next(num_of_recipes_to_fetch,id_to_remove){
     var remove = false;
@@ -116,8 +119,49 @@ async function delete_recipe(element){
     fetch_next(5,value);
 }
 
-function edit_recipe(element){
+function load_options(){
+    var options_list = document.getElementById("id_ing_1").options;
+    for (let j=0;j<options_list.length;j++){
+        options[options_list[j].textContent.trim()] = j;
+    }
+}
 
+
+function edit_recipe(element){
+    edit = true;
+    var recipe_id = element.getAttribute('value');
+    edit_recipe_id = recipe_id;
+    var ig_names = document.getElementsByClassName("igName_" + recipe_id);
+    var ig_values = document.getElementsByClassName("igQuan_" + recipe_id);
+    document.getElementById("recipe_name_create").value = document.getElementById("teaName_" + recipe_id).textContent.trim();
+    
+    for(var i=0;i<ig_names.length;i++){
+        if (i>=3){
+            break;
+        }
+        var name = ig_names[i].textContent.trim();
+        k = i + 1;
+        document.getElementById("id_ing_" + k + "_create").value = options[name];
+        document.getElementById("id_ing" + k + "_ammount").value = ig_values[i].getAttribute('value');
+    }
+
+    var temp_ammounts = document.getElementsByClassName("tempAm_" + recipe_id);
+    document.getElementById("id_brewing_temperature").value = temp_ammounts[0].getAttribute('value');
+
+    var tim_ammounts = document.getElementsByClassName("timAm_" + recipe_id);
+    var tim_names = document.getElementsByClassName("timName_" + recipe_id);
+
+    for(let i=0;i<tim_ammounts.length;i++){
+        let name = tim_names[i].innerHTML.trim();
+        if(name == 'Parzenie'){
+            document.getElementById("id_brewing_time").value = tim_ammounts[i].getAttribute('value');
+        }
+        else{
+            document.getElementById("id_mixing_time").value = tim_ammounts[i].getAttribute('value');
+        }
+    }
+
+    create_recipe();
 }
 
 function create_recipe(){
@@ -132,31 +176,29 @@ function close_create_recipe(){
     document.getElementById("addRecipePage").style.display = "none";
     document.getElementById("content_to_blur").classList.remove("to_blur");
     document.getElementById("content_to_blur").style.zIndex = 1;
+    document.getElementById("create_recipe_id").reset();
+    edit = false;
 }
 
-function submit_recipe(){
-    var fields = {
-        "recipe_name" : "",
-        "water" : "",
-        "ingredient1" : "",
-        "ingredient2" : "",
-        "ingredient3" : "",
-        "brewing_temperatue" : "",
-        "brewing_time" :"",
-        "mixing_time" :"",
-        "tea_type": "",
+async function submit_recipe(form){
+    const data = new FormData(form);
+    var value = Object.fromEntries(data.entries());
+    value['edit'] = edit;
+    value['recipe_id'] = edit_recipe_id;
+    const response = await fetch('createRecipe',{
+        method:"POST",
+        headers:{
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrf_token,
+        },
+        body:JSON.stringify(value),
+    });
+    if (response.ok){
+        console.log("Utworzono przepis");
+        fetched_recipes -= last_fetch;
+        fetch_next(5,0);
     }
-    if (document.getElementById("recipe_name_create").value != "")
-        fields["recipe_name"] =  document.getElementById("recipe_name_create").value
-    if (document.getElementById("id_water").value != "")
-        fields["water"] =  document.getElementById("id_water").value
-    if (document.getElementById("id_ing_1_create").value != "")
-        fields["ingredient1"] =  document.getElementById("id_ing_1_create").options[document.getElementById("id_ing_1_create").value].text;
-    if (document.getElementById("id_ing_2_create").value != "")
-        fields["ingredient2"] =  document.getElementById("id_ing_2_create").options[document.getElementById("id_ing_2_create").value].text;
-    if (document.getElementById("id_ing_3_create").value != "")
-        fields["ingredient3"] =  document.getElementById("id_ing_3_create").options[document.getElementById("id_ing_3_create").value].text;
-    if (document.getElementById("tea_name_create").value != "")
-        fields["tea_type"] =  document.getElementById("tea_name_create").options[document.getElementById("tea_name_create").value].text;
-
+    else{
+        console.log("Nie udało się utworyć przepisu");
+    }
 }
