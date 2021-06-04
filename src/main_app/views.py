@@ -4,7 +4,6 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http.request import HttpRequest
 from django.urls import reverse
-from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from .forms import FiltersForm,CreateFiltersForm
@@ -14,7 +13,14 @@ import functools
 from .models import Recipes, Ingerdients, IngredientsRecipes, Teas
 from django.db.models.query import QuerySet
 
-#@login_required()
+def login_required(func):
+    def inner(request: HttpRequest):
+        if not request.user.is_authenticated:
+            return redirect('auth:login_register')
+        return func(request)
+    return inner
+
+@login_required
 def home_view(request:HttpRequest, *args, **kwargs):
     if not request.user.is_authenticated:
         return redirect('auth:login_register')
@@ -25,48 +31,27 @@ def home_view(request:HttpRequest, *args, **kwargs):
     return render(request,"main/home.html", context)
 
 
-def recipes_view(request:HttpRequest, *args, **kwargs):
-    logger = logging.getLogger('main_logger')
-    request_d = json.loads(request.body)
+@login_required
+def edit_recipes_view(request: HttpRequest, *args, **kwargs):
+    if request.method == "POST":
+        return False
 
-    
-    if request_d['range'] < 0:
-        fetched = request.user.recipes_set.filter(id__lt = request_d['from']).order_by('-id')[:abs(request_d['range']):-1]
-        # logger.info(request_d['range'])
-        # logger.info(fetched)
-    else:
-        fetched = request.user.recipes_set.filter(id__gt = request_d['from']).order_by('id')[:request_d['range']]
-    
-    recipes_list = []
-    for recipe in fetched:
-        ing_names = []
-        ing_quantity = []
-
-        for ingredient in recipe.ingredientsrecipes_set.all():
-            ing_names.append(ingredient.ingredient.ingredient_name)
-            ing_quantity.append({'value': ingredient.ammount, 'unit': 'g'})
-        
-        recipes_list.append({
-            'id': recipe.id,
-            'title':recipe.recipe_name,
-            'ing_names':ing_names,
-            'ing_qua':ing_quantity,
-            'tem_name':['Parzenie'],
-            'tem_val':[recipe.brewing_temperature],
-            'tim_nam':['Mieszanie'],
-            'tim_val':[recipe.mixing_time],
-            'favourite': recipe.is_favourite,
-        })
-    
+    filters = FiltersForm('pl')
+    create_filters = CreateFiltersForm('pl')
     context = {
-        'recipes': recipes_list,
-        'blank': False,
+        'filters': filters,
+        'create_filters': create_filters,
     }
+    return render(request, "main/edit_recipes.html", context)
 
-    return render(request,"main/recipesList.html", context)
+
+@login_required
+def browse_recipes_view(request: HttpRequest, *args, **kwargs):
+    if request.method == "POST":
+        return False
 
 
-def machine_info_view(request:HttpRequest, *args, **kwargs):
+def machine_info(request:HttpRequest, *args, **kwargs):
     logger = logging.getLogger('main_logger')
 
     infos=[]
@@ -84,19 +69,50 @@ def machine_info_view(request:HttpRequest, *args, **kwargs):
     return render(request,"main/machineInfo.html", context)
 
 
-def edit_recipes_view(request: HttpRequest, *args, **kwargs):
-    if request.method == "POST":
-        return True
+def recipes(request: HttpRequest, *args, **kwargs):
+    logger = logging.getLogger('main_logger')
+    request_d = json.loads(request.body)
 
-    filters = FiltersForm('pl')
-    create_filters = CreateFiltersForm('pl')
+    if request_d['range'] < 0:
+        fetched = request.user.recipes_set.filter(
+            id__lt=request_d['from']).order_by('-id')[:abs(request_d['range']):-1]
+        # logger.info(request_d['range'])
+        # logger.info(fetched)
+    else:
+        fetched = request.user.recipes_set.filter(
+            id__gt=request_d['from']).order_by('id')[:request_d['range']]
+
+    recipes_list = []
+    for recipe in fetched:
+        ing_names = []
+        ing_quantity = []
+
+        for ingredient in recipe.ingredientsrecipes_set.all():
+            ing_names.append(ingredient.ingredient.ingredient_name)
+            ing_quantity.append({'value': ingredient.ammount, 'unit': 'g'})
+
+        recipes_list.append({
+            'id': recipe.id,
+            'title': recipe.recipe_name,
+            'ing_names': ing_names,
+            'ing_qua': ing_quantity,
+            'tem_name': ['Parzenie'],
+            'tem_val': [recipe.brewing_temperature],
+            'tim_nam': ['Mieszanie'],
+            'tim_val': [recipe.mixing_time],
+            'favourite': recipe.is_favourite,
+        })
+
     context = {
-        'filters': filters,
-        'create_filters': create_filters,
+        'recipes': recipes_list,
+        'blank': False,
     }
-    return render(request,"main/edit_recipes.html",context)
 
-# Get n objects and apply filters
+    return render(request, "main/recipesList.html", context)
+
+
+
+
 def fetch_edit_recipes(request: HttpRequest, *args, **kwargs):
 
     recipes, fetched_count = get_recipes(request, True)
@@ -109,6 +125,7 @@ def fetch_edit_recipes(request: HttpRequest, *args, **kwargs):
     result['fetched'] = fetched_count
     result['last_fetch'] = len(recipes)
     return result
+
 
 
 def apply_filters(filters, recipes: QuerySet):
@@ -167,6 +184,7 @@ def apply_filters(filters, recipes: QuerySet):
             mixing_time__lte=filters['mixing_time_up_filter'])
 
     return recipes
+
 
 
 def get_recipes(request: HttpRequest,filters=False):
@@ -258,6 +276,7 @@ def get_recipes(request: HttpRequest,filters=False):
     return recipes_list,end_index
 
 
+
 def add_to_favourites(request: HttpRequest, *args, **kwargs):
     recipe_id = json.loads(request.body)["recipe_id"]
     recipe = Recipes.objects.get(pk=recipe_id)
@@ -266,12 +285,14 @@ def add_to_favourites(request: HttpRequest, *args, **kwargs):
     return HttpResponse(status=200)
 
 
+
 def delete_from_favourites(request: HttpRequest, *args, **kwargs):
     recipe_id = json.loads(request.body)["recipe_id"]
     recipe = Recipes.objects.get(pk=recipe_id)
     recipe.is_favourite = False
     recipe.save()
     return HttpResponse(status=200)
+
 
 
 def create_recipe(request: HttpRequest, *args, **kwargs):
@@ -330,5 +351,4 @@ def create_recipe(request: HttpRequest, *args, **kwargs):
     return HttpResponse(status=200)
 
 
-def browse_recipes_view(request: HttpRequest, *args, **kwargs):
-    return Http404()
+
