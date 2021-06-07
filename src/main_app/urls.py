@@ -18,4 +18,5 @@ urlpatterns = [
     path('addToFavourites', add_to_favourites,name="main_add_recipe_to_favourites"),
     path('deleteFromFavourites', delete_from_favourites,name="main_delete_recipe_from_favourites"),
     path('createRecipe', create_recipe,name="main_create_recipe"),
+    path('browseFetchRecipesWithFilters', fetch_browse_recipes,name='main_fetch_recipes_with_filters_browse'),
 ]

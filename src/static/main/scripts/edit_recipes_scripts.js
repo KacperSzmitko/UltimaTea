@@ -19,7 +19,8 @@ var options = {};
 var edit = false;
 var edit_recipe_id = 0;
 
-function fetch_next(num_of_recipes_to_fetch,id_to_remove){
+// id_to_remove = 0 means no delete
+function fetch_next(num_of_recipes_to_fetch,id_to_remove,page){
     var remove = false;
     if (id_to_remove > 0){
         remove = true;
@@ -32,7 +33,17 @@ function fetch_next(num_of_recipes_to_fetch,id_to_remove){
         "remove":remove,
         "id_to_remove":id_to_remove
     })
-
+    let url = ""
+    if (page == "edit"){
+        url = "fetchRecipesWithFilters";
+    }
+    else if(page =="browse"){
+        url = "browseFetchRecipesWithFilters";
+    }
+    else{
+        return false;
+    }
+    console.log(url);
     var requestData = new XMLHttpRequest();
     requestData.responseType = "text";
     requestData.addEventListener("load", function () {
@@ -47,7 +58,7 @@ function fetch_next(num_of_recipes_to_fetch,id_to_remove){
             console.log('Request error')
         }
     }, {once : true});
-    requestData.open("post", 'fetchRecipesWithFilters');
+    requestData.open("post", url);
     requestData.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     requestData.setRequestHeader("X-CSRFToken", csrf_token);
     requestData.send(data);
@@ -116,7 +127,7 @@ async function delete_from_favourites(element){
 async function delete_recipe(element){
     let value = element.getAttribute('value');
     fetched_recipes -= last_fetch
-    fetch_next(5,value);
+    fetch_next(5,value,'edit');
 }
 
 function load_options(){
@@ -160,7 +171,6 @@ function edit_recipe(element){
             document.getElementById("id_mixing_time").value = tim_ammounts[i].getAttribute('value');
         }
     }
-
     create_recipe();
 }
 
@@ -196,7 +206,7 @@ async function submit_recipe(form){
     if (response.ok){
         console.log("Utworzono przepis");
         fetched_recipes -= last_fetch;
-        fetch_next(5,0);
+        fetch_next(5,0,'edit');
     }
     else{
         console.log("Nie udało się utworyć przepisu");

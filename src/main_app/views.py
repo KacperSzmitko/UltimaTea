@@ -50,6 +50,12 @@ def browse_recipes_view(request: HttpRequest, *args, **kwargs):
     if request.method == "POST":
         return False
 
+    filters = FiltersForm('pl')
+    context = {
+        'filters': filters,
+    }
+    return render(request, "main/browse_recipes.html", context)
+
 
 def machine_info(request:HttpRequest, *args, **kwargs):
     logger = logging.getLogger('main_logger')
@@ -106,19 +112,18 @@ def recipes(request: HttpRequest, *args, **kwargs):
     context = {
         'recipes': recipes_list,
         'blank': False,
+        'type': 'main',
     }
-
     return render(request, "main/recipesList.html", context)
 
 
 
-
 def fetch_edit_recipes(request: HttpRequest, *args, **kwargs):
-
-    recipes, fetched_count = get_recipes(request, True)
+    recipes, fetched_count = get_recipes(request, 'edit',True)
     context = {
         'recipes': recipes,
         'blank': True,
+        'type' : 'edit',
     }
     result = render(
         request, "main/recipesList.html", context)
@@ -126,6 +131,19 @@ def fetch_edit_recipes(request: HttpRequest, *args, **kwargs):
     result['last_fetch'] = len(recipes)
     return result
 
+
+def fetch_browse_recipes(request: HttpRequest, *args, **kwargs):
+    recipes, fetched_count = get_recipes(request, 'browse',True)
+    context = {
+        'recipes': recipes,
+        'blank': True,
+        'type' : 'edit',
+    }
+    result = render(
+        request, "main/recipesList.html", context)
+    result['fetched'] = fetched_count
+    result['last_fetch'] = len(recipes)
+    return result
 
 
 def apply_filters(filters, recipes: QuerySet):
@@ -186,8 +204,7 @@ def apply_filters(filters, recipes: QuerySet):
     return recipes
 
 
-
-def get_recipes(request: HttpRequest,filters=False):
+def get_recipes(request: HttpRequest, type,filters=False):
     request_d = json.loads(request.body)
     fetched_recipes = request_d["fetched_recipes"]
     recipes_to_fetch = request_d["num_of_recipes_to_fetch"]
@@ -195,19 +212,26 @@ def get_recipes(request: HttpRequest,filters=False):
     last_fetched = request_d["last_fetch"]
     remove = request_d["remove"]
     id_to_remove = request_d["id_to_remove"]
-
-    if remove:
-        Recipes.objects.get(pk=id_to_remove).delete()
-
     recipes_list = []
-
     user_recipes = ""
+    # Edit page
+    if type == 'edit':
+        # If remove recipe 
+        if remove:
+            Recipes.objects.get(pk=id_to_remove).delete()
 
-    if filters:
-        user_recipes = apply_filters(filters,request.user.recipes_set.all())
+        if filters:
+            user_recipes = apply_filters(filters,request.user.recipes_set.all())
+        else:
+            user_recipes = request.user.recipes_set.all()
+    # Browse page
+    elif type =='browse':
+        if filters:
+            user_recipes = apply_filters(filters,Recipes.objects.all())
+        else:
+            user_recipes = Recipes.objects.all()
     else:
-        user_recipes = request.user.recipes_set.all()
-
+        return Http404()
     # If true returns 0 as fetched
     end = False
     # Fetched all
@@ -268,8 +292,8 @@ def get_recipes(request: HttpRequest,filters=False):
             'ing_qua': ing_quantity,
             'tem_name': ['Parzenie'],
             'tem_val': [recipe.brewing_temperature],
-            'tim_nam': ['Mieszanie'],
-            'tim_val': [recipe.mixing_time],
+            'tim_nam': ['Parzenie','Mieszanie'],
+            'tim_val': [recipe.brewing_time, recipe.mixing_time],
             'favourite': recipe.is_favourite,
         })
 
@@ -297,24 +321,46 @@ def delete_from_favourites(request: HttpRequest, *args, **kwargs):
 
 def create_recipe(request: HttpRequest, *args, **kwargs):
     request_d = json.loads(request.body)
+    # Edit existing recipe
     if request_d['edit']:
         recipe = Recipes.objects.get(pk=request_d['recipe_id'])
         ings = IngredientsRecipes.objects.filter(recipe=recipe)
+        print(len(ings))
         recipe.recipe_name = request_d['recipe_name']
         recipe.brewing_temperature = request_d['brewing_temperature']
         recipe.brewing_time = request_d['brewing_time']
         recipe.mixing_time = request_d['mixing_time']
         recipe.tea_portion = request_d['water']
         recipe.tea_ammount = request_d['tea_quan']
+        l = len({k: v for k, v in request_d.items() if 'ingredient' in k and v != ''})
         recipe.tea_type = Teas.objects.get(
             pk=request_d['tea_name'])
-        for i,ing in enumerate(ings):
-            if i<3 and request_d[f'ingredient{i+1}'] != '' and request_d[f'ing{i+1}_ammount'] != "":
-                ing.ingredient = Ingerdients.objects.get(
-                    pk=request_d[f'ingredient{i+1}'])
-                ing.ammount = request_d[f'ing{i+1}_ammount']
-                ing.save()
+        for i in range(l):
+            if i<3 and request_d[f'ingredient{i+1}'] != '':
+                # Non empty value and non empty ingredient
+                if request_d[f'ing{i+1}_ammount'] != '':
+                    if len(ings) > i:
+                        ings[i].ingredient = Ingerdients.objects.get(
+                            pk=request_d[f'ingredient{i+1}'])
+                        ings[i].ammount = request_d[f'ing{i+1}_ammount']
+                        ings[i].save()
+                    else:
+                        IngredientsRecipes.objects.create(
+                            recipe=recipe,
+                            ingredient=Ingerdients.objects.get(
+                                pk=request_d[f'ingredient{i+1}']),
+                            ammount=request_d[f'ingredient{i+1}'],
+                        )
+                # Empty value and non empty ingredenit
+                else:
+                    ings[i].delete()
+            elif i < 3 and request_d[f'ingredient{i+1}'] == '':
+                try:
+                    ings[i].delete()
+                except:
+                    pass
         recipe.save()
+    # Add new recipe
     else:
         recipe = Recipes.objects.create(author=request.user,
                                         recipe_name=request_d['recipe_name'], 
@@ -349,6 +395,8 @@ def create_recipe(request: HttpRequest, *args, **kwargs):
             recipe.delete()
             return Http404()
     return HttpResponse(status=200)
+
+
 
 
 
