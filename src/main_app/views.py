@@ -1,18 +1,15 @@
-import re
+import json
+import logging
 from django.http.response import Http404, HttpResponse
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http.request import HttpRequest
-from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from .forms import FiltersForm,CreateFiltersForm
-import logging
-import json
-import functools
-from .models import Recipes, Ingerdients, IngredientsRecipes, Teas
+from .models import Recipes, Ingerdients, IngredientsRecipes, Teas,FavoriteRecipes
 from django.db.models.query import QuerySet
-
+from django.db.models import Q
 def login_required(func):
     def inner(request: HttpRequest):
         if not request.user.is_authenticated:
@@ -75,7 +72,7 @@ def machine_info(request:HttpRequest, *args, **kwargs):
     return render(request,"main/machineInfo.html", context)
 
 
-def recipes(request: HttpRequest, *args, **kwargs):
+def get_main_recipes(request: HttpRequest, *args, **kwargs):
     logger = logging.getLogger('main_logger')
     request_d = json.loads(request.body)
 
@@ -137,7 +134,7 @@ def fetch_browse_recipes(request: HttpRequest, *args, **kwargs):
     context = {
         'recipes': recipes,
         'blank': True,
-        'type' : 'edit',
+        'type' : 'browse',
     }
     result = render(
         request, "main/recipesList.html", context)
@@ -203,7 +200,7 @@ def apply_filters(filters, recipes: QuerySet):
 
     return recipes
 
-
+# Get recipes, also delete if needed
 def get_recipes(request: HttpRequest, type,filters=False):
     request_d = json.loads(request.body)
     fetched_recipes = request_d["fetched_recipes"]
@@ -227,9 +224,10 @@ def get_recipes(request: HttpRequest, type,filters=False):
     # Browse page
     elif type =='browse':
         if filters:
-            user_recipes = apply_filters(filters,Recipes.objects.all())
+            user_recipes = apply_filters(
+                filters, Recipes.objects.filter(~Q(author = request.user)))
         else:
-            user_recipes = Recipes.objects.all()
+            user_recipes = Recipes.objects.all(~Q(author=request.user))
     else:
         return Http404()
     # If true returns 0 as fetched
@@ -238,7 +236,7 @@ def get_recipes(request: HttpRequest, type,filters=False):
     if len(user_recipes) == fetched_recipes:
         if len(user_recipes) > 0:
             # Last page, Fetched all,  go right
-            if recipes_to_fetch > 0:
+            if recipes_to_fetch > 0 and not remove:
                 start_index = fetched_recipes - last_fetched
                 end_index = fetched_recipes
                 end = True
@@ -275,8 +273,9 @@ def get_recipes(request: HttpRequest, type,filters=False):
     elif not end:
         start_index = fetched_recipes - last_fetched +recipes_to_fetch
         end_index = start_index + abs(recipes_to_fetch)
-
-
+    user_copied_recipes = QuerySet()
+    if type == 'browse':
+        user_copied_recipes = Recipes.objects.filter(favoriterecipes__user = request.user)
     for recipe in user_recipes[start_index:end_index]:
         ing_names = []
         ing_quantity = []
@@ -284,7 +283,9 @@ def get_recipes(request: HttpRequest, type,filters=False):
         for ingredient in recipe.ingredientsrecipes_set.all():
             ing_names.append(ingredient.ingredient.ingredient_name)
             ing_quantity.append({'value': ingredient.ammount, 'unit': 'g'})
-
+        copied = False
+        if type == 'browse':
+            copied = user_copied_recipes.filter(pk=recipe.pk).exists()
         recipes_list.append({
             'id': recipe.id,
             'title': recipe.recipe_name,
@@ -295,6 +296,7 @@ def get_recipes(request: HttpRequest, type,filters=False):
             'tim_nam': ['Parzenie','Mieszanie'],
             'tim_val': [recipe.brewing_time, recipe.mixing_time],
             'favourite': recipe.is_favourite,
+            'copied' : copied,
         })
 
     return recipes_list,end_index
@@ -318,14 +320,30 @@ def delete_from_favourites(request: HttpRequest, *args, **kwargs):
     return HttpResponse(status=200)
 
 
+def copy_recipe(request: HttpRequest, *args, **kwargs):
+    recipe_id = json.loads(request.body)["recipe_id"]
+    recipe = Recipes.objects.get(pk=recipe_id)
+    FavoriteRecipes.objects.create(user=request.user, recipe=recipe)
+    recipe.pk = None
+    recipe.author = request.user
+    recipe.is_public = False
+    recipe.is_favourite = False
+    recipe.save()
+    return HttpResponse(status=200)
 
+def delete_copied_recipe(request: HttpRequest, *args, **kwargs):
+    recipe_id = json.loads(request.body)["recipe_id"]
+    recipe = Recipes.objects.get(pk=recipe_id)
+    FavoriteRecipes.objects.get(user=request.user, recipe=recipe).delete()
+    return HttpResponse(status=200)
+
+# Edit existing recipe or create new recipe
 def create_recipe(request: HttpRequest, *args, **kwargs):
     request_d = json.loads(request.body)
     # Edit existing recipe
     if request_d['edit']:
         recipe = Recipes.objects.get(pk=request_d['recipe_id'])
         ings = IngredientsRecipes.objects.filter(recipe=recipe)
-        print(len(ings))
         recipe.recipe_name = request_d['recipe_name']
         recipe.brewing_temperature = request_d['brewing_temperature']
         recipe.brewing_time = request_d['brewing_time']
@@ -359,6 +377,9 @@ def create_recipe(request: HttpRequest, *args, **kwargs):
                     ings[i].delete()
                 except:
                     pass
+        if not recipe.was_edited:
+            FavoriteRecipes.objects.filter()
+            recipe.was_edited = True
         recipe.save()
     # Add new recipe
     else:

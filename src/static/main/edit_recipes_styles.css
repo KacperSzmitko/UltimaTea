@@ -216,6 +216,7 @@ h5 {
 
 #content_to_blur{
     display: flex;
+    width: 100%;
 }
 
 .recipeDisplayedEdit{

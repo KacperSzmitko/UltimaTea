@@ -43,7 +43,6 @@ function fetch_next(num_of_recipes_to_fetch,id_to_remove,page){
     else{
         return false;
     }
-    console.log(url);
     var requestData = new XMLHttpRequest();
     requestData.responseType = "text";
     requestData.addEventListener("load", function () {
@@ -210,5 +209,25 @@ async function submit_recipe(form){
     }
     else{
         console.log("Nie udało się utworyć przepisu");
+    }
+}
+
+async function copy(element){
+    let value = element.getAttribute('value');
+    document.getElementById("empty_hearth_ico_" + value).style.zIndex = "0";
+    document.getElementById("full_hearth_ico_" + value).style.zIndex = "1";
+    const response = await icons_fetches("copyRecipe",value);
+    if (!response.ok){
+        console.log("favourites delete error");
+    }
+}
+
+async function delete_copy(element){
+    let value = element.getAttribute('value');
+    document.getElementById("empty_hearth_ico_" + value).style.zIndex = "1";
+    document.getElementById("full_hearth_ico_" + value).style.zIndex = "0";
+    const response = await icons_fetches("deleteCopiedRecipe",value);
+    if (!response.ok){
+        console.log("favourites delete error");
     }
 }

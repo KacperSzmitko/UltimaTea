@@ -103,8 +103,13 @@
         </div>
     {% elif type == "browse" %}
      <div id="icons">
-        <div id="full_hearth_ico_{{recipe.id}}" value={{recipe.id}} class="full_hearth_ico ico_box" onclick="delete_from_favourites(this);" style="z-index: 1;"> <img src="{% static 'main/media/add_recipe.svg' %}" alt="" class="ico on" ></div>
-        <div id="empty_hearth_ico_{{recipe.id}}" value={{recipe.id}} class="empty_hearth_ico ico_box" onclick="add_to_favourites(this);" ><img src="{% static 'main/media/heart.svg' %}" alt="" class="ico"></div>
+        {% if  recipe.copied %}
+        <div id="full_hearth_ico_{{recipe.id}}" value={{recipe.id}} class="full_hearth_ico ico_box"  onclick="delete_copy(this);" style="z-index: 1;" > <img src="{% static 'main/media/heart-fill.svg' %}" alt="" class="ico on" ></div>
+        <div id="empty_hearth_ico_{{recipe.id}}" value={{recipe.id}} class="empty_hearth_ico ico_box"  onclick="copy(this);" ><img src="{% static 'main/media/heart.svg' %}" alt="" class="ico"></div>
+        {% else %}
+        <div id="full_hearth_ico_{{recipe.id}}" value={{recipe.id}} class="full_hearth_ico ico_box" onclick="delete_copy(this);" > <img src="{% static 'main/media/heart-fill.svg' %}" alt="" class="ico on" ></div>
+        <div id="empty_hearth_ico_{{recipe.id}}" value={{recipe.id}} class="empty_hearth_ico ico_box" onclick="copy(this);" style="z-index: 1;" ><img src="{% static 'main/media/heart.svg' %}" alt="" class="ico"></div>
+        {% endif %}
         <div id="pencil_ico_{{recipe.id}}" value={{recipe.id}} class="pencil_ico ico_box " onclick="edit_recipe(this);"><img src="{% static 'main/media/pencil-square.svg' %}" alt="" class="ico"></div>
         <div id="trash_ico_{{recipe.id}}"  value={{recipe.id}} class="trash_ico ico_box " onclick="delete_recipe(this);"><img src="{% static 'main/media/trash.svg' %}" alt="" class="ico"></div>
         </div>
