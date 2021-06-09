@@ -1,24 +1,8 @@
-{% load static %}
-{% if blank %}
-    <div  value="0" class="recipeDisplayed recipe_0 centerIn">
-
-        <div id="createRecipe" class="in" style="width: 95%; height: 97%; border-radius: 5px; background-color: rgb(255,255,255); " onclick="create_recipe()">
-        <img src="{% static 'main/media/add_recipe.png' %}" id="createRecipeImg">
-        </div>
-    </div>
-    <div  style="width:5%;visibility: hidden;">
-    <div id="full_hearth_ico" class="ico_box"></div>
-    <div id="empty_hearth_ico" class="ico_box"></div>
-    <div id="pencil_ico" class="ico_box"></div>
-    <div id="trash_ico"  class="ico_box"></div>
-    </div>
-{% endif %}
-
 {% for recipe in recipes %}
-<div  value="{{recipe.id}}" class="recipe_{{recipe.id}} centerIn recipeDisplayed">
+<div  value="{{recipe.id}}" class="recipeDisplayed displayRecipe centerIn" style="width: 33.33%; height: 100%;">
     <div id="recipesDisplayed{{recipe.id}}" class="in" style="width: 95%; height: 97%; border-radius: 5px; background-color: rgb(255,255,255); " onclick="toggle_select('recipesDisplayed{{recipe.id}}')">
         <div class="recipeTitle centerIn" style="width: 100%; height: 10%;">
-            <div class="teaName in" id="teaName_{{recipe.id}}"> 
+            <div class="teaName in"> 
                 {{recipe.title}}
             </div>
         </div>
@@ -32,14 +16,14 @@
                     <div class="data" style="width: 100%; height: 80%; display: flex;">
                         <div class="names" style="width: 69%; height: 100%;">
                             {%for ingreditntName in recipe.ing_names%}
-                            <div class="dataPos igName_{{recipe.id}}">{{ingreditntName}}</div>
+                            <div class="dataPos">{{ingreditntName}}</div>
                             {%endfor%}
     
                         </div>
                         <div style="height: auto; width: 1;"> <div style="height: 10%;"></div> <div class="borderSec-ver"></div></div>
                         <div class="quantity" style="width: 30%; height: 100%;">
                             {%for ingreditntQuantity in recipe.ing_qua%}
-                            <div class="dataPos igQuan_{{recipe.id}}" value="{{ingreditntQuantity.value}}">{{ingreditntQuantity.value}} {{ingreditntQuantity.unit}}</div>
+                            <div class="dataPos">{{ingreditntQuantity.value}} {{ingreditntQuantity.unit}}</div>
                             {%endfor%}
     
                         </div>
@@ -52,14 +36,14 @@
                     <div class="data" style="width: 100%; height: 80%; display: flex;">
                         <div class="names" style="width: 69%; height: 100%;">
                             {%for tempName in recipe.tem_name%}
-                            <div class="dataPos tempName_{{recipe.id}}">{{tempName}}</div>
+                            <div class="dataPos">{{tempName}}</div>
                             {%endfor%}
     
                         </div>
                         <div style="height: auto; width: 1;"> <div style="height: 5%;"></div> <div class="borderSec-ver"></div></div>
                         <div class="quantity" style="width: 30%; height: 100%;">
                             {%for temVal in recipe.tem_val%}
-                            <div class="dataPos tempAm_{{recipe.id}}" value="{{temVal}}">{{temVal}} *C</div>
+                            <div class="dataPos">{{temVal}} *C</div>
                             {%endfor%}
     
                         </div>
@@ -72,14 +56,14 @@
                     <div class="data" style="width: 100%; height: 80%; display: flex;">
                         <div class="names" style="width: 69%; height: 100%;">
                             {%for timNam in recipe.tim_nam%}
-                            <div class="dataPos timName_{{recipe.id}}">{{timNam}}</div>
+                            <div class="dataPos">{{timNam}}</div>
                             {%endfor%}
     
                         </div>
                         <div style="height: auto; width: 1;"> <div style="height: 5%;"></div> <div class="borderSec-ver"></div></div>
                         <div class="quantity" style="width: 30%; height: 100%;">
                             {%for timVal in recipe.tim_val%}
-                            <div class="dataPos timAm_{{recipe.id}}" value="{{timVal}}">{{timVal}} s</div>
+                            <div class="dataPos">{{timVal}} s</div>
                             {%endfor%}
       
                         </div>
@@ -89,17 +73,4 @@
         </div>
     </div>
 </div>
-    {% if blank %}
-        <div id="icons">
-        {% if recipe.favourite %}
-        <div id="full_hearth_ico_{{recipe.id}}" value={{recipe.id}} class="full_hearth_ico ico_box" onclick="delete_from_favourites(this);" style="z-index: 1;"> <img src="{% static 'main/media/heart-fill.svg' %}" alt="" class="ico on" ></div>
-        <div id="empty_hearth_ico_{{recipe.id}}" value={{recipe.id}} class="empty_hearth_ico ico_box" onclick="add_to_favourites(this);" ><img src="{% static 'main/media/heart.svg' %}" alt="" class="ico"></div>
-        {% else %}
-        <div id="full_hearth_ico_{{recipe.id}}" value={{recipe.id}} class="full_hearth_ico ico_box " onclick="delete_from_favourites(this);" ><img src="{% static 'main/media/heart-fill.svg' %}" alt="" class="ico"></div>
-        <div id="empty_hearth_ico_{{recipe.id}}" value={{recipe.id}} class="empty_hearth_ico ico_box " onclick="add_to_favourites(this);" style="z-index: 1;" ><img src="{% static 'main/media/heart.svg' %}" alt="" class="ico"></div>
-        {% endif %}
-        <div id="pencil_ico_{{recipe.id}}" value={{recipe.id}} class="pencil_ico ico_box " onclick="edit_recipe(this);"><img src="{% static 'main/media/pencil-square.svg' %}" alt="" class="ico"></div>
-        <div id="trash_ico_{{recipe.id}}"  value={{recipe.id}} class="trash_ico ico_box " onclick="delete_recipe(this);"><img src="{% static 'main/media/trash.svg' %}" alt="" class="ico"></div>
-        </div>
-    {% endif %}
 {%endfor%}  

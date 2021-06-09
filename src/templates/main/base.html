@@ -1,17 +1,12 @@
 
 {% extends 'base.html' %}
-{% load static %}
-{%block head%}  
+{%block head%}
     {%if title%}
         <title>UltimaTea-{{title}}</title>
     {%else%}
         <title>UltimaTea</title>
-    {%endif%} 
-    {% block styles %} 
+    {%endif%}  
     <link rel="stylesheet" type="text/css" href="/static/main/main_styles.css">
-    {% block additional_styles %}
-    {% endblock additional_styles %}
-    {% endblock %}
 {%endblock head%}
 
 
@@ -28,8 +23,7 @@
             <div class="containerSeparator borderSec-ver" style="width: 1%">
                 
             </div>
-            
-            <div id="containerContent"class="containerContent" style="width: 77%">
+            <div class="containerContent" style="width: 77%">
                 {%block main_content%}
                 {%endblock main_content%}
             </div>
@@ -38,12 +32,4 @@
 </div>
 
 {%endblock content%}
-
-
-{% block scripts %}
- <script src="{% static 'main/scripts/base_scripts.js' %}"> </script>
-    {% block additional_scripts %}
-
-    {% endblock additional_scripts %}
-{% endblock scripts %}
 
