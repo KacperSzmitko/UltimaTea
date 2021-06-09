@@ -6,6 +6,9 @@
     transform: translate(-50%, -50%);
 }
 
+body {
+  font-family: 'Roboto';
+}
 
 .fill{
     width: 100%;
@@ -24,6 +27,9 @@
 .in {
     margin: auto;
     display: block;
+    outline-style: auto;
+    outline: 3px;
+    outline-color: rgb(219, 218, 218);
 } 
 
 
@@ -51,4 +57,54 @@
     border-style: solid;
     border-color: blueviolet;
     border-radius: 5px;
+}
+
+.containerContent{
+    display: flex;
+}
+
+.number_edit, .choice_edit {
+    height: 20px;
+    width: 50px;
+}
+
+.choice_edit {
+    width: 150px;
+}
+
+.text_input_edit {
+    height: 24px;
+    width: 150px;
+}
+
+#icons_edit {
+    width: 5%;
+    margin-top: 2%;
+    position: relative;
+    height: 90%;
+}
+
+.ico_box_edit {
+    width: 100%;
+    height: 12%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    border-radius: 13%;
+}
+
+.ico_edit {
+    width: 70%;
+    height: 70%;
+    cursor: pointer;
+}
+
+.save_icon_edit {
+    top:0%;
+}
+
+.return_icon_edit {
+    top:20%;
 }

@@ -15,20 +15,31 @@ class Ingerdients(models.Model):
         db_table = 'ingredients'
 
 
+class Teas(models.Model):
+    tea_name = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = 'teas'
+
+
 class Recipes(models.Model):
     author = models.ForeignKey(User,on_delete=models.CASCADE)
     last_modification = models.DateTimeField(auto_now_add=True)
-    descripction = models.CharField(max_length=1023,default=None)
+    descripction = models.CharField(max_length=1023,default="")
     recipe_name = models.CharField(max_length=255)
     overall_upvotes = models.IntegerField(default=0)
     last_month_upvotes = models.IntegerField(default=0)
     is_public = models.BooleanField(default=False)
-    brewing_temperatue = models.FloatField()
-    brewing_time = models.FloatField()
-    mixing_time = models.FloatField()
+    brewing_temperature = models.FloatField(default=80)
+    brewing_time = models.FloatField(default=60)
+    mixing_time = models.FloatField(default=15)
     tea_portion = models.FloatField()
+    is_favourite = models.BooleanField(default=False)
+    tea_type = models.ForeignKey(Teas, on_delete=models.CASCADE)
+    tea_ammount = models.FloatField()
     class Meta:
         db_table = 'recipes'
+        ordering = ('-is_favourite','recipe_name',)
 
     def __str__(self):
         return self.recipe_name+': '+self.descripction
@@ -79,3 +90,6 @@ class History(models.Model):
     user = models.ForeignKey(User,on_delete=CASCADE)
     recipe = models.ForeignKey(Recipes,on_delete=CASCADE)
     date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'history'

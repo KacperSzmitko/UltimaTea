@@ -1,4 +1,11 @@
 {%extends "main/base.html"%}
+
+{% load static %}
+
+{% block additional_styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/home_styles.css' %}">
+{% endblock additional_styles %}
+
 {%block main_content%}
 <div class="mainContent" style="width: 100%; height: 100%;">
     <div class="mainTop" style="width: 100%; height: 10%;">
@@ -37,7 +44,7 @@
 </div>
 {%endblock main_content%}
 
-{%block scripts%}
+{%block additional_scripts%}
 {% csrf_token %}
 <script>
 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
@@ -46,6 +53,6 @@ var last = 0
 <script src="static/main/scripts/home_scripts.js"> </script>
 <script>
     loadRecipes(1, 3, csrftoken)
-    loadMachineInfo(csrftoken)
+    loadMachineInfo(csrftoken,{{ adr }})
 </script>
-{%endblock scripts%}
+{%endblock additional_scripts%}
