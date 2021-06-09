@@ -125,7 +125,7 @@ async function delete_from_favourites(element){
 
 async function delete_recipe(element){
     let value = element.getAttribute('value');
-    fetched_recipes -= last_fetch
+    //fetched_recipes -= last_fetch
     fetch_next(5,value,'edit');
 }
 

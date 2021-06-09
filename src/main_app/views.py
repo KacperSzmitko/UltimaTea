@@ -231,52 +231,59 @@ def get_recipes(request: HttpRequest, type,filters=False):
     else:
         return Http404()
     # If true returns 0 as fetched
-    end = False
-    # Fetched all
-    if len(user_recipes) == fetched_recipes:
-        if len(user_recipes) > 0:
-            # Last page, Fetched all,  go right
-            if recipes_to_fetch > 0 and not remove:
-                start_index = fetched_recipes - last_fetched
-                end_index = fetched_recipes
-                end = True
-            else:
-                # First page,Fetched all, go left
-                if fetched_recipes <= abs(recipes_to_fetch):
-                    start_index = 0
-                    end_index = fetched_recipes
-                    end = True
-                elif remove:
-                    start_index = fetched_recipes - recipes_to_fetch - last_fetched
-                    end_index = fetched_recipes - last_fetched
-                    end = True
-    # Not all fetched
-    else:
-        # First fetch
-        if fetched_recipes == 0:
-            # If there isnt recipes return 0
-            if recipes_to_fetch < 0:
-                recipes_to_fetch = 0
-            # If there is less than we want to fetch, just fetch all
-            elif len(user_recipes) <= recipes_to_fetch:
-                recipes_to_fetch = len(user_recipes)
-        # Fetch > 1 tell how many recipes left, go right
-        elif recipes_to_fetch > 0 and ((len(user_recipes) // fetched_recipes) < 2):
-            recipes_to_fetch = len(user_recipes) % fetched_recipes
-        # First page , not all fetched ,go left
-        elif fetched_recipes <= abs(recipes_to_fetch) and recipes_to_fetch<0:
-            start_index = 0
-            end_index = start_index + abs(recipes_to_fetch)
-            end = True
+    start_index, end_index = 0,0
+    all_user_recipes = len(user_recipes)
+    left_recipes = all_user_recipes - fetched_recipes
 
-    # Go right
-    if not end and recipes_to_fetch >= 0:
-        start_index = fetched_recipes
-        end_index = fetched_recipes+recipes_to_fetch
-    # Go left
-    elif not end:
-        start_index = fetched_recipes - last_fetched +recipes_to_fetch
-        end_index = start_index + abs(recipes_to_fetch)
+    if remove:
+        # Delete on first page
+        if fetched_recipes <= recipes_to_fetch:
+            start_index = 0
+            # Cant fetch requested number of recipes
+            if all_user_recipes <= recipes_to_fetch:
+                end_index = all_user_recipes
+            # Can fetch requested number of recipes
+            else:
+                end_index = recipes_to_fetch
+        # Delete on >1 page
+        else:
+            # If deleted was last on page
+            if (fetched_recipes - 1) % recipes_to_fetch == 0:
+                start_index = fetched_recipes - 1 - recipes_to_fetch
+                end_index = start_index + recipes_to_fetch
+            else:
+                start_index = fetched_recipes - last_fetched
+                # There are more recipes in right direction
+                if fetched_recipes + 1 <= all_user_recipes:
+                    end_index = start_index + last_fetched
+                else:
+                    end_index = all_user_recipes
+    else:
+        # Go right
+        if recipes_to_fetch > 0:
+            # Can fetch
+            if left_recipes > 0:
+                start_index = fetched_recipes
+                end_index = (start_index + 
+                (left_recipes % recipes_to_fetch *(left_recipes < fetched_recipes)) +
+                (recipes_to_fetch * (left_recipes >= fetched_recipes))
+                )
+            # Cant fetch
+            else:
+                start_index = fetched_recipes - last_fetched
+                end_index = start_index + last_fetched             
+        # Go left
+        else:
+            # First page
+            if fetched_recipes <= abs(recipes_to_fetch):
+                start_index = 0
+                end_index = start_index + last_fetched
+            else:
+                end_index = fetched_recipes - last_fetched
+                start_index = end_index + recipes_to_fetch
+
+
+
     user_copied_recipes = QuerySet()
     if type == 'browse':
         user_copied_recipes = Recipes.objects.filter(favoriterecipes__user = request.user)
