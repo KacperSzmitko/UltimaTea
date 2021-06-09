@@ -133,7 +133,7 @@ def fetch_browse_recipes(request: HttpRequest, *args, **kwargs):
     recipes, fetched_count = get_recipes(request, 'browse',True)
     context = {
         'recipes': recipes,
-        'blank': True,
+        'blank': False,
         'type' : 'browse',
     }
     result = render(
@@ -246,6 +246,10 @@ def get_recipes(request: HttpRequest, type,filters=False):
                     start_index = 0
                     end_index = fetched_recipes
                     end = True
+                elif remove:
+                    start_index = fetched_recipes - recipes_to_fetch - last_fetched
+                    end_index = fetched_recipes - last_fetched
+                    end = True
     # Not all fetched
     else:
         # First fetch
@@ -260,7 +264,7 @@ def get_recipes(request: HttpRequest, type,filters=False):
         elif recipes_to_fetch > 0 and ((len(user_recipes) // fetched_recipes) < 2):
             recipes_to_fetch = len(user_recipes) % fetched_recipes
         # First page , not all fetched ,go left
-        elif fetched_recipes <= abs(recipes_to_fetch):
+        elif fetched_recipes <= abs(recipes_to_fetch) and recipes_to_fetch<0:
             start_index = 0
             end_index = start_index + abs(recipes_to_fetch)
             end = True
@@ -328,6 +332,8 @@ def copy_recipe(request: HttpRequest, *args, **kwargs):
     recipe.author = request.user
     recipe.is_public = False
     recipe.is_favourite = False
+    recipe.last_month_upvotes = 0
+    recipe.overall_upvotes = 0
     recipe.save()
     return HttpResponse(status=200)
 

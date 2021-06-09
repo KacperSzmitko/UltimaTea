@@ -43,7 +43,8 @@ h5 {
     max-height: 50%;
     overflow: initial;
     margin-left: 1%;
-    border: 1px gray solid;
+    outline: 0.1px #F5F5F5 solid;
+    box-shadow:0 0 2px 0 rgba(0, 0, 0, 0.1);
 }
 
 .containerContent{
@@ -146,7 +147,7 @@ h5 {
 }
 
 .filter_btn{
-    margin-bottom: 6%;
+    margin-bottom: 4%;
 }
 
 #createRecipeImg{
@@ -169,7 +170,7 @@ h5 {
 }
 
 .ico_box{
-    width: 100%;
+    width: 90%;
     height: 12%;
     background-color: white;
     display: flex;
@@ -177,6 +178,9 @@ h5 {
     justify-content: center;
     position: absolute;
     border-radius: 13%;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,.1);
+    border: 0.1px solid #F5F5F5;
+    right: 33%;
 }
 
 .ico{
@@ -248,4 +252,9 @@ h5 {
 .ico_edit{
     width: 60%;
     height: 80%;
+}
+
+.single_recipe{
+    outline: none;
+    margin: 0;
 }

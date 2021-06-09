@@ -109,6 +109,15 @@
         x = document.getElementById("id_password2");
         x.classList.add("log-in", "register-re-password");
         x.id = "id_re_password";
+
+    document.onreadystatechange = function() {
+    if (document.readyState !== "complete") {
+        document.querySelector("body").style.visibility = "hidden";
+    } else {
+        document.querySelector("body").style.visibility = "visible";
+    }
+    };
+
     </script>
 
     <script src="{% static 'login_register/scripts/buttons_availability.js' %}"> </script>
