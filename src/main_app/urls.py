@@ -8,8 +8,8 @@ urlpatterns = [
 
     path('editRecipes', edit_recipes_view, name='main_edit_tea'),
     path('browseRecipes', home_view, name='main_search_recipes'),
-    path('editIngredients', home_view, name='main_configure_ingredients'),
-    path('status', home_view, name='main_status'),
+    path('editIngredients', edit_machine_view, name='main_configure_ingredients'),
+    path('status', machine_view, name='main_status'),
     path('editProfile', home_view, name='main_edit_profile'),
 
 

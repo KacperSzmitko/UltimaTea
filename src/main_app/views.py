@@ -14,6 +14,56 @@ import functools
 from .models import Recipes, Ingerdients, IngredientsRecipes
 from django.db.models.query import QuerySet
 
+
+def edit_machine_view(request:HttpRequest, *args, **kwargs):
+    if not request.user.is_authenticated:
+        return redirect('auth:login_register')
+    logger = logging.getLogger('main_logger')
+    logger.info("Hej z edit_machine_view!")
+    context = {
+        'title':'Edytuj składniki',
+        'containers':[{
+            'name':'Pojemnik #1',
+            'form':'form',
+            'value':77
+        },
+        {
+            'name':'Pojemnik #2',
+            'form':'form',
+            'value':11
+        },
+        {
+            'name':'Pojemnik #3',
+            'form':'form',
+            'value':33
+        },
+        {
+            'name':'Pojemnik #3',
+            'form':'form',
+            'value':33
+        },
+        
+        ]
+
+    }
+    return render(request,"main/edit_machine.html", context)
+
+
+def machine_view(request:HttpRequest, *args, **kwargs):
+    if not request.user.is_authenticated:
+        return redirect('auth:login_register')
+    logger = logging.getLogger('main_logger')
+    logger.info("Hej z machine_view!")
+    context = {
+        'title':'Machine',
+        'ingredients':[['Woda', 70],['Woda', 70],['Woda', 70],['Woda', 70]],
+        'temperatures':[['Komora jajeczna', 170],['Komora jajeczna', 70],['Komora jajeczna', 70],['Woda', 70]],
+        'valves':[['Pojemnik wody', 'Zamknięty'],['Pojemnik wody', 'Zamknięty'],['Pojemnik wody', 'Zamknięty'],['Pojemnik wody', 'Zamknięty']],
+        'others':[['Wykryto kubek?', 'chyba tak'],['Wykryto kubek?', 'chyba tak'],['Wykryto kubek?', 'chyba tak'],['Wykryto kubek?', 'chyba tak']],
+
+    }
+    return render(request,"main/machine.html", context)
+
 #@login_required()
 def home_view(request:HttpRequest, *args, **kwargs):
     if not request.user.is_authenticated:

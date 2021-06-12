@@ -21,14 +21,14 @@
 
 
 <div class="centerIn fill" style="height: 7%;">
-    <button class = "in" style="width: 90%; height: 90%;" onclick=location.href=''  type="button">
-        Edytuj składniki
-    </button><br /> 
+    <button class = "in" style="width: 90%; height: 90%;" onclick=location.href='{% url 'app:main_configure_ingredients' %}'  type="button">
+        Edytuj składniki 
+    </button><br />  
 </div>
 
 
 <div class="centerIn fill" style="height: 7%;">
-    <button class = "in" style="width: 90%; height: 90%;" onclick=location.href='' type="button">
+    <button class = "in" style="width: 90%; height: 90%;" onclick=location.href='{% url 'app:main_status' %}' type="button">
         Status urządzenia
     </button><br />
 </div>

@@ -1,0 +1,110 @@
+.flex-container{
+    display: flex;
+}
+
+
+.wrap{ 
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+} 
+
+.mainbox {
+    width: 50%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.insideBox{
+    width: 90%;
+    height: 90%;
+    background-color: rgb(235,235,235);
+    border-radius: 5px;
+}
+
+.title{
+    width: 100%;
+    height: 15%;
+    /* font-size: 150%; */
+    font-size: 2.3vw;
+
+}
+
+.h_border{
+    width: 100%;
+    height: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.h_border_in{
+    border-top: 1.5px solid #000000;
+    width: 100%;
+    height: 50%;
+}
+
+.items{
+    width: 100%;
+    height: 80%;
+}
+
+.item{
+    width: 100%;
+    height: 20%;
+}
+
+.iName{
+    width: 40%;
+    height: 100%;
+    font-size: 1.7vw;
+}
+
+.bar{
+    width: 60%;
+    height: 80%;
+    border-style: solid; 
+    border-radius: 5px; 
+    background-color: rgb(255,255,255);
+}
+
+.bar_pr{
+    height: 100%;
+    width: 60%;
+    background-color: green;
+    border-radius: 3px;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.v_center{
+    display: flex;
+    align-items: center
+}
+
+.h_center{
+    display: flex;
+    justify-content: center;
+}
+
+.vName{
+    height: 100%;
+    width: 70%;
+    font-size: 1.4vw;
+}
+
+.vStatus{
+    height: 100%;
+    width: 30%;
+    font-size: 1.4vw;
+}
+
+.vItem{
+    height: 15%;
+}
