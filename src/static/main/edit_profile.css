@@ -6,6 +6,8 @@
 .wrap{ 
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
 } 
 
 .column{
@@ -28,7 +30,6 @@
     height: 50%;
 }
 
-
 .bar{
     width: 100%;
     height: 70%;
@@ -43,7 +44,6 @@
     background-color: green;
     border-radius: 3px;
 }
-
 
 .center{
     display: flex;
@@ -61,56 +61,78 @@
     justify-content: center;
 }
 
-.listContainers{
+.profileOutContainer{
     width: 100%;
-    height: 90%;
+    height: 100%;
 }
 
-.container{
-    width: 80%;
+.profileContainer{
+    height: 70%;
+    width: 70%;
+}
+
+.changesContainer{
+    width: 100%;
+    height: 80%;
+}
+
+.bottomContainer{
+    width: 100%;
     height: 20%;
 }
 
-.title{
-    width: 100%;
-    height: 40%;
-}
-
-.content{
-    width: 100%;
-    height: 60%;
-}
-
-.inContent{
-    height: 100%;
-    width: 50%;
-}
-
-.inSide{
-    height: 90%;
-    width: 88%;
-}
-
-.title{
-    font-size: 2.0vw;
-}
-
-.choose{
-    font-size: 2.7vw;
-}
-
-.acButton{
+.avatarConteiner{
     width: 40%;
-    height: 50%;
-    background-color: blue;
+    height: 85%;
 }
 
-.containerButton{
+.avatar{
+    height: 65%;
     width: 80%;
-    height: 15%;
-    margin-top: 3%;
 }
 
-.text{
-    font-size: 1.4vw;
+.avatar_bt{
+    height: 10%;
+    width: 65%;
 }
+
+.form{
+    width: 60%;
+    height: 85%;
+}
+
+.data{
+    height: 25%;
+    width: 100%;
+}
+
+.descriptionContainer{
+    width: 100%;
+    height: 75%;
+}
+
+.inData{
+    width: 45%;
+    height: 90%;
+}
+
+.title{
+    width: 100%;
+    height: 25%;
+}
+
+.inputData{
+    width: 100%;
+    height: 75%;
+}
+
+.description{
+    width: 100%;
+    height: 75%;
+}
+
+.title{
+    font-size: 1.1vw;
+}
+
+

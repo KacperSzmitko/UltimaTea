@@ -1,0 +1,70 @@
+{%extends "main/base.html"%}
+{% load static %}
+
+{% load static %}
+
+{% block additional_styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/edit_profile.css' %}">
+{% endblock additional_styles %}
+
+{%block main_content%}
+    <div class="profileOutContainer center">
+        <div class="profileContainer">
+            <div class="changesContainer flexContainer wrap">
+                <div class="avatarConteiner flexContainer column">
+                    <div class="avatar center">
+                        Profile PIC
+                    </div>
+                    <div class="avatar_bt center">
+                        Button
+                    </div>
+                </div>
+                <div class="form">
+                    <div class="data flexContainer wrap">
+                        <div class="name inData">
+                            <div class="title">
+                                Imię
+                            </div>
+                            <div class="nameField inputData center">
+                                input
+                            </div>
+                        </div>
+                        <div class="surname inData">
+                            <div class="title">
+                                Nazwisko
+                            </div>
+                            <div class="surnameField inputData center">
+                                input
+                            </div>
+                        </div>
+                    </div>
+                    <div class="descriptionContainer">
+                        <div class="title">
+                            Opis
+                        </div>
+                        <div class="description center">
+                            input
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bottomContainer center">
+                Button
+            </div>
+        </div>
+    </div>
+{%endblock main_content%}
+
+
+{%block additional_scripts%}
+{% csrf_token %}
+    <script>
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    </script>
+    <script src="static/main/scripts/home_scripts.js"> </script>
+
+    <script>
+        loadMachineInfo(csrftoken);
+    </script>
+{%endblock additional_scripts%}
+

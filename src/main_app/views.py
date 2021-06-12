@@ -15,6 +15,18 @@ from .models import Recipes, Ingerdients, IngredientsRecipes
 from django.db.models.query import QuerySet
 
 
+def edit_profile_view(request:HttpRequest, *args, **kwargs):
+    if not request.user.is_authenticated:
+        return redirect('auth:login_register')
+    logger = logging.getLogger('main_logger')
+    logger.info("Hej z edit_profile_view!")
+    context = {
+        'title':'Edytuj profil',
+
+    }
+    return render(request,"main/edit_profile.html", context)
+
+
 def edit_machine_view(request:HttpRequest, *args, **kwargs):
     if not request.user.is_authenticated:
         return redirect('auth:login_register')

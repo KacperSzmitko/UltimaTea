@@ -10,7 +10,7 @@ urlpatterns = [
     path('browseRecipes', home_view, name='main_search_recipes'),
     path('editIngredients', edit_machine_view, name='main_configure_ingredients'),
     path('status', machine_view, name='main_status'),
-    path('editProfile', home_view, name='main_edit_profile'),
+    path('editProfile', edit_profile_view, name='main_edit_profile'),
 
 
 
