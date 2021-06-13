@@ -253,6 +253,7 @@ h5 {
 .single_recipe{
     outline: none;
     margin: 0;
+    overflow: auto;
 }
 
 #return_icon_edit{
