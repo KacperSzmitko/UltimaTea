@@ -64,7 +64,7 @@ body {
 .containerContent{
     display: flex;
 }
-
+/* 
 .number_edit, .choice_edit {
     height: 20px;
     width: 50px;
@@ -109,7 +109,8 @@ body {
 
 .return_icon_edit {
     top:20%;
-}
+} */
+
 
 .flexContainer{
     display: flex;
@@ -199,4 +200,107 @@ body {
 
 .body{
     overflow: hidden;
+}
+
+/* .input_box_edit{
+    margin-bottom: 2%;
+    height: 20px; 
+    width: 100%;
+} */
+
+/* .dataTitle{
+    margin-bottom: 4%;
+    font-size: 1.2vw;
+} */
+
+.input_box_edit{
+    margin-bottom: 2%;
+}
+
+.editIngredients{
+    width: 100%;
+    height: 50%;
+}
+
+.recipeEditTemperatures{
+    width: 100%;
+    height: 20%;
+}
+
+.choose_ing{
+    width: 100%;
+    height: 20%;
+    /* background-color: blue; */
+}
+
+.textEdit{
+    font-size: 1.0vw;
+}
+
+.quan_ing{
+    width: 100%;
+    height: 20%;
+    background-color: blueviolet;
+}
+
+.border_v{
+    margin-left: 3px;
+    border-left: 1.5px solid #000000;
+    width: 1%;
+}
+
+.names{
+    width: 59%;
+}
+
+.quantities{
+    height: 100%;
+    width: 40%;
+}
+
+.data{
+    justify-content: space-between;
+}
+
+.dataTitle{
+    margin-bottom: 2%;
+    margin-top: 2%;
+    font-size: 1.5vw;
+}
+
+.recipeEditContent{
+    width: 90%;
+    height: 90%;
+}
+
+
+.choice_edit{
+    width: 90%;
+    height: 80%;
+    font-size: 1.0vw;
+
+}
+
+.number_edit{
+    width: 100%;
+    height: 20%;
+    font-size: 1.0vw;
+
+}
+
+#iconsEdit{
+    height: 260px;
+    width: 30px;
+    margin-left: 110%;
+    margin-top: -190%;
+}
+
+
+#returnIcon{
+    margin-top: -100%;
+}
+
+#iconEdit{
+    height: 30px;
+    width: 30px;
 }
