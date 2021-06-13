@@ -13,19 +13,19 @@
 2021-06-13 18:28:29,472 - main_logger - INFO - UserSettings object (1)
 2021-06-13 18:30:42,394 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['wvAjcKvSMfj1jO7SpILgfS1n7OWlT7cMLUkiDPidnV7nHsOcVtKLiC7gtzKnKgXM'], 'name': ['Maciej Stefaniak'], 'surname': ['Stefaniak'], 'description': ['asd']}>
 2021-06-13 18:30:42,394 - main_logger - INFO - UserSettings object (1)
-2021-06-13 18:30:56,117 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['jAF0iMpOTs3N0cRTsBLKVqXLsFnbAiGXyZpZJRc9u8R9oQydYmKfYa3EOqbdrrrX'], 'name': ['Maciej'], 'surname': ['Stefaniak'], 'description': ['Lubiê herbatê']}>
+2021-06-13 18:30:56,117 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['jAF0iMpOTs3N0cRTsBLKVqXLsFnbAiGXyZpZJRc9u8R9oQydYmKfYa3EOqbdrrrX'], 'name': ['Maciej'], 'surname': ['Stefaniak'], 'description': ['LubiÃª herbatÃª']}>
 2021-06-13 18:30:56,117 - main_logger - INFO - UserSettings object (1)
-2021-06-13 18:31:02,571 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['jAF0iMpOTs3N0cRTsBLKVqXLsFnbAiGXyZpZJRc9u8R9oQydYmKfYa3EOqbdrrrX'], 'name': ['Maciej'], 'surname': ['Stefaniak'], 'description': ['Lubiê herbatê']}>
+2021-06-13 18:31:02,571 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['jAF0iMpOTs3N0cRTsBLKVqXLsFnbAiGXyZpZJRc9u8R9oQydYmKfYa3EOqbdrrrX'], 'name': ['Maciej'], 'surname': ['Stefaniak'], 'description': ['LubiÃª herbatÃª']}>
 2021-06-13 18:31:02,571 - main_logger - INFO - UserSettings object (1)
-2021-06-13 18:32:44,372 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['jAF0iMpOTs3N0cRTsBLKVqXLsFnbAiGXyZpZJRc9u8R9oQydYmKfYa3EOqbdrrrX'], 'name': ['Maciej'], 'surname': ['Stefaniak'], 'description': ['Lubiê herbatê']}>
+2021-06-13 18:32:44,372 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['jAF0iMpOTs3N0cRTsBLKVqXLsFnbAiGXyZpZJRc9u8R9oQydYmKfYa3EOqbdrrrX'], 'name': ['Maciej'], 'surname': ['Stefaniak'], 'description': ['LubiÃª herbatÃª']}>
 2021-06-13 18:32:44,372 - main_logger - INFO - UserSettings object (1)
-2021-06-13 18:32:52,646 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['f2FPm51KjXDeapvMAvGGKHIphkMyuazGurpONaO5UDrAy3c66gFbNrOiD5AAljkG'], 'name': ['Maciej'], 'surname': ['Stefaniak'], 'description': ['Lubiê herbatê i piæ']}>
+2021-06-13 18:32:52,646 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['f2FPm51KjXDeapvMAvGGKHIphkMyuazGurpONaO5UDrAy3c66gFbNrOiD5AAljkG'], 'name': ['Maciej'], 'surname': ['Stefaniak'], 'description': ['LubiÃª herbatÃª i piÃ¦']}>
 2021-06-13 18:32:52,646 - main_logger - INFO - UserSettings object (1)
-2021-06-13 18:33:37,050 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['f2FPm51KjXDeapvMAvGGKHIphkMyuazGurpONaO5UDrAy3c66gFbNrOiD5AAljkG'], 'name': ['Maciej'], 'surname': ['Stefaniak'], 'description': ['Lubiê herbatê i piæ']}>
+2021-06-13 18:33:37,050 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['f2FPm51KjXDeapvMAvGGKHIphkMyuazGurpONaO5UDrAy3c66gFbNrOiD5AAljkG'], 'name': ['Maciej'], 'surname': ['Stefaniak'], 'description': ['LubiÃª herbatÃª i piÃ¦']}>
 2021-06-13 18:33:37,051 - main_logger - INFO - UserSettings object (1)
 2021-06-13 18:33:41,433 - main_logger - INFO - Hej z machine_view!
 2021-06-13 18:33:43,782 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 18:33:56,680 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['qfmcwNxj5aUaMa9dvGlyD49xVWyUCQT4FE6bXSkEGQIwaOQx1rk3GOfqhHmWtZE4'], 'name': ['Maciej'], 'surname': ['Stefaniak'], 'description': ['Lubiê herbatê i koty\r\n\r\nZiom']}>
+2021-06-13 18:33:56,680 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['qfmcwNxj5aUaMa9dvGlyD49xVWyUCQT4FE6bXSkEGQIwaOQx1rk3GOfqhHmWtZE4'], 'name': ['Maciej'], 'surname': ['Stefaniak'], 'description': ['LubiÃª herbatÃª i koty\r\n\r\nZiom']}>
 2021-06-13 18:33:56,680 - main_logger - INFO - UserSettings object (1)
 2021-06-13 18:33:58,713 - main_logger - INFO - Hej z machine_view!
 2021-06-13 18:34:00,986 - main_logger - INFO - Hej z edit_profile_view!
@@ -33,42 +33,42 @@
 2021-06-13 18:34:15,862 - main_logger - INFO - Hej z edit_machine_view!
 2021-06-13 19:19:08,362 - main_logger - INFO - Hej z edit_machine_view!
 2021-06-13 19:19:16,920 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 19:19:16,920 - main_logger - INFO - ['Sok z cytryny', 'Miód', 'Sok z cytryny', 'cukier', 'woda']
+2021-06-13 19:19:16,920 - main_logger - INFO - ['Sok z cytryny', 'MiÃ³d', 'Sok z cytryny', 'cukier', 'woda']
 2021-06-13 19:19:21,069 - main_logger - INFO - Hej z edit_machine_view!
 2021-06-13 19:20:56,358 - main_logger - INFO - Hej z edit_machine_view!
 2021-06-13 19:21:07,886 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 19:21:07,887 - main_logger - INFO - ['Syrop malinowy', 'Miód', 'Sok z cytryny', 'cukier', 'woda']
+2021-06-13 19:21:07,887 - main_logger - INFO - ['Syrop malinowy', 'MiÃ³d', 'Sok z cytryny', 'cukier', 'woda']
 2021-06-13 19:21:17,494 - main_logger - INFO - Hej z edit_machine_view!
 2021-06-13 19:21:25,231 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 19:21:25,232 - main_logger - INFO - ['woda', 'Miód', 'Sok z cytryny', 'cukier', 'woda']
+2021-06-13 19:21:25,232 - main_logger - INFO - ['woda', 'MiÃ³d', 'Sok z cytryny', 'cukier', 'woda']
 2021-06-13 19:21:27,613 - main_logger - INFO - Hej z edit_machine_view!
 2021-06-13 19:21:36,246 - main_logger - INFO - Hej z edit_machine_view!
 2021-06-13 19:21:41,877 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 19:21:41,877 - main_logger - INFO - ['Miód', 'Miód', 'Sok z cytryny', 'cukier', 'woda']
+2021-06-13 19:21:41,877 - main_logger - INFO - ['MiÃ³d', 'MiÃ³d', 'Sok z cytryny', 'cukier', 'woda']
 2021-06-13 19:23:22,699 - main_logger - INFO - Hej z edit_machine_view!
 2021-06-13 19:23:29,448 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 19:23:29,448 - main_logger - INFO - ['Syrop malinowy', 'Miód', 'Sok z cytryny', 'cukier', 'woda']
+2021-06-13 19:23:29,448 - main_logger - INFO - ['Syrop malinowy', 'MiÃ³d', 'Sok z cytryny', 'cukier', 'woda']
 2021-06-13 19:23:32,239 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 19:23:32,239 - main_logger - INFO - ['Syrop malinowy', 'Miód', 'Sok z cytryny', 'cukier', 'woda']
+2021-06-13 19:23:32,239 - main_logger - INFO - ['Syrop malinowy', 'MiÃ³d', 'Sok z cytryny', 'cukier', 'woda']
 2021-06-13 19:23:32,537 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 19:23:32,538 - main_logger - INFO - ['Syrop malinowy', 'Miód', 'Sok z cytryny', 'cukier', 'woda']
+2021-06-13 19:23:32,538 - main_logger - INFO - ['Syrop malinowy', 'MiÃ³d', 'Sok z cytryny', 'cukier', 'woda']
 2021-06-13 19:23:32,878 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 19:23:32,878 - main_logger - INFO - ['Syrop malinowy', 'Miód', 'Sok z cytryny', 'cukier', 'woda']
+2021-06-13 19:23:32,878 - main_logger - INFO - ['Syrop malinowy', 'MiÃ³d', 'Sok z cytryny', 'cukier', 'woda']
 2021-06-13 19:23:36,054 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 19:23:36,054 - main_logger - INFO - ['Syrop malinowy', 'Miód', 'Sok z cytryny', 'cukier', 'woda']
+2021-06-13 19:23:36,054 - main_logger - INFO - ['Syrop malinowy', 'MiÃ³d', 'Sok z cytryny', 'cukier', 'woda']
 2021-06-13 19:24:38,404 - main_logger - INFO - Hej z edit_machine_view!
 2021-06-13 19:24:45,289 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 19:24:45,289 - main_logger - INFO - ['Syrop malinowy', 'Miód', 'Sok z cytryny', 'cukier', 'woda']
+2021-06-13 19:24:45,289 - main_logger - INFO - ['Syrop malinowy', 'MiÃ³d', 'Sok z cytryny', 'cukier', 'woda']
 2021-06-13 19:24:52,000 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 19:24:52,000 - main_logger - INFO - ['cukier', 'Miód', 'Sok z cytryny', 'cukier', 'woda']
+2021-06-13 19:24:52,000 - main_logger - INFO - ['cukier', 'MiÃ³d', 'Sok z cytryny', 'cukier', 'woda']
 2021-06-13 19:24:57,254 - main_logger - INFO - Hej z edit_machine_view!
 2021-06-13 19:24:57,254 - main_logger - INFO - ['cukier', 'Syrop malinowy', 'Sok z cytryny', 'cukier', 'woda']
 2021-06-13 19:25:05,072 - main_logger - INFO - Hej z edit_machine_view!
 2021-06-13 19:25:05,073 - main_logger - INFO - ['Syrop malinowy', 'Syrop malinowy', 'Sok z cytryny', 'cukier', 'woda']
 2021-06-13 19:25:14,580 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 19:25:14,581 - main_logger - INFO - ['Miód', 'Syrop malinowy', 'Sok z cytryny', 'cukier', 'woda']
+2021-06-13 19:25:14,581 - main_logger - INFO - ['MiÃ³d', 'Syrop malinowy', 'Sok z cytryny', 'cukier', 'woda']
 2021-06-13 19:25:25,029 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 19:25:25,029 - main_logger - INFO - ['Miód', 'Syrop malinowy', 'Sok z cytryny', 'cukier', 'woda']
+2021-06-13 19:25:25,029 - main_logger - INFO - ['MiÃ³d', 'Syrop malinowy', 'Sok z cytryny', 'cukier', 'woda']
 2021-06-13 19:25:34,099 - main_logger - INFO - Hej z edit_machine_view!
 2021-06-13 19:25:34,099 - main_logger - INFO - ['Syrop malinowy', 'Syrop malinowy', 'Sok z cytryny', 'cukier', 'woda']
 2021-06-13 19:25:39,035 - main_logger - INFO - Hej z edit_machine_view!
@@ -78,11 +78,5 @@
 2021-06-13 19:32:38,396 - main_logger - INFO - Hej z edit_machine_view!
 2021-06-13 19:33:16,822 - main_logger - INFO - Hej z edit_machine_view!
 2021-06-13 19:33:25,097 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 19:33:25,097 - main_logger - INFO - ['Miód', 'Syrop malinowy', 'Sok z cytryny', 'cukier', 'Syrop malinowy']
-2021-06-13 19:39:33,484 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 19:39:44,236 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 19:41:04,349 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 19:41:08,080 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 19:41:08,080 - main_logger - INFO - ['Miód', 'Syrop malinowy', 'Sok z cytryny', 'cukier', 'Pusty']
-2021-06-13 20:02:35,142 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 20:03:27,777 - main_logger - INFO - Hej z edit_profile_view!
+2021-06-13 19:33:25,097 - main_logger - INFO - ['MiÃ³d', 'Syrop malinowy', 'Sok z cytryny', 'cukier', 'Syrop malinowy']
+
