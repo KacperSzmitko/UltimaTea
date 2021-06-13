@@ -84,3 +84,5 @@
 2021-06-13 19:41:04,349 - main_logger - INFO - Hej z edit_machine_view!
 2021-06-13 19:41:08,080 - main_logger - INFO - Hej z edit_machine_view!
 2021-06-13 19:41:08,080 - main_logger - INFO - ['Miód', 'Syrop malinowy', 'Sok z cytryny', 'cukier', 'Pusty']
+2021-06-13 20:02:35,142 - main_logger - INFO - Hej z edit_profile_view!
+2021-06-13 20:03:27,777 - main_logger - INFO - Hej z edit_profile_view!
