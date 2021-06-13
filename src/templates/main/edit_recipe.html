@@ -1,8 +1,7 @@
 {% load static %}
-
-<div class="centerIn recipeDisplayedEdit">
-    <div id="recipeEdit" class="in" style="width: 95%; height: 97%; border-radius: 5px; background-color: rgb(255,255,255); " onclick="toggle_select('recipesDisplayed{{recipe.id}}')">
-        <form method="POST" id="create_recipe_id" onsubmit="event.preventDefault();submit_recipe(this);">  {% csrf_token %}
+<form method="POST" class="centerIn recipeDisplayedEdit flexContainer" id="create_recipe_id" onsubmit="event.preventDefault();submit_recipe(this);">  {% csrf_token %}
+    <div id="recipeEdit" class="in" style="width: 95%; height: 97%; border-radius: 5px; background-color: rgb(255,255,255);">
+        <div>
             <div class="recipeEditTitle centerIn" style="width: 100%; height: 19%;">
                 <div class="teaName in"> 
                     <div>Nazwa</div>
@@ -18,7 +17,7 @@
                         <div class="dataTitle dataPos" style="width: 100%; height: 30%">Skłdaniki</div>
                         <div class="data flexContainer" style="width: 100%; height: 80%; display: flex;">
                             <div class="names flexContainer column">
-                                <div class="choose_ing center" > Woda</div>
+                                <div class="choose_ing center tel" > Woda</div>
                                 <div class="choose_ing center" >{{create_filters.tea_name}} </div>
                                 <div class="choose_ing center" >{{create_filters.ingredient1}}</div>
                                 <div class="choose_ing center" > {{create_filters.ingredient2}}</div>
@@ -76,13 +75,13 @@
                     </div>
                 </div>
 
-                <div id="icons_edit">
-                    <div id="save_icon_edit" class="save_icon_edit ico_box_edit"> <input type="image" src="{% static 'main/media/heart.svg' %}" alt="" class="ico_edit" /></div>
-                    <div id="return_icon_edit"  class="return_icon_edit ico_box_edit " onclick="close_create_recipe()"> <image src="{% static 'main/media/trash.svg' %}" alt="" class="ico_edit"></div>
-                </div>
             </div>
 
-        </form>
+        </div>
     </div>
-</div>
+    <div id="id1">
+        <div id="id11" class="c1 c"> <input type="image" src="{% static 'main/media/heart.svg' %}" alt="" class="ico_edit" /></div>
+        <div id="id12"  class="c2  c" onclick="close_create_recipe()"> <image src="{% static 'main/media/trash.svg' %}" alt="" class="ico_edit"></div>
+    </div>
+</form>
 

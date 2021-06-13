@@ -304,3 +304,22 @@ body {
     height: 30px;
     width: 30px;
 }
+
+#tel{
+    font-size: 1.0vw;
+}
+
+.c{
+    width: 70px;
+    height: 70px;
+}
+
+#id1{
+    width: 70px;
+    height: 140px;
+    margin-bottom: 500px;
+}
+
+#id12{
+    margin-top: 500px;
+}
