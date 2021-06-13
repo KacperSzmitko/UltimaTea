@@ -146,24 +146,6 @@ def browse_recipes_view(request: HttpRequest, *args, **kwargs):
     return render(request, "main/browse_recipes.html", context)
 
 
-def machine_info(request:HttpRequest, *args, **kwargs):
-    logger = logging.getLogger('main_logger')
-
-    infos=[]
-
-    for container in request.user.machines_set.first().machinecontainers_set.all():
-        infos.append({
-            'name':container.ingredient.ingredient_name,
-            'value':container.ammount
-        })
-
-    context = {
-        'infos': infos
-    }
-
-    return render(request,"main/machineInfo.html", context)
-
-
 def get_main_recipes(request: HttpRequest, *args, **kwargs):
     logger = logging.getLogger('main_logger')
     request_d = json.loads(request.body)
@@ -207,7 +189,7 @@ def get_main_recipes(request: HttpRequest, *args, **kwargs):
 
 
 
-def machine_info_view(request:HttpRequest, *args, **kwargs):
+def machine_info(request:HttpRequest, *args, **kwargs):
     logger = logging.getLogger('main_logger')
 
     infos=[]

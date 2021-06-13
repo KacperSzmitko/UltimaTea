@@ -1,7 +1,8 @@
 var machinInfoContainer = document.getElementById("infoBar");
 
 
-function loadMachineInfo(csrf_token) {
+async function loadMachineInfo(csrf_token) {
+    console.log('asd')
     var requestData = new XMLHttpRequest();
     requestData.responseType = "text";
     requestData.addEventListener("load", function () {

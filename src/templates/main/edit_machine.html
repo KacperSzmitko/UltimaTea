@@ -32,7 +32,7 @@
         </div>
         {%endfor%}
         <div class="container center">
-            <button class = "accept" onclick=send_ingredients(csrftoken)  type="button">
+            <button class = "accept" onclick="(async ()=>{await send_ingredients(csrftoken); ; loadMachineInfo(csrftoken);})()"  type="button">
                 Zapisz
             </button> 
         <div>
