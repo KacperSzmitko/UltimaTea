@@ -134,6 +134,10 @@ function load_options(){
     for (let j=0;j<options_list.length;j++){
         options[options_list[j].textContent.trim()] = j;
     }
+    var options_list = document.getElementById("tea_name_filter").options;
+    for (let j=0;j<options_list.length;j++){
+        options[options_list[j].textContent.trim()] = j;
+    }
 }
 
 
@@ -145,12 +149,20 @@ function edit_recipe(element){
     var ig_values = document.getElementsByClassName("igQuan_" + recipe_id);
     document.getElementById("recipe_name_create").value = document.getElementById("teaName_" + recipe_id).textContent.trim();
     
-    for(var i=0;i<ig_names.length;i++){
-        if (i>=3){
+
+    var tea_type = ig_names[0].textContent.trim();
+    document.getElementById("tea_name_create").value = options[tea_type];
+    document.getElementById("id_tea_quan").value = ig_values[0].getAttribute('value');
+
+    var water = parseInt(ig_values[1].getAttribute('value'));
+    document.getElementById("id_water").value = water;
+
+    for(var i=2;i<ig_names.length;i++){
+        if (i>=5){
             break;
         }
         var name = ig_names[i].textContent.trim();
-        k = i + 1;
+        let k = i - 1;
         document.getElementById("id_ing_" + k + "_create").value = options[name];
         document.getElementById("id_ing" + k + "_ammount").value = ig_values[i].getAttribute('value');
     }
