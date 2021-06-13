@@ -1,88 +1,33 @@
-2021-06-13 12:29:54,297 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:29:54,388 - main_logger - INFO - {'required': False, 'label': None, 'initial': None, 'show_hidden_initial': False, 'help_text': '', 'disabled': False, 'label_suffix': None, 'localize': False, 'widget': <django.forms.widgets.Select object at 0x00000125ED068F70>, 'error_messages': {'required': 'This field is required.', 'invalid_choice': 'Select a valid choice. That choice is not one of the available choices.'}, 'validators': [], 'empty_label': 'Nie wybrano', '_queryset': <QuerySet [<Ingerdients: Ingerdients object (1)>, <Ingerdients: Ingerdients object (2)>, <Ingerdients: Ingerdients object (3)>, <Ingerdients: Ingerdients object (4)>, <Ingerdients: Ingerdients object (5)>]>, 'limit_choices_to': None, 'to_field_name': None, 'base_field': 'eloZiomelo'}
-2021-06-13 12:29:54,440 - main_logger - INFO - {'required': False, 'label': None, 'initial': None, 'show_hidden_initial': False, 'help_text': '', 'disabled': False, 'label_suffix': None, 'localize': False, 'widget': <django.forms.widgets.Select object at 0x00000125ED068F70>, 'error_messages': {'required': 'This field is required.', 'invalid_choice': 'Select a valid choice. That choice is not one of the available choices.'}, 'validators': [], 'empty_label': 'Nie wybrano', '_queryset': <QuerySet [<Ingerdients: Ingerdients object (1)>, <Ingerdients: Ingerdients object (2)>, <Ingerdients: Ingerdients object (3)>, <Ingerdients: Ingerdients object (4)>, <Ingerdients: Ingerdients object (5)>]>, 'limit_choices_to': None, 'to_field_name': None, 'base_field': 'eloZiomelo'}
-2021-06-13 12:29:54,485 - main_logger - INFO - {'required': False, 'label': None, 'initial': None, 'show_hidden_initial': False, 'help_text': '', 'disabled': False, 'label_suffix': None, 'localize': False, 'widget': <django.forms.widgets.Select object at 0x00000125ED068F70>, 'error_messages': {'required': 'This field is required.', 'invalid_choice': 'Select a valid choice. That choice is not one of the available choices.'}, 'validators': [], 'empty_label': 'Nie wybrano', '_queryset': <QuerySet [<Ingerdients: Ingerdients object (1)>, <Ingerdients: Ingerdients object (2)>, <Ingerdients: Ingerdients object (3)>, <Ingerdients: Ingerdients object (4)>, <Ingerdients: Ingerdients object (5)>]>, 'limit_choices_to': None, 'to_field_name': None, 'base_field': 'eloZiomelo'}
-2021-06-13 12:29:54,530 - main_logger - INFO - {'required': False, 'label': None, 'initial': None, 'show_hidden_initial': False, 'help_text': '', 'disabled': False, 'label_suffix': None, 'localize': False, 'widget': <django.forms.widgets.Select object at 0x00000125ED068F70>, 'error_messages': {'required': 'This field is required.', 'invalid_choice': 'Select a valid choice. That choice is not one of the available choices.'}, 'validators': [], 'empty_label': 'Nie wybrano', '_queryset': <QuerySet [<Ingerdients: Ingerdients object (1)>, <Ingerdients: Ingerdients object (2)>, <Ingerdients: Ingerdients object (3)>, <Ingerdients: Ingerdients object (4)>, <Ingerdients: Ingerdients object (5)>]>, 'limit_choices_to': None, 'to_field_name': None, 'base_field': 'eloZiomelo'}
-2021-06-13 12:29:54,580 - main_logger - INFO - {'required': False, 'label': None, 'initial': None, 'show_hidden_initial': False, 'help_text': '', 'disabled': False, 'label_suffix': None, 'localize': False, 'widget': <django.forms.widgets.Select object at 0x00000125ED068F70>, 'error_messages': {'required': 'This field is required.', 'invalid_choice': 'Select a valid choice. That choice is not one of the available choices.'}, 'validators': [], 'empty_label': 'Nie wybrano', '_queryset': <QuerySet [<Ingerdients: Ingerdients object (1)>, <Ingerdients: Ingerdients object (2)>, <Ingerdients: Ingerdients object (3)>, <Ingerdients: Ingerdients object (4)>, <Ingerdients: Ingerdients object (5)>]>, 'limit_choices_to': None, 'to_field_name': None, 'base_field': 'eloZiomelo'}
-2021-06-13 12:30:34,653 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:30:34,741 - main_logger - INFO - {'required': False, 'label': None, 'initial': None, 'show_hidden_initial': False, 'help_text': '', 'disabled': False, 'label_suffix': None, 'localize': False, 'widget': <django.forms.widgets.Select object at 0x0000016E629F6F70>, 'error_messages': {'required': 'This field is required.', 'invalid_choice': 'Select a valid choice. That choice is not one of the available choices.'}, 'validators': [], 'empty_label': 'eloZiomelo', '_queryset': <QuerySet [<Ingerdients: Ingerdients object (1)>, <Ingerdients: Ingerdients object (2)>, <Ingerdients: Ingerdients object (3)>, <Ingerdients: Ingerdients object (4)>, <Ingerdients: Ingerdients object (5)>]>, 'limit_choices_to': None, 'to_field_name': None}
-2021-06-13 12:30:34,781 - main_logger - INFO - {'required': False, 'label': None, 'initial': None, 'show_hidden_initial': False, 'help_text': '', 'disabled': False, 'label_suffix': None, 'localize': False, 'widget': <django.forms.widgets.Select object at 0x0000016E629F6F70>, 'error_messages': {'required': 'This field is required.', 'invalid_choice': 'Select a valid choice. That choice is not one of the available choices.'}, 'validators': [], 'empty_label': 'eloZiomelo', '_queryset': <QuerySet [<Ingerdients: Ingerdients object (1)>, <Ingerdients: Ingerdients object (2)>, <Ingerdients: Ingerdients object (3)>, <Ingerdients: Ingerdients object (4)>, <Ingerdients: Ingerdients object (5)>]>, 'limit_choices_to': None, 'to_field_name': None}
-2021-06-13 12:30:34,821 - main_logger - INFO - {'required': False, 'label': None, 'initial': None, 'show_hidden_initial': False, 'help_text': '', 'disabled': False, 'label_suffix': None, 'localize': False, 'widget': <django.forms.widgets.Select object at 0x0000016E629F6F70>, 'error_messages': {'required': 'This field is required.', 'invalid_choice': 'Select a valid choice. That choice is not one of the available choices.'}, 'validators': [], 'empty_label': 'eloZiomelo', '_queryset': <QuerySet [<Ingerdients: Ingerdients object (1)>, <Ingerdients: Ingerdients object (2)>, <Ingerdients: Ingerdients object (3)>, <Ingerdients: Ingerdients object (4)>, <Ingerdients: Ingerdients object (5)>]>, 'limit_choices_to': None, 'to_field_name': None}
-2021-06-13 12:30:34,860 - main_logger - INFO - {'required': False, 'label': None, 'initial': None, 'show_hidden_initial': False, 'help_text': '', 'disabled': False, 'label_suffix': None, 'localize': False, 'widget': <django.forms.widgets.Select object at 0x0000016E629F6F70>, 'error_messages': {'required': 'This field is required.', 'invalid_choice': 'Select a valid choice. That choice is not one of the available choices.'}, 'validators': [], 'empty_label': 'eloZiomelo', '_queryset': <QuerySet [<Ingerdients: Ingerdients object (1)>, <Ingerdients: Ingerdients object (2)>, <Ingerdients: Ingerdients object (3)>, <Ingerdients: Ingerdients object (4)>, <Ingerdients: Ingerdients object (5)>]>, 'limit_choices_to': None, 'to_field_name': None}
-2021-06-13 12:30:34,897 - main_logger - INFO - {'required': False, 'label': None, 'initial': None, 'show_hidden_initial': False, 'help_text': '', 'disabled': False, 'label_suffix': None, 'localize': False, 'widget': <django.forms.widgets.Select object at 0x0000016E629F6F70>, 'error_messages': {'required': 'This field is required.', 'invalid_choice': 'Select a valid choice. That choice is not one of the available choices.'}, 'validators': [], 'empty_label': 'eloZiomelo', '_queryset': <QuerySet [<Ingerdients: Ingerdients object (1)>, <Ingerdients: Ingerdients object (2)>, <Ingerdients: Ingerdients object (3)>, <Ingerdients: Ingerdients object (4)>, <Ingerdients: Ingerdients object (5)>]>, 'limit_choices_to': None, 'to_field_name': None}
-2021-06-13 12:31:00,749 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:31:00,903 - main_logger - INFO - {'required': False, 'label': None, 'initial': None, 'show_hidden_initial': False, 'help_text': '', 'disabled': False, 'label_suffix': None, 'localize': False, 'widget': <django.forms.widgets.Select object at 0x000002E2BF048D90>, 'error_messages': {'required': 'This field is required.', 'invalid_choice': 'Select a valid choice. That choice is not one of the available choices.'}, 'validators': [], 'empty_label': 'Syrop malinowy', '_queryset': <QuerySet [<Ingerdients: Ingerdients object (1)>, <Ingerdients: Ingerdients object (2)>, <Ingerdients: Ingerdients object (3)>, <Ingerdients: Ingerdients object (4)>, <Ingerdients: Ingerdients object (5)>]>, 'limit_choices_to': None, 'to_field_name': None}
-2021-06-13 12:31:01,000 - main_logger - INFO - {'required': False, 'label': None, 'initial': None, 'show_hidden_initial': False, 'help_text': '', 'disabled': False, 'label_suffix': None, 'localize': False, 'widget': <django.forms.widgets.Select object at 0x000002E2BF048D90>, 'error_messages': {'required': 'This field is required.', 'invalid_choice': 'Select a valid choice. That choice is not one of the available choices.'}, 'validators': [], 'empty_label': 'Miód', '_queryset': <QuerySet [<Ingerdients: Ingerdients object (1)>, <Ingerdients: Ingerdients object (2)>, <Ingerdients: Ingerdients object (3)>, <Ingerdients: Ingerdients object (4)>, <Ingerdients: Ingerdients object (5)>]>, 'limit_choices_to': None, 'to_field_name': None}
-2021-06-13 12:31:01,090 - main_logger - INFO - {'required': False, 'label': None, 'initial': None, 'show_hidden_initial': False, 'help_text': '', 'disabled': False, 'label_suffix': None, 'localize': False, 'widget': <django.forms.widgets.Select object at 0x000002E2BF048D90>, 'error_messages': {'required': 'This field is required.', 'invalid_choice': 'Select a valid choice. That choice is not one of the available choices.'}, 'validators': [], 'empty_label': 'Sok z cytryny', '_queryset': <QuerySet [<Ingerdients: Ingerdients object (1)>, <Ingerdients: Ingerdients object (2)>, <Ingerdients: Ingerdients object (3)>, <Ingerdients: Ingerdients object (4)>, <Ingerdients: Ingerdients object (5)>]>, 'limit_choices_to': None, 'to_field_name': None}
-2021-06-13 12:31:01,184 - main_logger - INFO - {'required': False, 'label': None, 'initial': None, 'show_hidden_initial': False, 'help_text': '', 'disabled': False, 'label_suffix': None, 'localize': False, 'widget': <django.forms.widgets.Select object at 0x000002E2BF048D90>, 'error_messages': {'required': 'This field is required.', 'invalid_choice': 'Select a valid choice. That choice is not one of the available choices.'}, 'validators': [], 'empty_label': 'cukier', '_queryset': <QuerySet [<Ingerdients: Ingerdients object (1)>, <Ingerdients: Ingerdients object (2)>, <Ingerdients: Ingerdients object (3)>, <Ingerdients: Ingerdients object (4)>, <Ingerdients: Ingerdients object (5)>]>, 'limit_choices_to': None, 'to_field_name': None}
-2021-06-13 12:31:01,267 - main_logger - INFO - {'required': False, 'label': None, 'initial': None, 'show_hidden_initial': False, 'help_text': '', 'disabled': False, 'label_suffix': None, 'localize': False, 'widget': <django.forms.widgets.Select object at 0x000002E2BF048D90>, 'error_messages': {'required': 'This field is required.', 'invalid_choice': 'Select a valid choice. That choice is not one of the available choices.'}, 'validators': [], 'empty_label': 'woda', '_queryset': <QuerySet [<Ingerdients: Ingerdients object (1)>, <Ingerdients: Ingerdients object (2)>, <Ingerdients: Ingerdients object (3)>, <Ingerdients: Ingerdients object (4)>, <Ingerdients: Ingerdients object (5)>]>, 'limit_choices_to': None, 'to_field_name': None}
-2021-06-13 12:37:40,072 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:38:31,383 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:39:10,119 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:39:46,671 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:40:32,470 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:40:41,248 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:41:06,033 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:41:36,541 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:41:50,837 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:42:34,453 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:42:50,881 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:43:27,603 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:43:57,959 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:44:44,862 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:47:02,560 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:48:21,315 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:50:37,875 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:52:12,937 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:52:36,194 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:54:22,893 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:56:35,946 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:56:54,759 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:59:32,716 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 12:59:44,434 - main_logger - INFO - Hej z machine_view!
-2021-06-13 12:59:47,435 - main_logger - INFO - Hej z machine_view!
-2021-06-13 13:00:50,874 - main_logger - INFO - Hej z machine_view!
-2021-06-13 13:01:43,050 - main_logger - INFO - Hej z machine_view!
-2021-06-13 13:01:44,736 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 13:01:47,288 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:02:25,343 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:11:00,620 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:11:24,918 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:12:38,835 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:13:03,345 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:14:39,650 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:15:37,412 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:15:44,457 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:15:58,135 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:16:09,504 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:16:24,804 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:16:35,597 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:16:40,421 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:19:14,638 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:19:47,854 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:20:15,257 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:20:37,701 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:20:38,768 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:23:42,793 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:24:51,179 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:25:42,950 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:26:49,794 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:27:58,890 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:28:09,077 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:28:44,698 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:29:29,417 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:29:44,005 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:29:52,626 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:29:53,809 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:30:21,203 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:31:03,994 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:31:24,747 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:31:34,919 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:31:48,200 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:31:57,030 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 13:32:17,644 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 13:32:42,557 - main_logger - INFO - Hej z edit_profile_view!
-2021-06-13 13:32:48,239 - main_logger - INFO - Hej z machine_view!
-2021-06-13 13:32:54,992 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 13:33:39,179 - main_logger - INFO - Hej z edit_machine_view!
-2021-06-13 13:33:49,803 - main_logger - INFO - Hej z edit_machine_view!
+2021-06-13 18:18:21,972 - main_logger - INFO - Hej z edit_profile_view!
+2021-06-13 18:19:36,646 - main_logger - INFO - Hej z edit_profile_view!
+2021-06-13 18:20:01,789 - main_logger - INFO - Hej z edit_profile_view!
+2021-06-13 18:20:34,930 - main_logger - INFO - Hej z edit_profile_view!
+2021-06-13 18:20:54,562 - main_logger - INFO - Hej z edit_profile_view!
+2021-06-13 18:21:06,106 - main_logger - INFO - Hej z edit_profile_view!
+2021-06-13 18:22:33,388 - main_logger - INFO - Hej z edit_profile_view!
+2021-06-13 18:22:42,735 - main_logger - INFO - Hej z edit_profile_view!
+2021-06-13 18:24:17,749 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['PQIgBc3XNNTNBAhzLfkgZQkYtl5LIlDh4fsf2hQiotH9ZeYTh0jL2AqRP6TNzuoh'], 'name': ['asd'], 'surname': ['asd'], 'description': ['asd']}>
+2021-06-13 18:28:21,049 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['PQIgBc3XNNTNBAhzLfkgZQkYtl5LIlDh4fsf2hQiotH9ZeYTh0jL2AqRP6TNzuoh'], 'name': ['asd'], 'surname': ['asd'], 'description': ['asd']}>
+2021-06-13 18:28:21,100 - main_logger - INFO - UserSettings object (1)
+2021-06-13 18:28:29,429 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['wvAjcKvSMfj1jO7SpILgfS1n7OWlT7cMLUkiDPidnV7nHsOcVtKLiC7gtzKnKgXM'], 'name': ['Maciej Stefaniak'], 'surname': ['Stefaniak'], 'description': ['asd']}>
+2021-06-13 18:28:29,472 - main_logger - INFO - UserSettings object (1)
+2021-06-13 18:30:42,394 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['wvAjcKvSMfj1jO7SpILgfS1n7OWlT7cMLUkiDPidnV7nHsOcVtKLiC7gtzKnKgXM'], 'name': ['Maciej Stefaniak'], 'surname': ['Stefaniak'], 'description': ['asd']}>
+2021-06-13 18:30:42,394 - main_logger - INFO - UserSettings object (1)
+2021-06-13 18:30:56,117 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['jAF0iMpOTs3N0cRTsBLKVqXLsFnbAiGXyZpZJRc9u8R9oQydYmKfYa3EOqbdrrrX'], 'name': ['Maciej'], 'surname': ['Stefaniak'], 'description': ['Lubiê herbatê']}>
+2021-06-13 18:30:56,117 - main_logger - INFO - UserSettings object (1)
+2021-06-13 18:31:02,571 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['jAF0iMpOTs3N0cRTsBLKVqXLsFnbAiGXyZpZJRc9u8R9oQydYmKfYa3EOqbdrrrX'], 'name': ['Maciej'], 'surname': ['Stefaniak'], 'description': ['Lubiê herbatê']}>
+2021-06-13 18:31:02,571 - main_logger - INFO - UserSettings object (1)
+2021-06-13 18:32:44,372 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['jAF0iMpOTs3N0cRTsBLKVqXLsFnbAiGXyZpZJRc9u8R9oQydYmKfYa3EOqbdrrrX'], 'name': ['Maciej'], 'surname': ['Stefaniak'], 'description': ['Lubiê herbatê']}>
+2021-06-13 18:32:44,372 - main_logger - INFO - UserSettings object (1)
+2021-06-13 18:32:52,646 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['f2FPm51KjXDeapvMAvGGKHIphkMyuazGurpONaO5UDrAy3c66gFbNrOiD5AAljkG'], 'name': ['Maciej'], 'surname': ['Stefaniak'], 'description': ['Lubiê herbatê i piæ']}>
+2021-06-13 18:32:52,646 - main_logger - INFO - UserSettings object (1)
+2021-06-13 18:33:37,050 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['f2FPm51KjXDeapvMAvGGKHIphkMyuazGurpONaO5UDrAy3c66gFbNrOiD5AAljkG'], 'name': ['Maciej'], 'surname': ['Stefaniak'], 'description': ['Lubiê herbatê i piæ']}>
+2021-06-13 18:33:37,051 - main_logger - INFO - UserSettings object (1)
+2021-06-13 18:33:41,433 - main_logger - INFO - Hej z machine_view!
+2021-06-13 18:33:43,782 - main_logger - INFO - Hej z edit_profile_view!
+2021-06-13 18:33:56,680 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['qfmcwNxj5aUaMa9dvGlyD49xVWyUCQT4FE6bXSkEGQIwaOQx1rk3GOfqhHmWtZE4'], 'name': ['Maciej'], 'surname': ['Stefaniak'], 'description': ['Lubiê herbatê i koty\r\n\r\nZiom']}>
+2021-06-13 18:33:56,680 - main_logger - INFO - UserSettings object (1)
+2021-06-13 18:33:58,713 - main_logger - INFO - Hej z machine_view!
+2021-06-13 18:34:00,986 - main_logger - INFO - Hej z edit_profile_view!
+2021-06-13 18:34:13,143 - main_logger - INFO - Hej z machine_view!
+2021-06-13 18:34:15,862 - main_logger - INFO - Hej z edit_machine_view!

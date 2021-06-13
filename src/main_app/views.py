@@ -19,10 +19,23 @@ def edit_profile_view(request:HttpRequest, *args, **kwargs):
     if not request.user.is_authenticated:
         return redirect('auth:login_register')
     logger = logging.getLogger('main_logger')
-    logger.info("Hej z edit_profile_view!")
+
+    settings = request.user.usersettings_set.get()
+    form = Profile_form(lang='pl')
+    if request.method == 'POST': #form.is_valid():#
+        logger.info(request.POST)
+        logger.info(settings)
+        settings.name = request.POST.get('name')
+        settings.surname = request.POST.get('surname')
+        settings.description = request.POST.get('description')
+        settings.save()
+    else:
+        logger.info("Hej z edit_profile_view!")
+        
+    form.initial = {'name':settings.name, 'surname':settings.surname, 'description':settings.description}
     context = {
         'title':'Edytuj profil',
-        'form': Profile_form(lang='pl')
+        'form': form
     }
     return render(request,"main/edit_profile.html", context)
 
@@ -32,6 +45,19 @@ def edit_machine_view(request:HttpRequest, *args, **kwargs):
         return redirect('auth:login_register')
     logger = logging.getLogger('main_logger')
     logger.info("Hej z edit_machine_view!")
+
+    if request.method == 'POST' :
+        data = json.loads(request.body)
+        logger.info(data)
+
+        i = 0
+        for container in request.user.machines_set.first().machinecontainers_set.all():
+            ing = Ingerdients.objects.get(ingredient_name = data[i])
+            container.ingredient = ing
+            container.save()
+            i+=1
+
+        return HttpResponse(status=200)
 
     containers = []
     i = 1
@@ -331,5 +357,8 @@ def delete_from_favourites(request: HttpRequest, *args, **kwargs):
     recipe.is_favourite = False
     recipe.save()
     return HttpResponse(status=200)
+
+
+
 
 

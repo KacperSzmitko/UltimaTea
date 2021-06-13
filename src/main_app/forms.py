@@ -102,7 +102,7 @@ class Profile_form(forms.Form):
     surname = forms.CharField(max_length=255, required=True,
         widget=TextInput(attrs={'class': 'surnameField input'}))
     description = forms.CharField(max_length=1000, required=False,
-        widget=TextInput(attrs={'class': 'descriptionField input'}))
+        widget=forms.Textarea(attrs={'class': 'descriptionField input', 'rows':4, 'cols':25}))
     
     def __init__(self, lang, *args, **kwargs):
         super(Profile_form, self).__init__(*args, **kwargs)

@@ -193,3 +193,7 @@ body {
 .recipePosition{
     font-size: 0.8vw;
 }
+
+.body{
+    overflow: hidden;
+}
