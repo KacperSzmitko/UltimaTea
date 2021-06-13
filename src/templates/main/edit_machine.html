@@ -1,0 +1,58 @@
+{%extends "main/base.html"%}
+{% load static %}
+
+{% load static %}
+
+{% block additional_styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/edit_machine.css' %}">
+{% endblock additional_styles %}
+
+{%block main_content%}
+    <div class="listContainers flexContainer column">
+        {% for container in containers %}
+        <div class="container">
+            <div class="title">
+                {{container.name}}
+            </div>
+            <div class="content flexContainer">
+                <div class="lContent inContent center" >
+                    <div class="inSide center" style="background-color: blueviolet;">
+                        {{container.form.ingredient}}
+                    </div>
+                </div>
+                <div class="rContent inContent center" >
+                    <div class="inSide center">
+                        <div class="bar">
+                            <div class="bar_pr" style="width: {{container.value}}%;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+        <div class="container center">
+            <button class = "accept" onclick="(async ()=>{await send_ingredients(csrftoken); ; loadMachineInfo(csrftoken);})()"  type="button">
+                Zapisz
+            </button> 
+        <div>
+    </div>
+    
+{%endblock main_content%}
+
+
+{%block additional_scripts%}
+{% csrf_token %}
+    <script>
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    var last = 0
+    </script>
+    <script src="static/main/scripts/home_scripts.js"> </script>
+    <script src="static/main/scripts/edit_machine.js"> </script>
+
+    <script>
+        loadMachineInfo(csrftoken);
+        {% comment %} send_ingredients(csrftoken); {% endcomment %}
+    </script>
+{%endblock additional_scripts%}
+

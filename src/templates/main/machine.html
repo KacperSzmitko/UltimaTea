@@ -1,0 +1,134 @@
+{%extends "main/base.html"%}
+{% load static %}
+
+{% load static %}
+
+{% block additional_styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/machine_styles.css' %}">
+{% endblock additional_styles %}
+
+{%block main_content%}
+<div class="wrap flex-container" style="width: 100%;height: 100%;">
+    <div class="mainbox">
+        <div class="ingredients insideBox">
+            <div class="title v_center">
+                Składniki
+            </div>
+            <div class="h_border">
+                <div class="h_border_in">
+                
+                </div>
+            </div>
+            <div class="items">
+                {%for ingredient in ingredients%}
+                <div class="item flex-container v_center">
+                    <div class="iName v_center">
+                        {{ingredient.0}}
+                    </div>
+                    <div class="bar">
+                        <div class="bar_pr" style="width: {{ingredient.1}}%;">
+                        
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+                
+                
+            </div>
+        </div>
+    </div>
+    <div class="mainbox">
+        <div class="temperatures insideBox">
+            <div class="title v_center">
+                Temperatury
+            </div>
+            <div class="h_border">
+                <div class="h_border_in">
+                    
+                </div>
+            </div>
+            <div class="items">
+                {%for temperature in temperatures%}
+                <div class="vItem item flex-container v_center">
+                    <div class="vName">
+                        {{temperature.0}}
+                    </div>
+                    <div class="vStatus">
+                        {{temperature.1}} &#x2103;
+                    </div>
+                </div>  
+                {%endfor%}
+ 
+            </div>
+        </div>
+    </div>
+    <div class="mainbox">
+        <div class="valves insideBox">
+            <div class="title v_center">
+                Zawory
+            </div>
+            <div class="h_border">
+                <div class="h_border_in">
+                    
+                </div>
+            </div>
+            <div class="items">
+                {%for valve in valves%}
+                <div class="vItem item flex-container v_center">
+                    <div class="vName">
+                        {{valve.0}}
+                    </div>
+                    <div class="vStatus">
+                        {{valve.1}}
+                    </div>
+                </div>  
+                {%endfor%}
+ 
+            </div>
+        </div>
+    </div>
+    <div class="mainbox"> 
+        <div class="others insideBox">
+            <div class="title v_center">
+                Inne
+            </div>
+            <div class="h_border">
+                <div class="h_border_in">
+                    
+                </div>
+            </div>
+            <div class="items">
+                {%for other in others%}
+                <div class="vItem item flex-container v_center">
+                    <div class="vName">
+                        {{other.0}}
+                    </div>
+                    <div class="vStatus">
+                        {{other.1}}
+                    </div>
+                </div>  
+                {%endfor%}
+
+            </div>
+        </div>
+    </div>
+    <div></div>
+
+
+</div>
+{%endblock main_content%}
+
+
+{%block additional_scripts%}
+{% csrf_token %}
+    <script>
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    var last = 0
+    </script>
+    <script src="static/main/scripts/home_scripts.js"> </script>
+
+    <script>
+        loadMachineInfo(csrftoken);
+    </script>
+{%endblock additional_scripts%}
+

@@ -57,6 +57,9 @@ class IngredientsRecipes(models.Model):
 
 class UserSettings(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
+    name = models.CharField(max_length=255,default='Jan')
+    surname = models.CharField(max_length=255,default='Kowalski')
+    description = models.CharField(max_length=1000,default='Brak opisu')
     class Meta:
         db_table = 'user_settings'
 

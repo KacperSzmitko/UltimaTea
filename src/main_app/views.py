@@ -6,10 +6,102 @@ from django.shortcuts import redirect
 from django.http.request import HttpRequest
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
-from .forms import FiltersForm,CreateFiltersForm
+from .forms import FiltersForm, CreateFiltersForm, ChooseIngredient, Profile_form
+import logging
+import json
+import functools
 from .models import Recipes, Ingerdients, IngredientsRecipes, Teas,FavoriteRecipes
 from django.db.models.query import QuerySet
 from django.db.models import Q
+
+
+def edit_profile_view(request:HttpRequest, *args, **kwargs):
+    if not request.user.is_authenticated:
+        return redirect('auth:login_register')
+    logger = logging.getLogger('main_logger')
+
+    settings = request.user.usersettings_set.get()
+    form = Profile_form(lang='pl')
+    if request.method == 'POST': #form.is_valid():#
+        logger.info(request.POST)
+        logger.info(settings)
+        settings.name = request.POST.get('name')
+        settings.surname = request.POST.get('surname')
+        settings.description = request.POST.get('description')
+        settings.save()
+    else:
+        logger.info("Hej z edit_profile_view!")
+        
+    form.initial = {'name':settings.name, 'surname':settings.surname, 'description':settings.description}
+    context = {
+        'title':'Edytuj profil',
+        'form': form
+    }
+    return render(request,"main/edit_profile.html", context)
+
+
+def edit_machine_view(request:HttpRequest, *args, **kwargs):
+    if not request.user.is_authenticated:
+        return redirect('auth:login_register')
+    logger = logging.getLogger('main_logger')
+    logger.info("Hej z edit_machine_view!")
+
+    if request.method == 'POST' :
+        data = json.loads(request.body)
+        logger.info(data)
+
+        i = 0
+        for container in request.user.machines_set.first().machinecontainers_set.all():
+            ing = Ingerdients.objects.get(ingredient_name = data[i])
+            container.ingredient = ing
+            container.save()
+            i+=1
+
+        return HttpResponse(status=200)
+
+    containers = []
+    i = 1
+    
+    for container in request.user.machines_set.first().machinecontainers_set.all():
+        actual_choose = ChooseIngredient
+        # actual_choose.base_fields['ingredient'].empty_label = container.ingredient.ingredient_name
+        containers.append({
+            'name':'Pojemnik #{}'.format(i),
+            'form':actual_choose(lang='pl', initial = {'ingredient':container.ingredient.id} ),
+            'value':container.ammount
+        })
+        
+        # [container.ingredient.ingredient_name, container.ammount])
+        i+=1
+
+    context = {
+        'title':'Edytuj składniki',
+        'containers':containers,
+    }
+    return render(request,"main/edit_machine.html", context)
+
+
+def machine_view(request:HttpRequest, *args, **kwargs):
+    if not request.user.is_authenticated:
+        return redirect('auth:login_register')
+    logger = logging.getLogger('main_logger')
+    logger.info("Hej z machine_view!")
+
+    ingredients = []
+    for container in request.user.machines_set.first().machinecontainers_set.all():
+        ingredients.append([container.ingredient.ingredient_name, container.ammount])
+
+    context = {
+        'title':'Machine',
+        'ingredients':ingredients,
+        'temperatures':[['Komora grzewcza', 87],['Komora parzenia', 27],['Kubek', 24]],
+        'valves':[['Pojemnik wody', 'Zamknięty'],['Komora grzewcza', 'Zamknięty'],['Komora parzenia', 'Zamknięty'],['Pojenik składniku #1', 'Zamknięty'],['Pojenik składniku #2', 'Zamknięty'],['Pojenik składniku #3', 'Zamknięty'],['Pojenik składniku #4', 'Zamknięty']],
+        'others':[['Wykryto kubek?', 'Tak'],['Kubek pusty?', 'Tak'],['Napięcie zasilania', '12.2 V'],['Napięcie zasilania ESP', '3.3 V'],['Pobór mocy', '2 W'],],
+
+    }
+    return render(request,"main/machine.html", context)
+
+
 def login_required(func):
     def inner(request: HttpRequest):
         if not request.user.is_authenticated:
@@ -54,24 +146,6 @@ def browse_recipes_view(request: HttpRequest, *args, **kwargs):
     return render(request, "main/browse_recipes.html", context)
 
 
-def machine_info(request:HttpRequest, *args, **kwargs):
-    logger = logging.getLogger('main_logger')
-
-    infos=[]
-
-    for container in request.user.machines_set.first().machinecontainers_set.all():
-        infos.append({
-            'name':container.ingredient.ingredient_name,
-            'value':container.ammount
-        })
-
-    context = {
-        'infos': infos
-    }
-
-    return render(request,"main/machineInfo.html", context)
-
-
 def get_main_recipes(request: HttpRequest, *args, **kwargs):
     logger = logging.getLogger('main_logger')
     request_d = json.loads(request.body)
@@ -113,6 +187,25 @@ def get_main_recipes(request: HttpRequest, *args, **kwargs):
     }
     return render(request, "main/recipesList.html", context)
 
+
+
+def machine_info(request:HttpRequest, *args, **kwargs):
+    logger = logging.getLogger('main_logger')
+
+    infos=[]
+
+    for container in request.user.machines_set.first().machinecontainers_set.all():
+        infos.append({
+            'name':container.ingredient.ingredient_name,
+            'value':container.ammount
+        })
+
+    context = {
+        'infos': infos,
+        'username': request.user.username
+    }
+
+    return render(request,"main/machineInfo.html", context)
 
 
 def fetch_edit_recipes(request: HttpRequest, *args, **kwargs):

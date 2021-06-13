@@ -1,0 +1,120 @@
+
+.flexContainer{
+    display: flex;
+}
+
+.wrap{ 
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+} 
+
+.column{
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.h_border{
+    width: 100%;
+    height: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.h_border_in{
+    border-top: 1.5px solid #000000;
+    width: 100%;
+    height: 50%;
+}
+
+
+.bar{
+    width: 100%;
+    height: 70%;
+    border-style: solid; 
+    border-radius: 5px; 
+    background-color: rgb(255,255,255);
+}
+
+.bar_pr{
+    height: 100%;
+    width: 60%;
+    background-color: green;
+    border-radius: 3px;
+}
+
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.v_center{
+    display: flex;
+    align-items: center
+}
+
+.h_center{
+    display: flex;
+    justify-content: center;
+}
+
+.listContainers{
+    width: 100%;
+    height: 90%;
+}
+
+.container{
+    width: 80%;
+    height: 16%;
+}
+
+.title{
+    width: 100%;
+    height: 40%;
+}
+
+.content{
+    width: 100%;
+    height: 60%;
+}
+
+.inContent{
+    height: 100%;
+    width: 50%;
+}
+
+.inSide{
+    height: 90%;
+    width: 88%;
+}
+
+.choose{
+    height: 100%;
+    width: 100%;
+    font-size: 1.5vw;
+}
+
+
+
+.title{
+    font-size: 1.7vw;
+}
+
+.accept{
+    width: 60%;
+    height: 70%;
+    font-size: 1.5vw;
+}
+
+.containerButton{
+    width: 80%;
+    height: 15%;
+    margin-top: 3%;
+}
+
+.text{
+    font-size: 1.3vw;
+}
