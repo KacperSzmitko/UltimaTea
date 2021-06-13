@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
-from .forms import FiltersForm, CreateFiltersForm, ChooseIngredient
+from .forms import FiltersForm, CreateFiltersForm, ChooseIngredient, Profile_form
 import logging
 import json
 import functools
@@ -22,7 +22,7 @@ def edit_profile_view(request:HttpRequest, *args, **kwargs):
     logger.info("Hej z edit_profile_view!")
     context = {
         'title':'Edytuj profil',
-
+        'form': Profile_form(lang='pl')
     }
     return render(request,"main/edit_profile.html", context)
 
@@ -51,33 +51,6 @@ def edit_machine_view(request:HttpRequest, *args, **kwargs):
     context = {
         'title':'Edytuj składniki',
         'containers':containers,
-        # [{
-        #     'name':'Pojemnik #1',
-        #     'form':ChooseIngredient,
-        #     'value':77
-        # },
-        # {
-        #     'name':'Pojemnik #2',
-        #     'form':ChooseIngredient,
-        #     'value':11
-        # },
-        # {
-        #     'name':'Pojemnik #3',
-        #     'form':ChooseIngredient,
-        #     'value':33
-        # },
-        # {
-        #     'name':'Pojemnik #4',
-        #     'form':ChooseIngredient,
-        #     'value':33
-        # },
-        # {
-        #     'name':'Pojemnik #5',
-        #     'form':ChooseIngredient,
-        #     'value':33
-        # },
-        # ]
-
     }
     return render(request,"main/edit_machine.html", context)
 
@@ -166,7 +139,8 @@ def machine_info_view(request:HttpRequest, *args, **kwargs):
         })
 
     context = {
-        'infos': infos
+        'infos': infos,
+        'username': request.user.username
     }
 
     return render(request,"main/machineInfo.html", context)

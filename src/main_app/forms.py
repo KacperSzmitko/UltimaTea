@@ -93,3 +93,17 @@ class ChooseIngredient(forms.Form):
     def __init__(self, lang, *args, **kwargs):
         super(ChooseIngredient, self).__init__(*args, **kwargs)
         self.message = ErrorMessages.languages[lang]
+
+
+
+class Profile_form(forms.Form):
+    name = forms.CharField(max_length=255, required=True,
+        widget=TextInput(attrs={'class': 'nameField input'}))
+    surname = forms.CharField(max_length=255, required=True,
+        widget=TextInput(attrs={'class': 'surnameField input'}))
+    description = forms.CharField(max_length=1000, required=False,
+        widget=TextInput(attrs={'class': 'descriptionField input'}))
+    
+    def __init__(self, lang, *args, **kwargs):
+        super(Profile_form, self).__init__(*args, **kwargs)
+        self.message = ErrorMessages.languages[lang]

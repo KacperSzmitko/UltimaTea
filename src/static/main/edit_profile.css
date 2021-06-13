@@ -132,9 +132,33 @@
 }
 
 .title{
-    font-size: 1.1vw;
+    font-size: 1.2vw;
 }
 
 .text{
-    font-size: 1.7vw;
+    font-size: 1.0vw;
+}
+
+.input{
+    height: 50%;
+    width: 90%;
+}
+
+.descriptionField{
+    height: 110%;
+    width: 90%;
+}
+
+.dTitle{
+    padding-left: 4%;
+}
+
+.button{
+    width: 50%;
+    height: 50%;
+}
+
+.changePic{
+    width: 100%;
+    height: 100%;
 }

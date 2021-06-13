@@ -16,7 +16,9 @@
                         Profile PIC
                     </div>
                     <div class="avatar_bt center text">
-                        Button
+                        <button class = "changePic button" onclick=location.href=''  type="button">
+                            Zmień zdjęcie
+                        </button> 
                     </div>
                 </div>
                 <div class="form">
@@ -26,7 +28,7 @@
                                 Imię
                             </div>
                             <div class="nameField inputData center text">
-                                input
+                                {{form.name}}
                             </div>
                         </div>
                         <div class="surname inData">
@@ -34,22 +36,24 @@
                                 Nazwisko
                             </div>
                             <div class="surnameField inputData center text">
-                                input
+                                {{form.surname}}
                             </div>
                         </div>
                     </div>
                     <div class="descriptionContainer">
-                        <div class="title">
+                        <div class="title dTitle v_center">
                             Opis
                         </div>
                         <div class="description center text">
-                            input
+                            {{form.description}}
                         </div>
                     </div>
                 </div>
             </div>
             <div class="bottomContainer center text">
-                Button
+                <button class = "accept button" onclick=location.href=''  type="button">
+                    Zapisz
+                </button> 
             </div>
         </div>
     </div>
