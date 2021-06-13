@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
-from .forms import FiltersForm,CreateFiltersForm
+from .forms import FiltersForm, CreateFiltersForm, ChooseIngredient
 import logging
 import json
 import functools
@@ -32,30 +32,51 @@ def edit_machine_view(request:HttpRequest, *args, **kwargs):
         return redirect('auth:login_register')
     logger = logging.getLogger('main_logger')
     logger.info("Hej z edit_machine_view!")
+
+    containers = []
+    i = 1
+    
+    for container in request.user.machines_set.first().machinecontainers_set.all():
+        actual_choose = ChooseIngredient
+        # actual_choose.base_fields['ingredient'].empty_label = container.ingredient.ingredient_name
+        containers.append({
+            'name':'Pojemnik #{}'.format(i),
+            'form':actual_choose(lang='pl', initial = {'ingredient':container.ingredient.id} ),
+            'value':container.ammount
+        })
+        
+        # [container.ingredient.ingredient_name, container.ammount])
+        i+=1
+
     context = {
         'title':'Edytuj składniki',
-        'containers':[{
-            'name':'Pojemnik #1',
-            'form':'form',
-            'value':77
-        },
-        {
-            'name':'Pojemnik #2',
-            'form':'form',
-            'value':11
-        },
-        {
-            'name':'Pojemnik #3',
-            'form':'form',
-            'value':33
-        },
-        {
-            'name':'Pojemnik #3',
-            'form':'form',
-            'value':33
-        },
-        
-        ]
+        'containers':containers,
+        # [{
+        #     'name':'Pojemnik #1',
+        #     'form':ChooseIngredient,
+        #     'value':77
+        # },
+        # {
+        #     'name':'Pojemnik #2',
+        #     'form':ChooseIngredient,
+        #     'value':11
+        # },
+        # {
+        #     'name':'Pojemnik #3',
+        #     'form':ChooseIngredient,
+        #     'value':33
+        # },
+        # {
+        #     'name':'Pojemnik #4',
+        #     'form':ChooseIngredient,
+        #     'value':33
+        # },
+        # {
+        #     'name':'Pojemnik #5',
+        #     'form':ChooseIngredient,
+        #     'value':33
+        # },
+        # ]
 
     }
     return render(request,"main/edit_machine.html", context)
@@ -66,12 +87,17 @@ def machine_view(request:HttpRequest, *args, **kwargs):
         return redirect('auth:login_register')
     logger = logging.getLogger('main_logger')
     logger.info("Hej z machine_view!")
+
+    ingredients = []
+    for container in request.user.machines_set.first().machinecontainers_set.all():
+        ingredients.append([container.ingredient.ingredient_name, container.ammount])
+
     context = {
         'title':'Machine',
-        'ingredients':[['Woda', 70],['Woda', 70],['Woda', 70],['Woda', 70]],
-        'temperatures':[['Komora jajeczna', 170],['Komora jajeczna', 70],['Komora jajeczna', 70],['Woda', 70]],
-        'valves':[['Pojemnik wody', 'Zamknięty'],['Pojemnik wody', 'Zamknięty'],['Pojemnik wody', 'Zamknięty'],['Pojemnik wody', 'Zamknięty']],
-        'others':[['Wykryto kubek?', 'chyba tak'],['Wykryto kubek?', 'chyba tak'],['Wykryto kubek?', 'chyba tak'],['Wykryto kubek?', 'chyba tak']],
+        'ingredients':ingredients,
+        'temperatures':[['Komora grzewcza', 87],['Komora parzenia', 27],['Kubek', 24]],
+        'valves':[['Pojemnik wody', 'Zamknięty'],['Komora grzewcza', 'Zamknięty'],['Komora parzenia', 'Zamknięty'],['Pojenik składniku #1', 'Zamknięty'],['Pojenik składniku #2', 'Zamknięty'],['Pojenik składniku #3', 'Zamknięty'],['Pojenik składniku #4', 'Zamknięty']],
+        'others':[['Wykryto kubek?', 'Tak'],['Kubek pusty?', 'Tak'],['Napięcie zasilania', '12.2 V'],['Napięcie zasilania ESP', '3.3 V'],['Pobór mocy', '2 W'],],
 
     }
     return render(request,"main/machine.html", context)

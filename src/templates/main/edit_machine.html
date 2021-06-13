@@ -16,12 +16,12 @@
             </div>
             <div class="content flexContainer">
                 <div class="lContent inContent center" >
-                    <div class="choose inSide" style="background-color: blueviolet;">
-                        {{container.form}}
+                    <div class="inSide center" style="background-color: blueviolet;">
+                        {{container.form.ingredient}}
                     </div>
                 </div>
                 <div class="rContent inContent center" >
-                    <div class="inSide center" style="background-color: fuchsia;">
+                    <div class="inSide center">
                         <div class="bar">
                             <div class="bar_pr" style="width: {{container.value}}%;">
                             </div>
@@ -31,12 +31,10 @@
             </div>
         </div>
         {%endfor%}
-        <div class="containerButton center">
-            <div class="acButton center">
-                <button class = "accept text" style="width: 100%; height: 100%;" onclick=location.href=''  type="button">
-                    Zapisz
-                </button> 
-            </div>
+        <div class="container center">
+            <button class = "accept " onclick=location.href=''  type="button">
+                Zapisz
+            </button> 
         <div>
     </div>
     

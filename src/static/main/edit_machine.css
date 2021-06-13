@@ -68,7 +68,7 @@
 
 .container{
     width: 80%;
-    height: 20%;
+    height: 16%;
 }
 
 .title{
@@ -91,18 +91,21 @@
     width: 88%;
 }
 
-.title{
-    font-size: 2.0vw;
-}
-
 .choose{
-    font-size: 2.7vw;
+    height: 100%;
+    width: 100%;
+    font-size: 1.5vw;
 }
 
-.acButton{
-    width: 40%;
-    height: 50%;
-    background-color: blue;
+
+
+.title{
+    font-size: 1.7vw;
+}
+
+.accept{
+    width: 60%;
+    height: 70%;
 }
 
 .containerButton{
@@ -112,5 +115,5 @@
 }
 
 .text{
-    font-size: 1.4vw;
+    font-size: 1.3vw;
 }

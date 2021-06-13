@@ -83,3 +83,13 @@ class CreateFiltersForm(forms.Form):
     def __init__(self, lang, *args, **kwargs):
         super(CreateFiltersForm, self).__init__(*args, **kwargs)
         self.message = ErrorMessages.languages[lang]
+
+
+class ChooseIngredient(forms.Form):
+    ingredient = IngerdientsModelChoiceField(
+        queryset=Ingerdients.objects.all(), empty_label="Pusty", required=False, 
+        widget=forms.Select(attrs={'class': 'choose'}))
+    
+    def __init__(self, lang, *args, **kwargs):
+        super(ChooseIngredient, self).__init__(*args, **kwargs)
+        self.message = ErrorMessages.languages[lang]
