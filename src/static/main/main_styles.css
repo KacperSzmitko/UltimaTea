@@ -316,9 +316,9 @@ body {
 #id1{
     width: 70px;
     height: 140px;
-    margin-bottom: 500px;
+    /* margin-bottom: 200%; */
 }
 
-#id12{
-    margin-top: 500px;
-}
+/* #id12{
+    margin-top: 700%;
+} */
