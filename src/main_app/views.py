@@ -358,15 +358,19 @@ def get_recipes(request: HttpRequest, type,filters=False):
                 else:
                     end_index = all_user_recipes
     else:
-        # Go right
+        # Go right or get first page
         if recipes_to_fetch > 0:
             # Can fetch
             if left_recipes > 0:
-                start_index = fetched_recipes
-                end_index = (start_index + 
-                    (left_recipes % recipes_to_fetch * (left_recipes < recipes_to_fetch)) +
-                    (recipes_to_fetch * (left_recipes >= recipes_to_fetch))
-                )
+                    start_index = fetched_recipes
+                    end_index = (start_index + 
+                        (left_recipes % recipes_to_fetch * (left_recipes < recipes_to_fetch)) +
+                        (recipes_to_fetch * (left_recipes >= recipes_to_fetch))
+                    )
+            # First page no recipes
+            elif left_recipes == 0 and fetched_recipes == 0:
+                start_index = 0
+                end_index = 0
             # Cant fetch
             else:
                 start_index = fetched_recipes - last_fetched
