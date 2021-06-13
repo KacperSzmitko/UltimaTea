@@ -50,7 +50,7 @@ class FiltersForm(forms.Form):
 class CreateFiltersForm(forms.Form):
     recipe_name = forms.CharField(max_length=255,
                                   widget=TextInput(attrs={'class': 'recipe_name create text_input', 'id': 'recipe_name_create'}))
-    water = forms.FloatField(max_value=150, 
+    water = forms.FloatField(max_value=250, 
                                                 widget=forms.NumberInput(attrs={'class': 'number_edit create'}))
     tea_name = TeaNamesChoiceField(queryset=Teas.objects.all(), empty_label="Nie wybrano",
                                     widget=forms.Select(attrs={'class': 'tea_name choice_edit', 'id': 'tea_name_create'}))

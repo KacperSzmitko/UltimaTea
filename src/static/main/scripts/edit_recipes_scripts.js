@@ -154,13 +154,17 @@ function edit_recipe(element){
     document.getElementById("tea_name_create").value = options[tea_type];
     document.getElementById("id_tea_quan").value = ig_values[0].getAttribute('value');
 
-    for(var i=1;i<ig_names.length;i++){
-        if (i>=3){
+    var water = parseInt(ig_values[1].getAttribute('value'));
+    document.getElementById("id_water").value = water;
+
+    for(var i=2;i<ig_names.length;i++){
+        if (i>=5){
             break;
         }
         var name = ig_names[i].textContent.trim();
-        document.getElementById("id_ing_" + i + "_create").value = options[name];
-        document.getElementById("id_ing" + i + "_ammount").value = ig_values[i].getAttribute('value');
+        let k = i - 1;
+        document.getElementById("id_ing_" + k + "_create").value = options[name];
+        document.getElementById("id_ing" + k + "_ammount").value = ig_values[i].getAttribute('value');
     }
 
     var temp_ammounts = document.getElementsByClassName("tempAm_" + recipe_id);
