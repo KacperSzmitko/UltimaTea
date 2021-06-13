@@ -25,7 +25,7 @@ class Teas(models.Model):
 class Recipes(models.Model):
     author = models.ForeignKey(User,on_delete=models.CASCADE)
     last_modification = models.DateTimeField(auto_now_add=True)
-    descripction = models.CharField(max_length=1023,default=None)
+    descripction = models.CharField(max_length=1023,default="")
     recipe_name = models.CharField(max_length=255)
     overall_upvotes = models.IntegerField(default=0)
     last_month_upvotes = models.IntegerField(default=0)
@@ -36,6 +36,7 @@ class Recipes(models.Model):
     tea_portion = models.FloatField()
     is_favourite = models.BooleanField(default=False)
     tea_type = models.ForeignKey(Teas, on_delete=models.CASCADE)
+    tea_ammount = models.FloatField()
     class Meta:
         db_table = 'recipes'
         ordering = ('-is_favourite','recipe_name',)
@@ -92,3 +93,6 @@ class History(models.Model):
     user = models.ForeignKey(User,on_delete=CASCADE)
     recipe = models.ForeignKey(Recipes,on_delete=CASCADE)
     date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'history'

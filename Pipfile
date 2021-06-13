@@ -11,8 +11,8 @@ autopep8 = "*"
 django = "*"
 mysqlclient = "*"
 redis = "*"
-celery = "*"
 gevent = "*"
+pylint-django = "*"
 
 [requires]
 python_version = "3.9"

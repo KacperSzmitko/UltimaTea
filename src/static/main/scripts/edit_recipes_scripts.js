@@ -12,10 +12,15 @@ var filters = {
         "brewing_temperatue_up_filter":"",
         "brewing_time_up_filter":"",
         "mixing_time_up_filter":"",
+        "tea_type_filter": "",
 }
 var csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value;
+var options = {};
+var edit = false;
+var edit_recipe_id = 0;
 
-function fetch_next(num_of_recipes_to_fetch,id_to_remove){
+// id_to_remove = 0 means no delete
+function fetch_next(num_of_recipes_to_fetch,id_to_remove,page){
     var remove = false;
     if (id_to_remove > 0){
         remove = true;
@@ -28,7 +33,16 @@ function fetch_next(num_of_recipes_to_fetch,id_to_remove){
         "remove":remove,
         "id_to_remove":id_to_remove
     })
-
+    let url = ""
+    if (page == "edit"){
+        url = "fetchRecipesWithFilters";
+    }
+    else if(page =="browse"){
+        url = "browseFetchRecipesWithFilters";
+    }
+    else{
+        return false;
+    }
     var requestData = new XMLHttpRequest();
     requestData.responseType = "text";
     requestData.addEventListener("load", function () {
@@ -43,7 +57,7 @@ function fetch_next(num_of_recipes_to_fetch,id_to_remove){
             console.log('Request error')
         }
     }, {once : true});
-    requestData.open("post", 'fetchRecipesWithFilters');
+    requestData.open("post", url);
     requestData.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     requestData.setRequestHeader("X-CSRFToken", csrf_token);
     requestData.send(data);
@@ -111,12 +125,52 @@ async function delete_from_favourites(element){
 
 async function delete_recipe(element){
     let value = element.getAttribute('value');
-    fetched_recipes -= last_fetch
-    fetch_next(5,value);
+    //fetched_recipes -= last_fetch
+    fetch_next(5,value,'edit');
 }
 
-function edit_recipe(element){
+function load_options(){
+    var options_list = document.getElementById("id_ing_1").options;
+    for (let j=0;j<options_list.length;j++){
+        options[options_list[j].textContent.trim()] = j;
+    }
+}
 
+
+function edit_recipe(element){
+    edit = true;
+    var recipe_id = element.getAttribute('value');
+    edit_recipe_id = recipe_id;
+    var ig_names = document.getElementsByClassName("igName_" + recipe_id);
+    var ig_values = document.getElementsByClassName("igQuan_" + recipe_id);
+    document.getElementById("recipe_name_create").value = document.getElementById("teaName_" + recipe_id).textContent.trim();
+    
+    for(var i=0;i<ig_names.length;i++){
+        if (i>=3){
+            break;
+        }
+        var name = ig_names[i].textContent.trim();
+        k = i + 1;
+        document.getElementById("id_ing_" + k + "_create").value = options[name];
+        document.getElementById("id_ing" + k + "_ammount").value = ig_values[i].getAttribute('value');
+    }
+
+    var temp_ammounts = document.getElementsByClassName("tempAm_" + recipe_id);
+    document.getElementById("id_brewing_temperature").value = temp_ammounts[0].getAttribute('value');
+
+    var tim_ammounts = document.getElementsByClassName("timAm_" + recipe_id);
+    var tim_names = document.getElementsByClassName("timName_" + recipe_id);
+
+    for(let i=0;i<tim_ammounts.length;i++){
+        let name = tim_names[i].innerHTML.trim();
+        if(name == 'Parzenie'){
+            document.getElementById("id_brewing_time").value = tim_ammounts[i].getAttribute('value');
+        }
+        else{
+            document.getElementById("id_mixing_time").value = tim_ammounts[i].getAttribute('value');
+        }
+    }
+    create_recipe();
 }
 
 function create_recipe(){
@@ -131,4 +185,49 @@ function close_create_recipe(){
     document.getElementById("addRecipePage").style.display = "none";
     document.getElementById("content_to_blur").classList.remove("to_blur");
     document.getElementById("content_to_blur").style.zIndex = 1;
+    document.getElementById("create_recipe_id").reset();
+    edit = false;
+}
+
+async function submit_recipe(form){
+    const data = new FormData(form);
+    var value = Object.fromEntries(data.entries());
+    value['edit'] = edit;
+    value['recipe_id'] = edit_recipe_id;
+    const response = await fetch('createRecipe',{
+        method:"POST",
+        headers:{
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrf_token,
+        },
+        body:JSON.stringify(value),
+    });
+    if (response.ok){
+        console.log("Utworzono przepis");
+        fetched_recipes -= last_fetch;
+        fetch_next(5,0,'edit');
+    }
+    else{
+        console.log("Nie udało się utworyć przepisu");
+    }
+}
+
+async function copy(element){
+    let value = element.getAttribute('value');
+    document.getElementById("empty_hearth_ico_" + value).style.zIndex = "0";
+    document.getElementById("full_hearth_ico_" + value).style.zIndex = "1";
+    const response = await icons_fetches("copyRecipe",value);
+    if (!response.ok){
+        console.log("favourites delete error");
+    }
+}
+
+async function delete_copy(element){
+    let value = element.getAttribute('value');
+    document.getElementById("empty_hearth_ico_" + value).style.zIndex = "1";
+    document.getElementById("full_hearth_ico_" + value).style.zIndex = "0";
+    const response = await icons_fetches("deleteCopiedRecipe",value);
+    if (!response.ok){
+        console.log("favourites delete error");
+    }
 }

@@ -4,17 +4,14 @@
 
 {% block additional_styles %}
     <link rel="stylesheet" type="text/css" href="{% static 'main/edit_recipes_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/browse_recipes_styles.css' %}">
 {% endblock additional_styles %}
 
 {%block main_content%}
-    <div id="addRecipePage">
-    {% include 'main/edit_recipe.html' %} 
-    </div>
-    
-    <div id="content_to_blur">
+
     <div id="filters">
     <h3>Filtry</h3>
-    <form method="POST" id="filters_id" onsubmit="event.preventDefault();apply_filters();fetch_next(5,0,'edit')">  {% csrf_token %}
+    <form method="POST" id="filters_id" onsubmit="event.preventDefault();apply_filters();fetch_next(5,0,'browse')">  {% csrf_token %}
     <h5>Nazwa przepisu</h5><div class="input_box"> {{filters.recipe_name_filter}} </div>
     <h5>Typ herbaty</h5> <div class="input_box"> {{filters.tea_name_filter}} </div>
     <h5>Dodatkowy składnik #1</h5>
@@ -47,15 +44,15 @@
     </div>
 
     <div class="arrow_box" id="left_bar">
-        <div id="left_arrow_box"><img src="{% static 'main/media/left-arrow.png' %}" id="left_arrow" class="arrow" alt="Left" onclick="fetch_next(-5,0,'edit')"> </div>
-        <div id="right_arrow_box"><img src="{% static 'main/media/right-arrow.png' %}" id="right_arrow" class="arrow" alt="Right" onclick="fetch_next(5,0,'edit')"> </div>
+        <div id="left_arrow_box"><img src="{% static 'main/media/left-arrow.png' %}" id="left_arrow" class="arrow" alt="Left" onclick="fetch_next(-5,0,'browse')"> </div>
+        <div id="right_arrow_box"><img src="{% static 'main/media/right-arrow.png' %}" id="right_arrow" class="arrow" alt="Right" onclick="fetch_next(5,0,'browse')"> </div>
     </div>
 
 
     <div id="recipesDisplay">
     </div>
 
-    </div>
+
 
 {%endblock main_content%}
 
@@ -72,6 +69,6 @@
     <script> load_options();</script>
     <script>
         loadMachineInfo(csrftoken);
-        fetch_next(5,0,"edit");
+        fetch_next(5,0,'browse');
     </script>
 {%endblock additional_scripts%}
