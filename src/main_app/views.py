@@ -358,8 +358,8 @@ def get_recipes(request: HttpRequest, type,filters=False):
             if left_recipes > 0:
                 start_index = fetched_recipes
                 end_index = (start_index + 
-                (left_recipes % recipes_to_fetch *(left_recipes < fetched_recipes)) +
-                (recipes_to_fetch * (left_recipes >= fetched_recipes))
+                    (left_recipes % recipes_to_fetch * (left_recipes < recipes_to_fetch)) +
+                    (recipes_to_fetch * (left_recipes >= recipes_to_fetch))
                 )
             # Cant fetch
             else:
@@ -459,7 +459,9 @@ def create_recipe(request: HttpRequest, *args, **kwargs):
         recipe.mixing_time = request_d['mixing_time']
         recipe.tea_portion = request_d['water']
         recipe.tea_ammount = request_d['tea_quan']
-        l = len({k: v for k, v in request_d.items() if 'ingredient' in k and v != ''})
+        l = len({k: v for k, v in request_d.items() if 'ingredient' in k})
+        # Delete ingredient
+
         recipe.tea_type = Teas.objects.get(
             pk=request_d['tea_name'])
         for i in range(l):
@@ -476,7 +478,7 @@ def create_recipe(request: HttpRequest, *args, **kwargs):
                             recipe=recipe,
                             ingredient=Ingerdients.objects.get(
                                 pk=request_d[f'ingredient{i+1}']),
-                            ammount=request_d[f'ingredient{i+1}'],
+                            ammount=request_d[f'ing{i+1}_ammount'],
                         )
                 # Empty value and non empty ingredenit
                 else:
@@ -486,9 +488,6 @@ def create_recipe(request: HttpRequest, *args, **kwargs):
                     ings[i].delete()
                 except:
                     pass
-        if not recipe.was_edited:
-            FavoriteRecipes.objects.filter()
-            recipe.was_edited = True
         recipe.save()
     # Add new recipe
     else:
