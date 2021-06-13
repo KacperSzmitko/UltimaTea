@@ -164,6 +164,12 @@ def get_main_recipes(request: HttpRequest, *args, **kwargs):
         ing_names = []
         ing_quantity = []
 
+        ing_names.append(recipe.tea_type.tea_name)
+        ing_quantity.append({'value': recipe.tea_ammount, 'unit': 'g'})
+
+        ing_names.append('Woda')
+        ing_quantity.append({'value': recipe.tea_portion, 'unit': 'g'})
+
         for ingredient in recipe.ingredientsrecipes_set.all():
             ing_names.append(ingredient.ingredient.ingredient_name)
             ing_quantity.append({'value': ingredient.ammount, 'unit': 'g'})
@@ -386,6 +392,9 @@ def get_recipes(request: HttpRequest, type,filters=False):
         
         ing_names.append(recipe.tea_type.tea_name)
         ing_quantity.append({'value': recipe.tea_ammount, 'unit': 'g'})
+
+        ing_names.append('Woda')
+        ing_quantity.append({'value': recipe.tea_portion, 'unit': 'g'})
 
         for ingredient in recipe.ingredientsrecipes_set.all():
             ing_names.append(ingredient.ingredient.ingredient_name)
