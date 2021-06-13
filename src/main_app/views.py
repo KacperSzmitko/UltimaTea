@@ -389,6 +389,9 @@ def get_recipes(request: HttpRequest, type,filters=False):
     for recipe in user_recipes[start_index:end_index]:
         ing_names = []
         ing_quantity = []
+        
+        ing_names.append(recipe.tea_type.tea_name)
+        ing_quantity.append({'value': recipe.tea_ammount, 'unit': 'g'})
 
         ing_names.append('Woda')
         ing_quantity.append({'value': recipe.tea_portion, 'unit': 'g'})
