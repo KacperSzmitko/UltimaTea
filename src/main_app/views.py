@@ -248,6 +248,7 @@ def apply_filters(filters, recipes: QuerySet):
         recipes = recipes.filter(
             recipe_name__iregex=f".*(?={filters['recipe_name_filter']}).*")
 
+
     if filters['ingredient1_filter'] != "":
         recipes = recipes.filter(
             ingredientsrecipes__ingredient__ingredient_name=filters['ingredient1_filter'])
@@ -259,7 +260,7 @@ def apply_filters(filters, recipes: QuerySet):
             ingredientsrecipes__ingredient__ingredient_name=filters['ingredient3_filter'])
     if filters['tea_type_filter'] != "":
         recipes = recipes.filter(
-            teas__tea_name=filters['tea_type_filter'])
+            tea_type__tea_name=filters['tea_type_filter'])
 
     if filters['brewing_temperatue_down_filter'] != "":
         if filters['brewing_temperatue_up_filter'] != "":

@@ -79,6 +79,10 @@ function apply_filters(){
         filters["ingredient3_filter"] = document.getElementById("id_ing_1").options[document.getElementById("id_ing_3").value].text;
     else filters["ingredient3_filter"] = "";
 
+    if (document.getElementById("tea_name_filter").value != "")
+        filters["tea_type_filter"] = document.getElementById("tea_name_filter").options[document.getElementById("tea_name_filter").value].text;
+    else filters["tea_type_filter"] = "";
+
     filters["recipe_name_filter"] = document.getElementById("recipe_name_filter").value;
 
     filters["brewing_temperatue_down_filter"] = document.getElementById("id_brewing_temperatue_down_filter").value;
