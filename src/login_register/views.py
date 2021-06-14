@@ -1,4 +1,5 @@
 from re import template
+from django.db import models
 from django.http.request import HttpRequest
 from django.http.response import Http404, HttpResponse
 from django.shortcuts import render
@@ -13,6 +14,7 @@ from django.conf import settings
 from .tasks import send_mails
 import time
 import logging
+from main_app.models import Machines, MachineContainers, Ingerdients
 
 def login_view(request:HttpRequest,*args, **kwargs):
     register_form = RegisterForm('pl',request.POST or None)
@@ -29,7 +31,23 @@ def login_view(request:HttpRequest,*args, **kwargs):
 
     if is_register and register_form.is_valid():
         register_form.save()
+        new_user = User.objects.filter(username = register_form.cleaned_data.get("username")).first()
+        new_machine = Machines(user = new_user, machine_password='12345')
+        new_container1 = MachineContainers(machine = new_machine, ingredient = Ingerdients.objects.filter(id = 1).first(), ammount = 50)
+        new_container2 = MachineContainers(machine = new_machine, ingredient = Ingerdients.objects.filter(id = 1).first(), ammount = 50)
+        new_container3 = MachineContainers(machine = new_machine, ingredient = Ingerdients.objects.filter(id = 1).first(), ammount = 50)
+        new_container4 = MachineContainers(machine = new_machine, ingredient = Ingerdients.objects.filter(id = 1).first(), ammount = 50)
+        new_container5 = MachineContainers(machine = new_machine, ingredient = Ingerdients.objects.filter(id = 1).first(), ammount = 50)
+        new_machine.save()
+        new_container1.save()
+        new_container2.save()
+        new_container3.save()
+        new_container4.save()
+        new_container5.save()
         register_form = RegisterForm('pl')
+        
+
+
 
     if is_login and login_form.is_valid():
         remember_me = login_form.cleaned_data['remember_me']

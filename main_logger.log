@@ -94,3 +94,14 @@
 2021-06-14 14:34:12,542 - main_logger - INFO - Hej z edit_machine_view!
 2021-06-14 14:34:40,594 - main_logger - INFO - Hej z machine_view!
 2021-06-14 14:35:34,471 - main_logger - INFO - Hej z edit_profile_view!
+2021-06-14 14:59:38,221 - main_logger - INFO - Hej z edit_profile_view!
+2021-06-14 14:59:50,786 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['c69nPi0CV5aVo417zMWnxov0rXcAtx14IbUKHovwn4OwTM5a6XIddaASU1wnEPAM'], 'name': ['Kacper'], 'surname': ['Szmitko'], 'description': ['Lubiê koty\r\n\r\n:P']}>
+2021-06-14 14:59:50,786 - main_logger - INFO - UserSettings object (2)
+2021-06-14 14:59:53,495 - main_logger - INFO - Hej z machine_view!
+2021-06-14 14:59:55,442 - main_logger - INFO - Hej z edit_profile_view!
+2021-06-14 15:00:01,175 - main_logger - INFO - <QueryDict: {'csrfmiddlewaretoken': ['ZDV6rhI9c9DykXJb3vdHV8JKMThI56MIvIGtjnd3E8h9PFNeAGZxBUOCfXBvgolq'], 'name': ['Kacper'], 'surname': ['Szmytko'], 'description': ['Lubiê koty\r\n\r\n:P']}>
+2021-06-14 15:00:01,175 - main_logger - INFO - UserSettings object (2)
+2021-06-14 15:02:00,065 - main_logger - INFO - Hej z machine_view!
+2021-06-14 15:02:14,636 - main_logger - INFO - Hej z edit_machine_view!
+2021-06-14 15:02:26,327 - main_logger - INFO - Hej z machine_view!
+2021-06-14 15:02:40,151 - main_logger - INFO - Hej z machine_view!
