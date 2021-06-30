@@ -1,5 +1,3 @@
-
-
 # About the project
 This project is a web aplication, used to control a tea machine we constructed. Current features of the application:
 * Account creation
@@ -14,12 +12,14 @@ This project is a web aplication, used to control a tea machine we constructed. 
 * Editing user profile
 
 # Technologies used
-* Python and Django as backend engine
-* CSS, HTML and Bootstrap 
-* Celery with Redis as broker used for example to asynchronous mail sending, newletter sending etc.
-* MySQL as database
-* Adobe XD to create desing projects
+* **Python** and **Django** as backend engine
+* **CSS**, **HTML** and **Bootstrap** 
+* **Celery** with **Redis** as broker used for example to asynchronous mail sending, newletter sending etc.
+* **MySQL** as database
+* **Adobe XD** to create desing projects
 
+# Database scheme
+![alt text](https://github.com/KapelanJR/UltimaTea/blob/master/src/static/main/media/Screenshot_1.png?raw=true)
 
 # Setup
 1. Install python 3.9
