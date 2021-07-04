@@ -15,6 +15,14 @@ from django.db.models.query import QuerySet
 from django.db.models import Q
 
 
+def login_required(func):
+    def inner(request: HttpRequest):
+        if not request.user.is_authenticated:
+            return redirect('auth:login_register')
+        return func(request)
+    return inner
+
+@login_required
 def edit_profile_view(request:HttpRequest, *args, **kwargs):
     if not request.user.is_authenticated:
         return redirect('auth:login_register')
@@ -39,7 +47,7 @@ def edit_profile_view(request:HttpRequest, *args, **kwargs):
     }
     return render(request,"main/edit_profile.html", context)
 
-
+@login_required
 def edit_machine_view(request:HttpRequest, *args, **kwargs):
     if not request.user.is_authenticated:
         return redirect('auth:login_register')
@@ -80,7 +88,7 @@ def edit_machine_view(request:HttpRequest, *args, **kwargs):
     }
     return render(request,"main/edit_machine.html", context)
 
-
+@login_required
 def machine_view(request:HttpRequest, *args, **kwargs):
     if not request.user.is_authenticated:
         return redirect('auth:login_register')
@@ -101,14 +109,6 @@ def machine_view(request:HttpRequest, *args, **kwargs):
     }
     return render(request,"main/machine.html", context)
 
-
-def login_required(func):
-    def inner(request: HttpRequest):
-        if not request.user.is_authenticated:
-            return redirect('auth:login_register')
-        return func(request)
-    return inner
-
 @login_required
 def home_view(request:HttpRequest, *args, **kwargs):
     if not request.user.is_authenticated:
@@ -118,7 +118,6 @@ def home_view(request:HttpRequest, *args, **kwargs):
         'title':'Home'
     }
     return render(request,"main/home.html", context)
-
 
 @login_required
 def edit_recipes_view(request: HttpRequest, *args, **kwargs):
@@ -133,7 +132,6 @@ def edit_recipes_view(request: HttpRequest, *args, **kwargs):
     }
     return render(request, "main/edit_recipes.html", context)
 
-
 @login_required
 def browse_recipes_view(request: HttpRequest, *args, **kwargs):
     if request.method == "POST":
@@ -146,6 +144,7 @@ def browse_recipes_view(request: HttpRequest, *args, **kwargs):
     return render(request, "main/browse_recipes.html", context)
 
 
+@login_required
 def get_main_recipes(request: HttpRequest, *args, **kwargs):
     logger = logging.getLogger('main_logger')
     request_d = json.loads(request.body)
@@ -194,7 +193,7 @@ def get_main_recipes(request: HttpRequest, *args, **kwargs):
     return render(request, "main/recipesList.html", context)
 
 
-
+@login_required
 def machine_info(request:HttpRequest, *args, **kwargs):
     logger = logging.getLogger('main_logger')
 
@@ -214,6 +213,7 @@ def machine_info(request:HttpRequest, *args, **kwargs):
     return render(request,"main/machineInfo.html", context)
 
 
+@login_required
 def fetch_edit_recipes(request: HttpRequest, *args, **kwargs):
     recipes, fetched_count = get_recipes(request, 'edit',True)
     context = {
@@ -228,6 +228,7 @@ def fetch_edit_recipes(request: HttpRequest, *args, **kwargs):
     return result
 
 
+@login_required
 def fetch_browse_recipes(request: HttpRequest, *args, **kwargs):
     recipes, fetched_count = get_recipes(request, 'browse',True)
     context = {
@@ -301,6 +302,7 @@ def apply_filters(filters, recipes: QuerySet):
     return recipes
 
 # Get recipes, also delete if needed
+
 def get_recipes(request: HttpRequest, type,filters=False):
     request_d = json.loads(request.body)
     fetched_recipes = request_d["fetched_recipes"]
@@ -423,7 +425,7 @@ def get_recipes(request: HttpRequest, type,filters=False):
     return recipes_list,end_index
 
 
-
+@login_required
 def add_to_favourites(request: HttpRequest, *args, **kwargs):
     recipe_id = json.loads(request.body)["recipe_id"]
     recipe = Recipes.objects.get(pk=recipe_id)
@@ -432,7 +434,7 @@ def add_to_favourites(request: HttpRequest, *args, **kwargs):
     return HttpResponse(status=200)
 
 
-
+@login_required
 def delete_from_favourites(request: HttpRequest, *args, **kwargs):
     recipe_id = json.loads(request.body)["recipe_id"]
     recipe = Recipes.objects.get(pk=recipe_id)
@@ -441,6 +443,7 @@ def delete_from_favourites(request: HttpRequest, *args, **kwargs):
     return HttpResponse(status=200)
 
 
+@login_required
 def copy_recipe(request: HttpRequest, *args, **kwargs):
     recipe_id = json.loads(request.body)["recipe_id"]
     recipe = Recipes.objects.get(pk=recipe_id)
@@ -454,12 +457,16 @@ def copy_recipe(request: HttpRequest, *args, **kwargs):
     recipe.save()
     return HttpResponse(status=200)
 
+
+@login_required
 def delete_copied_recipe(request: HttpRequest, *args, **kwargs):
     recipe_id = json.loads(request.body)["recipe_id"]
     recipe = Recipes.objects.get(pk=recipe_id)
     FavoriteRecipes.objects.get(user=request.user, recipe=recipe).delete()
     return HttpResponse(status=200)
 
+
+@login_required
 # Edit existing recipe or create new recipe
 def create_recipe(request: HttpRequest, *args, **kwargs):
     request_d = json.loads(request.body)

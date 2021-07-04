@@ -110,3 +110,9 @@
 2021-06-14 15:28:14,801 - main_logger - INFO - Hej z edit_profile_view!
 2021-06-14 15:28:17,009 - main_logger - INFO - Hej z machine_view!
 2021-06-14 15:28:19,151 - main_logger - INFO - Hej z edit_machine_view!
+2021-06-14 16:00:59,599 - main_logger - INFO - Hej z edit_machine_view!
+2021-06-14 16:01:48,584 - main_logger - INFO - Hej z edit_machine_view!
+2021-06-14 16:01:48,585 - main_logger - INFO - ['Miód', 'Syrop wiœniowy', 'Spirytus', 'Cukier', 'Woda']
+2021-06-14 16:02:15,990 - main_logger - INFO - Hej z machine_view!
+2021-06-14 16:02:42,959 - main_logger - INFO - Hej z edit_profile_view!
+2021-06-14 16:04:12,323 - main_logger - INFO - Hej z machine_view!
