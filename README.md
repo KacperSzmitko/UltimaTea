@@ -1,3 +1,7 @@
+# Link to page (app still under development)
+https://ultima-tea.herokuapp.com/
+
+
 # About the project
 This project is a web aplication, used to control a tea machine we constructed. Current features of the application:
 * Account creation
