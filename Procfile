@@ -1,1 +1,3 @@
-web: gunicorn UltimaTea.wsgi --log-file -
+web: gunicorn UltimaTea.wsgi:application --log-file - --log-level debug
+python manage.py collectstatic --noinput
+manage.py migrate
