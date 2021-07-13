@@ -35,6 +35,7 @@ h5 {
 #filters{
     width: 25%;
     overflow: auto;
+    overflow-y: scroll;
 }
 
 

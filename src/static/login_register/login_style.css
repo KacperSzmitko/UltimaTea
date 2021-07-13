@@ -74,7 +74,7 @@
 @media (max-width: 576px) {
 
   body {
-    height: auto;
+    height: auto!important;
   }
 }
 
