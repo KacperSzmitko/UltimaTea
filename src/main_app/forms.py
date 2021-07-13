@@ -20,13 +20,13 @@ class FiltersForm(forms.Form):
     tea_name_filter = TeaNamesChoiceField(queryset=Teas.objects.all(), empty_label="Nie wybrano", required=False,
         widget=forms.Select(attrs={'class': 'tea_name_filter filters choice', 'id': 'tea_name_filter'}))
     ingredient1_filter = IngerdientsModelChoiceField(
-        queryset=Ingerdients.objects.all(), empty_label="Nie wybrano", required=False, 
+        queryset=Ingerdients.objects.filter(pk__gt=1), empty_label="Nie wybrano", required=False, 
         widget=forms.Select(attrs={'class': 'filters choice', 'id': 'id_ing_1'}))
     ingredient2_filter = IngerdientsModelChoiceField(
-        queryset=Ingerdients.objects.all(), empty_label="Nie wybrano", required=False,
+        queryset=Ingerdients.objectsfilter(pk__gt=1), empty_label="Nie wybrano", required=False,
         widget=forms.Select(attrs={'class': 'filters choice', 'id': 'id_ing_2'}))
     ingredient3_filter = IngerdientsModelChoiceField(
-        queryset=Ingerdients.objects.all(), empty_label="Nie wybrano", required=False,
+        queryset=Ingerdients.objects.filter(pk__gt=1), empty_label="Nie wybrano", required=False,
         widget=forms.Select(attrs={'class': 'filters choice', 'id': 'id_ing_3'}))
     brewing_temperatue_down_filter = forms.FloatField(required=False,
         widget=forms.NumberInput(attrs={'class': 'number_filter filters'}))
@@ -55,13 +55,13 @@ class CreateFiltersForm(forms.Form):
     tea_name = TeaNamesChoiceField(queryset=Teas.objects.all(), empty_label="Nie wybrano",
                                     widget=forms.Select(attrs={'class': 'tea_name choice_edit', 'id': 'tea_name_create'}))
     ingredient1 = IngerdientsModelChoiceField(
-        queryset=Ingerdients.objects.all(), empty_label="Nie wybrano", required=False, 
+        queryset=Ingerdients.objects.filter(pk__gt=1), empty_label="Nie wybrano", required=False,
         widget=forms.Select(attrs={'class': 'create choice_edit', 'id': 'id_ing_1_create'}))
     ingredient2 = IngerdientsModelChoiceField(
-        queryset=Ingerdients.objects.all(), empty_label="Nie wybrano", required=False,
+        queryset=Ingerdients.objects.filter(pk__gt=1), empty_label="Nie wybrano", required=False,
         widget=forms.Select(attrs={'class': 'create choice_edit', 'id': 'id_ing_2_create'}))
     ingredient3 = IngerdientsModelChoiceField(
-        queryset=Ingerdients.objects.all(), empty_label="Nie wybrano", required=False,
+        queryset=Ingerdients.objects.filter(pk__gt=1), empty_label="Nie wybrano", required=False,
         widget=forms.Select(attrs={'class': 'create choice_edit', 'id': 'id_ing_3_create'}))
     ing1_ammount = forms.FloatField(required=False,max_value=150,
                                                widget=forms.NumberInput(attrs={'class': 'number_edit create'}))
