@@ -1,0 +1,1 @@
+web: gunicorn src.UltimaTea.wsgi.py 
