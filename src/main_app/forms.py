@@ -23,7 +23,7 @@ class FiltersForm(forms.Form):
         queryset=Ingerdients.objects.filter(pk__gt=1), empty_label="Nie wybrano", required=False, 
         widget=forms.Select(attrs={'class': 'filters choice', 'id': 'id_ing_1'}))
     ingredient2_filter = IngerdientsModelChoiceField(
-        queryset=Ingerdients.objectsfilter(pk__gt=1), empty_label="Nie wybrano", required=False,
+        queryset=Ingerdients.objects.filter(pk__gt=1), empty_label="Nie wybrano", required=False,
         widget=forms.Select(attrs={'class': 'filters choice', 'id': 'id_ing_2'}))
     ingredient3_filter = IngerdientsModelChoiceField(
         queryset=Ingerdients.objects.filter(pk__gt=1), empty_label="Nie wybrano", required=False,
