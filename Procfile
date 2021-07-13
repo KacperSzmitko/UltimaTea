@@ -1,1 +1,1 @@
-web: gunicorn UltimaTea.wsgi
+web: gunicorn UltimaTea.wsgi --log-file -
