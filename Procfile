@@ -1,1 +1,1 @@
-web: gunicorn UltimaTea.wsgi.py 
+web: gunicorn UltimaTea.wsgi
